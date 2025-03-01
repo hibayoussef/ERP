@@ -65,7 +65,7 @@ export default function Step5() {
                   : ""
               } shadow-sm divide-y divide-slate-200 overflow-hidden ${
                 plan.plan_name_en.toLowerCase() === "standard"
-                  ? "border-2 border-state-800 shadow-lg"
+                  ? "border-2 border-state-800 shadow-lg shadow-xl"
                   : ""
               }`}
             >
