@@ -4,6 +4,7 @@ import type {
     CountriesResponse,
     CurrencyResponse,
     IndustryData,
+    PlansResponse,
     TimeZoneResponse,
 } from "../types/common";
 import { QueryKeys } from "../utils/queryKeys";
@@ -55,8 +56,8 @@ export const useFetchCurrencies = () => {
 export const useFetchPlans = () => {
   return useQuery({
     queryKey: [QueryKeys.PLANS],
-    queryFn: async (): Promise<CurrencyResponse> => {
-      const data = await _CommonApi.fetchCurrencies();
+    queryFn: async (): Promise<PlansResponse> => {
+      const data = await _CommonApi.fetchPlans();
       return data;
     },
     staleTime: 1000 * 60 * 10,

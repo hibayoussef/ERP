@@ -111,6 +111,6 @@ export interface Plan {
 
 export interface PlansResponse {
   success: boolean;
-  message: string;
-  data: Plan[];
+  data: string;
+  message: Plan[];
 }
