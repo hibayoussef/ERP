@@ -35,7 +35,7 @@ export default function Step1() {
 
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
-      <div className="flex flex-col justify-center w-full mx-auto">
+      <div className="flex flex-col justify-center w-full mx-auto max-w-xl">
         <div className="w-full">
           <div className="mb-5 sm:mb-8 text-center">
             <h2 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90">

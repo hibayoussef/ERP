@@ -7,20 +7,7 @@ export default function Step5() {
   const [selectedCurrency, setSelectedCurrency] = useState(1); // Default: USD
 
   return (
-    <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      {/* Currency Selector */}
-      <div className="flex justify-center mb-8">
-        <select
-          onChange={(e) => setSelectedCurrency(Number(e.target.value))}
-          className="px-4 py-2 border rounded-lg"
-        >
-          <option value={1}>USD</option>
-          <option value={2}>EUR</option>
-          <option value={4}>AED</option>
-          <option value={9}>SAR</option>
-        </select>
-      </div>
-
+    <div className="w-full mx-auto py-12 px-4 sm:px-12 lg:px-12">
       {/* Billing Toggle */}
       <div className="flex justify-center mb-12">
         <div className="bg-gray-100 p-1 rounded-full">
@@ -48,7 +35,7 @@ export default function Step5() {
       </div>
 
       {/* Plans Grid */}
-      <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-3">
+      <div className="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
         {plans?.message.map((plan) => {
           const price = plan.prices.find(
             (p) => p.currency === selectedCurrency
@@ -57,44 +44,66 @@ export default function Step5() {
           return (
             <div
               key={plan.id}
-              className="border rounded-xl p-6 hover:border-blue-500 transition-all"
+              className="border border-slate-200 rounded-lg shadow-sm divide-y divide-slate-200"
             >
-              <h3 className="text-2xl font-bold mb-2">{plan.plan_name_ar}</h3>
-              <p className="text-gray-600 mb-4">{plan.plan_description_ar}</p>
-
-              <div className="mb-6">
-                <span className="text-4xl font-bold">
-                  {billingCycle === "monthly"
-                    ? price?.monthly_price_ar
-                    : price?.yearly_price_ar}
-                </span>
-                <span className="text-gray-600">
-                  /{billingCycle === "monthly" ? "شهر" : "سنة"}
-                </span>
+              <div className="p-6">
+                <h2 className="text-xl leading-6 font-bold text-slate-900">
+                  {plan.plan_name_ar}
+                </h2>
+                <p className="mt-2 text-base text-slate-700 leading-tight">
+                  {plan.plan_description_ar}
+                </p>
+                <p className="mt-8">
+                  <span className="text-4xl font-bold text-slate-900 tracking-tighter">
+                    {billingCycle === "monthly"
+                      ? price?.monthly_price_ar
+                      : price?.yearly_price_ar}
+                  </span>
+                  <span className="text-base font-medium text-slate-500">
+                    /{billingCycle === "monthly" ? "شهر" : "سنة"}
+                  </span>
+                </p>
+                <a
+                  href="/sign-up"
+                  className="mt-8 block w-full bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center"
+                >
+                  اختر الخطة
+                </a>
               </div>
-
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature) => (
-                  <li key={feature.id} className="flex items-center">
-                    <svg
-                      className="w-5 h-5 text-green-500 mr-2"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    {feature.feature_ar}
-                  </li>
-                ))}
-              </ul>
-
-              <button className="w-full py-3 px-6 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-colors">
-                اختر الخطة
-              </button>
+              <div className="pt-6 pb-8 px-6">
+                <h3 className="text-sm font-bold text-slate-900 tracking-wide uppercase">
+                  What's included
+                </h3>
+                <ul role="list" className="mt-4 space-y-3">
+                  {plan.features.map((feature) => (
+                    <li key={feature.id} className="flex space-x-3">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="flex-shrink-0 h-5 w-5 text-green-400"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke="none"
+                          d="M0 0h24v24H0z"
+                          fill="none"
+                        ></path>
+                        <path d="M5 12l5 5l10 -10"></path>
+                      </svg>
+                      <span className="text-base text-slate-700">
+                        {feature.feature_ar}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           );
         })}

@@ -6,7 +6,7 @@ export default function Step2() {
   const { zipCode, timeZone } = useCommonStore();
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
-      <div className="flex flex-col justify-center w-full mx-auto">
+      <div className="flex flex-col justify-center w-full mx-auto max-w-xl">
         <div className="w-full">
           <div className="mb-5 sm:mb-8 text-center">
             <h2 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90">
@@ -69,7 +69,9 @@ export default function Step2() {
                     type="text"
                     id="time_zone"
                     name="time_zone"
-                    value={ "(" + timeZone?.offset + ")" + " " + timeZone?.name || ""}
+                    value={
+                      "(" + timeZone?.offset + ")" + " " + timeZone?.name || ""
+                    }
                     readOnly
                     className="w-full"
                   />

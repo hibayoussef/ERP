@@ -21,8 +21,8 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="flex flex-col flex-1 w-full overflow-y-auto  lg:w-1/2 no-scrollbar">
-      <div className="flex flex-col justify-center align-center flex-1 w-full max-w-xl mx-auto">
+    <div className="flex flex-col flex-1 w-full overflow-y-auto no-scrollbar">
+      <div className="flex flex-col justify-center align-center flex-1 w-full max-w-xxl mx-auto">
         <div>
           <div className="mb-5 sm:mb-8 text-center">
             <div className="flex justify-center items-center space-x-4 mb-6">
@@ -38,19 +38,17 @@ export default function SignUpForm() {
           </div>
           <div>
             <form>
-              <div className="space-y-5">
-                <div className="w-full">
+              <div className="space-y-5 w-full">
+                <div className="w-full ">
                   {step === 1 && <Step1 />}
                   {step === 2 && <Step2 />}
                   {step === 3 && <Step3 />}
                   {step === 4 && <Step4 />}
                   {step === 5 && <Step5 />}
                 </div>
+
                 <div>
-                  {/* <button className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-[#575db1] shadow-theme-xs hover:bg-brand-600">
-                    Sign Up
-                  </button> */}
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-4 max-w-xl  mx-auto ">
                     <button
                       onClick={prevStep}
                       disabled={step === 1}
@@ -72,7 +70,7 @@ export default function SignUpForm() {
 
             {step === 1 && (
               <>
-                <div className="mt-5">
+                <div className="mt-5 max-w-xl mx-auto">
                   <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
                     Already have an account?
                     <Link
