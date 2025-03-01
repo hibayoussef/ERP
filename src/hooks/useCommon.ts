@@ -32,7 +32,7 @@ export const useFetchCountries = () => {
 
 export const useFetchTimeZone = () => {
   return useQuery({
-    queryKey: [QueryKeys.COUNTRIES],
+    queryKey: [QueryKeys.TIMEZONE],
     queryFn: async (): Promise<TimeZoneResponse> => {
       const data = await _CommonApi.fetchTimeZone();
       return data;
@@ -43,7 +43,18 @@ export const useFetchTimeZone = () => {
 
 export const useFetchCurrencies = () => {
   return useQuery({
-    queryKey: [QueryKeys.COUNTRIES],
+    queryKey: [QueryKeys.CURRENCIES],
+    queryFn: async (): Promise<CurrencyResponse> => {
+      const data = await _CommonApi.fetchCurrencies();
+      return data;
+    },
+    staleTime: 1000 * 60 * 10,
+  });
+};
+
+export const useFetchPlans = () => {
+  return useQuery({
+    queryKey: [QueryKeys.PLANS],
     queryFn: async (): Promise<CurrencyResponse> => {
       const data = await _CommonApi.fetchCurrencies();
       return data;

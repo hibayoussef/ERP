@@ -1,4 +1,7 @@
 export enum QueryKeys {
     INDUSTRY = "industry", 
-    COUNTRIES="countries"
+    COUNTRIES = "countries",
+    CURRENCIES = "currencies",
+    TIMEZONE = "timezone", 
+    PLANS = "plans"
 }
