@@ -20,7 +20,10 @@ export default function Step5() {
       <div className="flex justify-center mb-12">
         <div className="bg-gray-100 p-1 rounded-full">
           <button
-            onClick={() => setBillingCycle("monthly")}
+            onClick={(e) => {
+              e.preventDefault();
+              setBillingCycle("monthly");
+            }}
             className={`px-6 py-2 rounded-full ${
               billingCycle === "monthly"
                 ? "bg-[#575db1] text-white"
@@ -30,7 +33,10 @@ export default function Step5() {
             Monthly
           </button>
           <button
-            onClick={() => setBillingCycle("yearly")}
+            onClick={(e) => {
+              e.preventDefault();
+              setBillingCycle("yearly");
+            }}
             className={`px-6 py-2 rounded-full ${
               billingCycle === "yearly"
                 ? "bg-[#575db1] text-white"
@@ -52,22 +58,55 @@ export default function Step5() {
           return (
             <div
               key={plan.id}
-              className="border border-slate-200 rounded-xl shadow-sm divide-y divide-slate-200 overflow-hidden"
+              // className="border border-slate-200 rounded-xl shadow-sm divide-y divide-slate-200 overflow-hidden"
+              className={`border border-slate-200 rounded-xl  ${
+                plan.plan_name_en.toLowerCase() === "standard"
+                  ? "bg-slate-800"
+                  : ""
+              } shadow-sm divide-y divide-slate-200 overflow-hidden ${
+                plan.plan_name_en.toLowerCase() === "standard"
+                  ? "border-2 border-state-800 shadow-lg"
+                  : ""
+              }`}
             >
               <div className="p-6">
-                <h2 className="text-xl leading-6 font-bold text-slate-900">
+                <h2
+                  className={`text-xl leading-6 font-bold text-slate-700 ${
+                    plan.plan_name_en.toLowerCase() === "standard"
+                      ? "text-slate-200"
+                      : ""
+                  }`}
+                >
                   {plan.plan_name_en}
                 </h2>
-                <p className="mt-2 text-base text-slate-700 leading-tight">
+                <p
+                  className={`mt-2 text-base text-slate-700 leading-tight ${
+                    plan.plan_name_en.toLowerCase() === "standard"
+                      ? "text-slate-200"
+                      : ""
+                  }`}
+                >
                   {plan.plan_description_en}
                 </p>
                 <p className="mt-8">
-                  <span className="text-4xl font-bold text-slate-900 tracking-tighter">
+                  <span
+                    className={`text-3xl font-bold text-slate-900 ${
+                      plan.plan_name_en.toLowerCase() === "standard"
+                        ? "text-slate-200"
+                        : ""
+                    } tracking-tighter`}
+                  >
                     {billingCycle === "monthly"
                       ? price?.monthly_price_en
                       : price?.yearly_price_en}
                   </span>
-                  <span className="text-base font-medium text-slate-500">
+                  <span
+                    className={`text-base font-medium text-slate-500 ${
+                      plan.plan_name_en.toLowerCase() === "standard"
+                        ? "text-slate-200"
+                        : ""
+                    }`}
+                  >
                     /{billingCycle === "monthly" ? "month" : "year"}
                   </span>
                 </p>
@@ -96,7 +135,13 @@ export default function Step5() {
                         ></path>
                         <path d="M5 12l5 5l10 -10"></path>
                       </svg>
-                      <span className="text-base text-slate-700">
+                      <span
+                        className={`text-base text-slate-700 ${
+                          plan.plan_name_en.toLowerCase() === "standard"
+                            ? "text-slate-200"
+                            : ""
+                        }`}
+                      >
                         {feature.feature_en}
                       </span>
                     </li>
@@ -104,7 +149,7 @@ export default function Step5() {
                 </ul>
                 <a
                   href="/sign-up"
-                  className="mt-8 block w-full bg-[#575db1] rounded-md py-2 text-sm font-semibold text-white text-center"
+                  className="mt-8 block w-full bg-[#575db1] rounded-md py-4 text-sm font-semibold text-white text-center"
                 >
                   Choose Plan
                 </a>
