@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { _CommonApi } from "../services/common.service";
 import type {
-  CountriesResponse,
-  IndustryData,
-  TimeZoneResponse,
+    CountriesResponse,
+    CurrencyResponse,
+    IndustryData,
+    TimeZoneResponse,
 } from "../types/common";
 import { QueryKeys } from "../utils/queryKeys";
-import { useCommonStore } from "../store/useCommonStore";
 
 export const useFetchIndustry = () => {
   return useQuery({
@@ -35,6 +35,17 @@ export const useFetchTimeZone = () => {
     queryKey: [QueryKeys.COUNTRIES],
     queryFn: async (): Promise<TimeZoneResponse> => {
       const data = await _CommonApi.fetchTimeZone();
+      return data;
+    },
+    staleTime: 1000 * 60 * 10,
+  });
+};
+
+export const useFetchCurrencies = () => {
+  return useQuery({
+    queryKey: [QueryKeys.COUNTRIES],
+    queryFn: async (): Promise<CurrencyResponse> => {
+      const data = await _CommonApi.fetchCurrencies();
       return data;
     },
     staleTime: 1000 * 60 * 10,

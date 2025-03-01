@@ -20,14 +20,14 @@ export default function Step4() {
           </div>
           <form className="w-full">
             <div className="space-y-5 w-full">
-              <div className="flex items-center justify-between m-4">
+              <div className="flex items-center justify-between mr-4">
                 <Label>Is This business registered for VAT</Label>
                 <label className="inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
                     checked={registeredForVAT}
                     onChange={() => setRegisteredForVAT(!registeredForVAT)}
-                    className="sr-only peer"
+                    className="sr-only peer "
                   />
                   <div
                     className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4
