@@ -89,7 +89,7 @@ export default function Step1() {
                   </div>
                   <div className="w-full">
                     <Label>
-                      Organization Country States
+                      Emirate
                       <span className="text-error-500">*</span>
                     </Label>
                     <select
@@ -99,7 +99,7 @@ export default function Step1() {
                     >
                       <option value="">
                         {selectedCountry
-                          ? "Select a state"
+                          ? "Select a Emirate"
                           : "No Location selected"}
                       </option>
                       {countryStates.map((state) => (
