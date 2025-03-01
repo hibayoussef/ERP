@@ -41,7 +41,7 @@ export interface CountryState {
   name_ar: string;
   name_en: string;
   zip_code: string;
-  time_zone: TimeZone;
+  time_zone: TimeZone | null;
 }
 
 export interface Country {

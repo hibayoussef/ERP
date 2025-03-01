@@ -5,6 +5,7 @@ export const HttpRequestInterceptor = () => {
   Axios.interceptors.request.use(
     (request) => {
       const token = _AuthApi.getToken();
+        request.headers["x-api-key"] = "SANN_BOOKS";
 
       if (request.headers) {
         request.headers["x-api-key"] = "SANN_BOOKS";

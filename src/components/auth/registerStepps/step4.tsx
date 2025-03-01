@@ -1,9 +1,10 @@
-import { useFetchIndustry } from "../../../hooks/useCommon";
+import { useState } from "react";
 import Input from "../../form/input/InputField";
 import Label from "../../form/Label";
+import { EyeCloseIcon, EyeIcon } from "../../../icons";
 
 export default function Step4() {
-  const { data: industries, isLoading } = useFetchIndustry();
+  const [registeredForVAT, setRegisteredForVAT] = useState(false);
 
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
@@ -19,75 +20,86 @@ export default function Step4() {
           </div>
           <form className="w-full">
             <div className="space-y-5 w-full">
-              <div className="grid grid-cols-1 gap-5  w-full">
-                <div className="sm:col-span-1 w-full">
-                  <Label>
-                    Organization Name<span className="text-error-500">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    id="fname"
-                    name="fname"
-                    placeholder="Enter your Organization name"
-                    className="w-full"
+              <div className="flex items-center justify-between m-4">
+                <Label>Is This business registered for VAT</Label>
+                <label className="inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={registeredForVAT}
+                    onChange={() => setRegisteredForVAT(!registeredForVAT)}
+                    className="sr-only peer"
                   />
-                </div>
-                <div className="sm:col-span-1 w-full">
-                  <Label>
-                    Industry<span className="text-error-500">*</span>
-                  </Label>
-                  <select
-                    id="industry"
-                    name="industry"
-                    className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  >
-                    <option value="">Select an industry</option>
-                    {industries?.data.map((industry) => (
-                      <option key={industry.id} value={industry.id}>
-                        {industry.name_en}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="sm:col-span-1 sm:grid-cols-2 flex space-x-5">
-                  <div className="w-full">
-                    <Label>
-                      Organization Country States
-                      <span className="text-error-500">*</span>
-                    </Label>
-                    <select
-                      id="country_states"
-                      name="country_states"
-                      className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    >
-                      <option value="">Select an industry</option>
-                      {industries?.data.map((industry) => (
-                        <option key={industry.id} value={industry.id}>
-                          {industry.name_en}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="w-full">
-                    <Label>
-                      Organization Location
-                      <span className="text-error-500">*</span>
-                    </Label>
-                    <select
-                      id="location"
-                      name="location"
-                      className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    >
-                      <option value="">Select a location</option>
-                      {industries?.data.map((industry) => (
-                        <option key={industry.id} value={industry.id}>
-                          {industry.name_en}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
+                  <div
+                    className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4
+                   peer-focus:ring-blue-300 dark:peer-focus:ring-[#575db1] rounded-full peer
+                    dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full
+                     peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px]
+                      after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all
+                       dark:border-gray-600 peer-checked:bg-[#575db1] dark:peer-checked:bg-[#575db1]"
+                  ></div>
+                </label>
               </div>
+
+              {/* {!registeredForVAT && ( */}
+              <>
+                <div className="w-full flex space-x-2">
+                  <div className="w-full">
+                    <Label>Tax Registration Number Label</Label>
+                    <Input
+                      type="text"
+                      id="tax_registration_number_label"
+                      name="tax_registration_number_label"
+                      placeholder="Enter Tax Registration Number Label"
+                      className="w-full"
+                      disabled={!registeredForVAT} // Disable if not registered
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Label>
+                      Tax Registration Number (TRN)
+                      <span className="text-error-500">*</span>
+                    </Label>
+                    <Input
+                      type="text"
+                      id="tax_registration_number"
+                      name="tax_registration_number"
+                      placeholder="Enter Tax Registration Number"
+                      className="w-full"
+                      disabled={!registeredForVAT} // Disable if not registered
+                    />
+                  </div>
+                </div>
+                <div className="w-full flex space-x-2">
+                  <div className="w-full">
+                    <Label>
+                      VAT Registered On
+                      <span className="text-error-500">*</span>
+                    </Label>
+                    <Input
+                      type="date"
+                      id="vat_registered_on"
+                      name="vat_registered_on"
+                      className="w-full"
+                      disabled={!registeredForVAT} // Disable if not registered
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Label>
+                      Currency
+                      <span className="text-error-500">*</span>
+                    </Label>
+                    <Input
+                      type="text"
+                      id="currency"
+                      name="currency"
+                      placeholder="Enter Currency"
+                      className="w-full"
+                      disabled={!registeredForVAT} // Disable if not registered
+                    />
+                  </div>
+                </div>
+              </>
+              {/* )} */}
             </div>
           </form>
         </div>

@@ -1,7 +1,9 @@
+import { useCommonStore } from "../../../store/useCommonStore";
 import Input from "../../form/input/InputField";
 import Label from "../../form/Label";
 
 export default function Step2() {
+  const { zipCode, timeZone } = useCommonStore();
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col justify-center w-full mx-auto">
@@ -48,6 +50,29 @@ export default function Step2() {
                       className="w-full"
                     />
                   </div>
+                </div>
+                <div className="border-t border-gray-300 my-4" />
+                <div className="w-full">
+                  <Label>Postal Code</Label>
+                  <Input
+                    type="text"
+                    id="postal_code"
+                    name="postal_code"
+                    value={zipCode || ""}
+                    readOnly
+                    className="w-full"
+                  />
+                </div>
+                <div className="w-full">
+                  <Label>Time Zone</Label>
+                  <Input
+                    type="text"
+                    id="time_zone"
+                    name="time_zone"
+                    value={ "(" + timeZone?.offset + ")" + " " + timeZone?.name || ""}
+                    readOnly
+                    className="w-full"
+                  />
                 </div>
               </div>
             </div>

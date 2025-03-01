@@ -1,9 +1,10 @@
-import { useFetchIndustry } from "../../../hooks/useCommon";
+import { useState } from "react";
 import Input from "../../form/input/InputField";
 import Label from "../../form/Label";
+import { EyeCloseIcon, EyeIcon } from "../../../icons";
 
 export default function Step3() {
-  const { data: industries, isLoading } = useFetchIndustry();
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
@@ -11,80 +12,61 @@ export default function Step3() {
         <div className="w-full">
           <div className="mb-5 sm:mb-8 text-center">
             <h2 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90">
-              Location Details
+              Contact Information
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Enter your Location Details!
+              Enter your Contact Information!
             </p>
           </div>
           <form className="w-full">
             <div className="space-y-5 w-full">
-              <div className="grid grid-cols-1 gap-5  w-full">
-                <div className="sm:col-span-1 w-full">
+              <div className="grid grid-cols-1 gap-5 w-full">
+                <div className="w-full">
                   <Label>
-                    Organization Name<span className="text-error-500">*</span>
+                    Email
+                    <span className="text-error-500">*</span>
                   </Label>
                   <Input
-                    type="text"
-                    id="fname"
-                    name="fname"
-                    placeholder="Enter your Organization name"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="info@gmail.com"
                     className="w-full"
                   />
                 </div>
-                <div className="sm:col-span-1 w-full">
+                <div className="w-full">
                   <Label>
-                    Industry<span className="text-error-500">*</span>
+                    Mobile
+                    <span className="text-error-500">*</span>
                   </Label>
-                  <select
-                    id="industry"
-                    name="industry"
-                    className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  >
-                    <option value="">Select an industry</option>
-                    {industries?.data.map((industry) => (
-                      <option key={industry.id} value={industry.id}>
-                        {industry.name_en}
-                      </option>
-                    ))}
-                  </select>
+                  <Input
+                    type="tel"
+                    id="mobile"
+                    name="mobile"
+                    placeholder="Enter your Mobile Number"
+                    className="w-full"
+                  />
                 </div>
-                <div className="sm:col-span-1 sm:grid-cols-2 flex space-x-5">
-                  <div className="w-full">
-                    <Label>
-                      Organization Country States
-                      <span className="text-error-500">*</span>
-                    </Label>
-                    <select
-                      id="country_states"
-                      name="country_states"
-                      className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                <div className="w-full">
+                  <Label>
+                    Password <span className="text-error-500">*</span>
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Enter your password"
+                      name="password"
+                    />
+                    <span
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
                     >
-                      <option value="">Select an industry</option>
-                      {industries?.data.map((industry) => (
-                        <option key={industry.id} value={industry.id}>
-                          {industry.name_en}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="w-full">
-                    <Label>
-                      Organization Location
-                      <span className="text-error-500">*</span>
-                    </Label>
-                    <select
-                      id="location"
-                      name="location"
-                      className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    >
-                      <option value="">Select a location</option>
-                      {industries?.data.map((industry) => (
-                        <option key={industry.id} value={industry.id}>
-                          {industry.name_en}
-                        </option>
-                      ))}
-                    </select>
+                      {showPassword ? (
+                        <EyeIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
+                      ) : (
+                        <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
+                      )}
+                    </span>
                   </div>
                 </div>
               </div>

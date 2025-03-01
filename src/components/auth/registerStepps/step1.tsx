@@ -3,13 +3,14 @@ import { useFetchCountries, useFetchIndustry } from "../../../hooks/useCommon";
 import Input from "../../form/input/InputField";
 import Label from "../../form/Label";
 import { CountryState } from "../../../types/common";
+import { useCommonStore } from "../../../store/useCommonStore";
 
 export default function Step1() {
   const { data: industries } = useFetchIndustry();
   const { data: countries } = useFetchCountries();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countryStates, setCountryStates] = useState<CountryState[]>([]);
-
+  const { setZipCode, setTimeZone } = useCommonStore();
   const handleCountryChange = (event) => {
     const countryId = event.target.value;
     setSelectedCountry(countryId);
@@ -19,6 +20,17 @@ export default function Step1() {
     setCountryStates(
       selectedCountryData ? selectedCountryData.country_states : []
     );
+  };
+
+  const handleStateChange = (event) => {
+    const stateId = event.target.value;
+    const selectedState = countryStates.find(
+      (state) => state.id === parseInt(stateId)
+    );
+    if (selectedState) {
+      setZipCode(selectedState.zip_code);
+      setTimeZone(selectedState.time_zone);
+    }
   };
 
   return (
@@ -95,6 +107,7 @@ export default function Step1() {
                     <select
                       id="country_states"
                       name="country_states"
+                      onChange={handleStateChange}
                       className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     >
                       <option value="">
