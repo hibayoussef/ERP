@@ -24,8 +24,8 @@ export default function SignUpForm() {
     <div className="flex flex-col flex-1 w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col justify-center align-center flex-1 w-full max-w-xxl mx-auto">
         <div>
-          <div className="mb-5 sm:mb-8 text-center">
-            <div className="flex justify-center items-center space-x-4 mb-6">
+          <div className="mb-5 sm:mb-8 text-center mt-6">
+            <div className="flex justify-center items-center space-x-4">
               {[...Array(totalSteps)].map((_, index) => (
                 <div
                   key={index}
