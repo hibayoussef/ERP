@@ -50,7 +50,7 @@ export default function Step5() {
 
       {/* Plans Grid */}
       <div className="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
-        {plans?.message.map((plan) => {
+        {plans?.data.map((plan) => {
           const price = plan.prices.find(
             (p) => p.currency === selectedCurrency
           );
