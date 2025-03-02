@@ -4,6 +4,15 @@ import Input from "../../form/input/InputField";
 import Label from "../../form/Label";
 import { CountryState } from "../../../types/common";
 import { useCommonStore } from "../../../store/useCommonStore";
+import { useFormikContext } from "formik";
+
+interface FormValues {
+  organizationName: string;
+  industry: string;
+  location: string;
+  country_states: string;
+  // Add other fields as necessary
+}
 
 export default function Step1() {
   const { data: industries } = useFetchIndustry();
@@ -11,6 +20,9 @@ export default function Step1() {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countryStates, setCountryStates] = useState<CountryState[]>([]);
   const { setZipCode, setTimeZone } = useCommonStore();
+  const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
+    useFormikContext<FormValues>();
+
   const handleCountryChange = (event) => {
     const countryId = event.target.value;
     setSelectedCountry(countryId);
@@ -53,12 +65,19 @@ export default function Step1() {
                     Organization Name<span className="text-error-500">*</span>
                   </Label>
                   <Input
-                    type="text"
-                    id="fname"
-                    name="fname"
-                    placeholder="Enter your Organization name"
-                    className="w-full"
+                    name="organizationName"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values?.organizationName}
+                    error={
+                      !!(touched?.organizationName && errors.organizationName)
+                    } // Convert to boolean
                   />
+                  {touched.organizationName && errors.organizationName && (
+                    <div className="text-error-500 text-sm mt-1">
+                      {errors.organizationName}
+                    </div>
+                  )}
                 </div>
                 <div className="w-full">
                   <Label>
@@ -76,6 +95,11 @@ export default function Step1() {
                       </option>
                     ))}
                   </select>
+                  {touched.industry && errors.industry && (
+                    <div className="text-error-500 text-sm mt-1">
+                      {errors.industry}
+                    </div>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full">
