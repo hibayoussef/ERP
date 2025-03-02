@@ -3,6 +3,11 @@ import { _axios } from "../interceptor/http-config";
 import type { ILoginDTO, ILoginRequest } from "../types/auth";
 
 export const _AuthApi = {
+  // CREATE ACCOUNT
+  newAccount: async (data: any) => {
+    return _axios.post("/auth/register", data).then((res) => res.data);
+  },
+
   // LOGIN
   login: async (data: ILoginRequest) => {
     const res = await _axios.post<ILoginDTO>("/users/login", data);
@@ -25,9 +30,9 @@ export const _AuthApi = {
   //   },
 
   // LOGOUT
-//   logout: async () => {
-//     return await _axios.post<any>("/logout");
-//   },
+  //   logout: async () => {
+  //     return await _axios.post<any>("/logout");
+  //   },
 
   // STORE TOKEN
   storeToken: (token: string) => {
