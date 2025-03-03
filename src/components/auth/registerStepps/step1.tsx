@@ -11,7 +11,7 @@ export default function Step1() {
   const { data: countries } = useFetchCountries();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countryStates, setCountryStates] = useState<CountryState[]>([]);
-  const { setZipCode, setTimeZone } = useCommonStore();
+  const { setZipCode, setTimeZone, setCurrency } = useCommonStore();
   const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
     useFormikContext<{
       organization_name_en: string;
@@ -34,6 +34,11 @@ export default function Step1() {
     setCountryStates(
       selectedCountryData ? selectedCountryData.country_states : []
     );
+    if (selectedCountryData) {
+      setCurrency(selectedCountryData.currency);
+      setFieldValue("curreny_id", selectedCountryData.currency);
+
+    }
   };
 
   const handleStateChange = (event) => {

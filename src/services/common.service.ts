@@ -3,6 +3,7 @@ import {
   CountriesResponse,
   CurrencyResponse,
   IndustryResponse,
+  type Currency,
   type PlansResponse,
   type TimeZoneResponse,
 } from "../types/common";
@@ -33,6 +34,18 @@ export const _CommonApi = {
         "x-api-key": "SANN_BOOKS",
       },
     });
+    return response.data;
+  },
+  // Currncy By ID
+  fetchCurrencyById: async (currency_id: number | undefined) => {
+    const response = await _axios.get<Currency>(
+      `/auth/currencies/${currency_id}`,
+      {
+        headers: {
+          "x-api-key": "SANN_BOOKS",
+        },
+      }
+    );
     return response.data;
   },
   //   Industries

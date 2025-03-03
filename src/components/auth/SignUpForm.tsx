@@ -52,7 +52,6 @@ export default function SignUpForm() {
 
   const nextStep = async (validateForm, values) => {
     const errors = await validateForm();
-    console.log("Errors:", errors);
     if (Object.keys(errors).length === 0 && step < totalSteps) {
       setFormValues(values);
       setStep(step + 1);

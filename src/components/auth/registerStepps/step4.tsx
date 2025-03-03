@@ -1,8 +1,14 @@
+import { useFetchCurrencyById } from "../../../hooks/useCommon";
+import { useCommonStore } from "../../../store/useCommonStore";
 import Input from "../../form/input/InputField";
 import Label from "../../form/Label";
 import { useFormikContext } from "formik";
 
 export default function Step4() {
+  const { currency } = useCommonStore();
+  const { data: currencyData } = useFetchCurrencyById(currency); 
+  console.log("curren: ", currencyData);
+  
   const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
     useFormikContext<{
       vat_registered_on: string;
@@ -34,7 +40,7 @@ export default function Step4() {
                 type="text"
                 name="curreny_id"
                 placeholder="Enter Currency"
-                value={values.curreny_id}
+                value={currencyData?.data?.currency_code + " - " + currencyData?.data?.currency_name }
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className="w-full"

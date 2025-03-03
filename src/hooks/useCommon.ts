@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { _CommonApi } from "../services/common.service";
 import type {
-    CountriesResponse,
-    CurrencyResponse,
-    IndustryData,
-    PlansResponse,
-    TimeZoneResponse,
+  CountriesResponse,
+  Currency,
+  CurrencyResponse,
+  IndustryData,
+  PlansResponse,
+  TimeZoneResponse
 } from "../types/common";
 import { QueryKeys } from "../utils/queryKeys";
 
@@ -49,6 +50,18 @@ export const useFetchCurrencies = () => {
       const data = await _CommonApi.fetchCurrencies();
       return data;
     },
+    staleTime: 1000 * 60 * 10,
+  });
+};
+
+export const useFetchCurrencyById = (currency_id: number | undefined) => {
+  return useQuery({
+    queryKey: [QueryKeys.CURRENCY, currency_id],
+    queryFn: async (): Promise<any> => {
+      const data: any = await _CommonApi.fetchCurrencyById(currency_id);
+      return data?.data;
+    },
+    enabled: !!currency_id,
     staleTime: 1000 * 60 * 10,
   });
 };
