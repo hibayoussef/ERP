@@ -27,7 +27,7 @@ export default function SignUpForm() {
     country_id: "",
     password: "",
     time_zone_id: "",
-    registered_for_vat: "",
+    registered_for_vat: 0,
     postal_code: "",
     city: "",
     street1: "",

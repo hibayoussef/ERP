@@ -84,10 +84,10 @@ export default function Step2() {
                     type="text"
                     id="time_zone_id"
                     name="time_zone_id"
-                    value={values.time_zone_id}
-                    // value={
-                    //   "(" + timeZone?.offset + ")" + " " + timeZone?.name || ""
-                    // }
+                    // value={values.time_zone_id}
+                    value={
+                      "(" + timeZone?.offset + ")" + " " + timeZone?.name || ""
+                    }
                     readOnly
                     className="w-full"
                   />

@@ -8,6 +8,7 @@ export default function Step4() {
   const { currency } = useCommonStore();
   const { data: currencyData } = useFetchCurrencyById(currency);
 
+  console.log("currencyData: ", currencyData);
   const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
     useFormikContext<{
       vat_registered_on: string;
@@ -17,7 +18,6 @@ export default function Step4() {
       currency_id: number;
     }>();
 
-  console.log("values 4: ", values);
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col justify-center w-full mx-auto max-w-xl">
@@ -41,9 +41,9 @@ export default function Step4() {
                 // name="curreny_id"
                 placeholder="Enter Currency"
                 value={
-                  currencyData?.data?.currency_code +
+                  currencyData?.currency_code +
                   " - " +
-                  currencyData?.data?.currency_name
+                  currencyData?.currency_name
                 }
                 onChange={handleChange}
                 onBlur={handleBlur}
