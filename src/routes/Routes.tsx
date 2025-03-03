@@ -19,6 +19,7 @@ import Blank from "../pages/Blank";
 import AppLayout from "../layout/AppLayout";
 import Home from "../pages/Dashboard/Home";
 import ForgotPassword from "../pages/AuthPages/ForgotPassword";
+import VerifyEmail from "../pages/AuthPages/VerifyEmail";
 
 const RoutesComponent = () => {
   return (
@@ -47,6 +48,7 @@ const RoutesComponent = () => {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ForgotPassword />} />
+      <Route path="/verify-email/:token" element={<VerifyEmail />} />
 
       {/* Fallback Route */}
       <Route path="*" element={<NotFound />} />

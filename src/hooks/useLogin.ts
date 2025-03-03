@@ -59,3 +59,19 @@ export const useLogin = () => {
     handleSubmit,
   };
 };
+
+export const useVerifyEmail = () => {
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationFn: async (token: string) => {
+      return _AuthApi.verifyEmail(token);
+    },
+    onSuccess: () => {
+      setTimeout(() => navigate("/login"), 3000);
+    },
+    onError: (error) => {
+      console.error("Email verification failed:", error);
+    },
+  });
+};

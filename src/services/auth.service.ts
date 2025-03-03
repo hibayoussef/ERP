@@ -1,4 +1,3 @@
-
 import { _axios } from "../interceptor/http-config";
 import type { ILoginDTO, ILoginRequest } from "../types/auth";
 
@@ -12,6 +11,11 @@ export const _AuthApi = {
   login: async (data: ILoginRequest) => {
     const res = await _axios.post<ILoginDTO>("/auth/login", data);
     return res.data;
+  },
+
+  // VERIFY EMAIL
+  verifyEmail: async (token: string) => {
+    return _axios.post("/auth/verfiy-email", { token }).then((res) => res.data);
   },
 
   //   // FORGOT PASSWORD
