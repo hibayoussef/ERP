@@ -51,12 +51,10 @@ export default function SignUpForm() {
   const { mutate, isPending } = useRegister();
 
   const nextStep = async (validateForm, values) => {
-    console.log("values: ", values);
     const errors = await validateForm();
     if (Object.keys(errors).length === 0 && step < totalSteps) {
       setFormValues(values);
       setStep(step + 1);
-      console.log("Step updated to: ", step + 1);
     }
   };
 

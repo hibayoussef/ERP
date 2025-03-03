@@ -6,12 +6,14 @@ import Checkbox from "../form/input/Checkbox";
 import Input from "../form/input/InputField";
 import Button from "../ui/button/Button";
 import { useLogin } from "../../hooks/useLogin";
+import { Formik, Form, Field } from "formik";
+import { signinValidationSchema } from "./registerStepps/validations/siginValidation";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  const { register, handleSubmit, onSubmit, errors, isPending } = useLogin();
+  const { onSubmit, errors, isPending } = useLogin();
 
   return (
     <div className="flex flex-col flex-1">
@@ -26,71 +28,84 @@ export default function SignInForm() {
             </p>
           </div>
           <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="space-y-6">
-                <div>
-                  <Label>
-                    Email Address <span className="text-error-500">*</span>
-                  </Label>
-                  <Input
-                    type="email"
-                    placeholder="info@gmail.com"
-                    {...register("email")}
-                    error={!!errors.email}
-                    hint={errors.email?.message}
-                  />
-                </div>
-                <div>
-                  <Label>
-                    Password <span className="text-error-500">*</span>
-                  </Label>
-                  <div className="relative">
-                    <Input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Enter your password"
-                      {...register("password")}
-                      error={!!errors.password}
-                      hint={errors.password?.message}
+            <Formik
+              initialValues={{
+                email: "",
+                password: "",
+              }}
+              validationSchema={signinValidationSchema}
+              onSubmit={(values, actions) => {
+                onSubmit(values);
+                actions.setSubmitting(false);
+              }}
+            >
+              {({ isSubmitting }) => (
+                <Form className="space-y-6">
+                  <div>
+                    <Label>
+                      Email Address <span className="text-error-500">*</span>
+                    </Label>
+                    <Field
+                      as={Input}
+                      type="email"
+                      name="email"
+                      placeholder="info@gmail.com"
+                      error={!!errors?.email}
+                      hint={errors?.email?.message}
                     />
-                    <span
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+                  </div>
+                  <div>
+                    <Label>
+                      Password <span className="text-error-500">*</span>
+                    </Label>
+                    <div className="relative">
+                      <Field
+                        as={Input}
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        placeholder="Enter your password"
+                        error={!!errors?.password}
+                        hint={errors?.password?.message}
+                      />
+                      <span
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+                      >
+                        {showPassword ? (
+                          <EyeIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
+                        ) : (
+                          <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Checkbox checked={isChecked} onChange={setIsChecked} />
+                      <span className="block font-normal text-gray-700 text-theme-sm dark:text-gray-400">
+                        Remember me
+                      </span>
+                    </div>
+                    <Link
+                      to="/forgot-password"
+                      className="text-sm text-red-600 hover:text-red-700 dark:text-red-500"
                     >
-                      {showPassword ? (
-                        <EyeIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
-                      ) : (
-                        <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
-                      )}
-                    </span>
+                      Forgot password?
+                    </Link>
                   </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Checkbox checked={isChecked} onChange={setIsChecked} />
-                    <span className="block font-normal text-gray-700 text-theme-sm dark:text-gray-400">
-                      Remember me
-                    </span>
+                  <div>
+                    <Button
+                      type="submit"
+                      className="w-full bg-[#575db1] !important shadow-theme-xs hover:bg-[#aa9fea] !important text-white"
+                      size="sm"
+                      disabled={isSubmitting || isPending}
+                    >
+                      {isPending ? "Signing in..." : "Sign in"}
+                    </Button>
                   </div>
-                  <Link
-                    to="/forgot-password"
-                    className="text-sm text-red-600 hover:text-red-700 dark:text-red-500"
-                  >
-                    Forgot password?
-                  </Link>
-                </div>
-                <div>
-                  <Button
-                    type="submit"
-                    className="w-full bg-[#575db1] shadow-theme-xs hover:bg-[#aa9fea] text-white"
-                    size="sm"
-                    disabled={isPending}
-                  >
-                    {isPending ? "Signing in..." : "Sign in"}
-                  </Button>
-                </div>
-              </div>
-            </form>
-
+                </Form>
+              )}
+            </Formik>
             <div className="mt-5">
               <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
                 Don&apos;t have an account?{" "}
