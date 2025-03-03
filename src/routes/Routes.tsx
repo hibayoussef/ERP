@@ -45,7 +45,6 @@ const RoutesComponent = () => {
       <Route index path="/signup" element={<SignUp />} />
 
       <Route path="/signin" element={<SignIn />} />
-      <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ForgotPassword />} />
 
