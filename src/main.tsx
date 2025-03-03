@@ -1,13 +1,13 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter as Router } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 import "simplebar-react/dist/simplebar.min.css";
 import "swiper/swiper-bundle.css";
 import App from "./App.tsx";
 import { AppWrapper } from "./components/common/PageMeta.tsx";
 import { ThemeProvider } from "./context/ThemeContext.tsx";
 import "./index.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Router>
+    <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <AppWrapper>
@@ -28,6 +28,6 @@ createRoot(document.getElementById("root")!).render(
           </AppWrapper>
         </ThemeProvider>
       </QueryClientProvider>
-    </Router>
+    </BrowserRouter>
   </StrictMode>
 );
