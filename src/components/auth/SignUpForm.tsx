@@ -1,17 +1,18 @@
+import { Form, Formik } from "formik";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useRegister } from "../../hooks/useLogin";
+import Loader from "../ui/loader/loader";
 import Step1 from "./registerStepps/step1";
 import Step2 from "./registerStepps/step2";
 import Step3 from "./registerStepps/step3";
 import Step4 from "./registerStepps/step4";
 import Step5 from "./registerStepps/step5";
-import { Formik, Form } from "formik";
 import step1Validation from "./registerStepps/validations/step1ValidationSchema";
 import step2Validation from "./registerStepps/validations/step2ValidationSchema";
 import step3Validation from "./registerStepps/validations/step3ValidationSchema";
 import step4Validation from "./registerStepps/validations/step4ValidationSchema";
 import step5Validation from "./registerStepps/validations/step5ValidationSchema";
-import { useRegister } from "../../hooks/useLogin";
 
 export default function SignUpForm() {
   const [step, setStep] = useState(1);
@@ -104,7 +105,7 @@ export default function SignUpForm() {
                     <button
                       onClick={prevStep}
                       disabled={step === 1}
-                      className="flex items-center justify-center w-full px-4 py-3 text-sm disabled:opacity-50 font-medium text-white transition rounded-lg bg-gray-500 shadow-theme-xs hover:bg-brand-600"
+                      className="flex items-center justify-center w-full px-4 py-3 text-sm disabled:opacity-50 font-medium text-white transition rounded-lg bg-gray-500 shadow-theme-xs hover:bg-gray-600"
                     >
                       Back
                     </button>
@@ -118,9 +119,9 @@ export default function SignUpForm() {
                         }
                       }}
                       disabled={isSubmitting}
-                      className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium disabled:opacity-50 text-white transition rounded-lg bg-[#575db1] shadow-theme-xs hover:bg-brand-600"
+                      className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium disabled:opacity-50 text-white transition rounded-lg  shadow-theme-xs bg-[#575db1] hover:bg-[#474ca1]"
                     >
-                      {isPending ? "Loading..." : "Next"}
+                      {isPending ? <Loader /> : "Next"}
                     </button>
                   </div>
                 </div>
@@ -128,7 +129,6 @@ export default function SignUpForm() {
             )}
           </Formik>
 
-          {/* ✅ Popup عند نجاح التسجيل */}
           {showPopup && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
               <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
