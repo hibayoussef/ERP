@@ -7,7 +7,6 @@ import { useFormikContext } from "formik";
 export default function Step4() {
   const { currency } = useCommonStore();
   const { data: currencyData } = useFetchCurrencyById(currency); 
-  console.log("curren: ", currencyData);
   
   const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
     useFormikContext<{

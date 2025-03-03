@@ -4,7 +4,7 @@ import { useFormikContext } from "formik";
 
 export default function Step5() {
   const { data: plans } = useFetchPlans();
-  const [billingCycle, setBillingCycle] = useState("monthly");
+  const [billingCycle, setBillingCycle] = useState("Monthly");
   const [selectedCurrency, setSelectedCurrency] = useState(1);
 
   const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
@@ -30,10 +30,10 @@ export default function Step5() {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setBillingCycle("monthly");
+              setBillingCycle("Monthly");
             }}
             className={`px-6 py-2 rounded-full ${
-              billingCycle === "monthly"
+              billingCycle === "Monthly"
                 ? "bg-[#575db1] text-white"
                 : "text-gray-600"
             }`}
@@ -73,7 +73,7 @@ export default function Step5() {
                   : ""
               } shadow-sm divide-y divide-slate-200 overflow-hidden ${
                 plan.plan_name_en.toLowerCase() === "standard"
-                  ? "border-2 border-state-800 shadow-lg shadow-xl"
+                  ? "border-2 border-state-800 shadow-lg"
                   : ""
               }`}
             >
@@ -104,7 +104,7 @@ export default function Step5() {
                         : ""
                     } tracking-tighter`}
                   >
-                    {billingCycle === "monthly"
+                    {billingCycle === "Monthly"
                       ? price?.monthly_price_en
                       : price?.yearly_price_en}
                   </span>
@@ -115,7 +115,7 @@ export default function Step5() {
                         : ""
                     }`}
                   >
-                    /{billingCycle === "monthly" ? "month" : "year"}
+                    /{billingCycle === "Monthly" ? "Monthly" : "year"}
                   </span>
                 </p>
               </div>
@@ -158,6 +158,7 @@ export default function Step5() {
                 <button
                   type="button"
                   onClick={() => {
+                    console.log("plan: ", plan, price);
                     setFieldValue("plan_id", plan.id);
                     setFieldValue("plan_price_id", price?.id);
                     setFieldValue("plan_type", billingCycle);

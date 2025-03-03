@@ -34,7 +34,6 @@ export const useLogin = () => {
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (input: ILoginRequest) => {
-      console.log("input: ", input);
       const res = await _AuthApi.login(input);
       return res;
     },
