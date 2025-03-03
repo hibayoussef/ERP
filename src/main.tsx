@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router";
 import "simplebar-react/dist/simplebar.min.css";
 import "swiper/swiper-bundle.css";
 import App from "./App.tsx";
@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <Router>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <AppWrapper>
@@ -28,6 +28,6 @@ createRoot(document.getElementById("root")!).render(
           </AppWrapper>
         </ThemeProvider>
       </QueryClientProvider>
-    </BrowserRouter>
+    </Router>
   </StrictMode>
 );
