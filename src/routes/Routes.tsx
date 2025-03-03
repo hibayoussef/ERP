@@ -25,7 +25,7 @@ const RoutesComponent = () => {
     <Routes>
       {/* Dashboard Layout */}
       <Route element={<AppLayout />}>
-        <Route index path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/profile" element={<UserProfiles />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/blank" element={<Blank />} />
@@ -42,6 +42,8 @@ const RoutesComponent = () => {
       </Route>
 
       {/* Auth Layout */}
+      <Route index path="/signup" element={<SignUp />} />
+
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
