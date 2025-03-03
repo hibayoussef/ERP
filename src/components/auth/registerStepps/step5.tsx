@@ -6,9 +6,9 @@ import Loader from "../../ui/loader/loader";
 export default function Step5() {
   const { data: plans } = useFetchPlans();
   const [billingCycle, setBillingCycle] = useState("Monthly");
-  const [selectedCurrency, setSelectedCurrency] = useState(1);
+  const [selectedCurrency] = useState(1);
 
-  const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
+  const { values, setFieldValue } =
     useFormikContext<{
       plan_id: number;
       plan_price_id: number;

@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { _CommonApi } from "../services/common.service";
 import type {
   CountriesResponse,
-  Currency,
   CurrencyResponse,
   IndustryData,
   PlansResponse,

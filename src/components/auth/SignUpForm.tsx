@@ -50,7 +50,7 @@ export default function SignUpForm() {
     step5Validation,
   ];
 
-  const { mutate, isPending, isSuccess } = useRegister();
+  const { mutate, isPending } = useRegister();
 
   const nextStep = async (validateForm, values) => {
     const errors = await validateForm();

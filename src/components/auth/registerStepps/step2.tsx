@@ -5,14 +5,13 @@ import Label from "../../form/Label";
 
 export default function Step2() {
   const { zipCode, timeZone } = useCommonStore();
-  const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
-    useFormikContext<{
-      city: string;
-      street1: string;
-      street2: string;
-      postal_code: string;
-      time_zone_id: number;
-    }>();
+  const { errors, touched, values } = useFormikContext<{
+    city: string;
+    street1: string;
+    street2: string;
+    postal_code: string;
+    time_zone_id: number;
+  }>();
 
   console.log("values 2: ", values);
 

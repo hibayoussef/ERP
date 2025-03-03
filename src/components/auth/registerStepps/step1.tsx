@@ -1,10 +1,10 @@
+import { useFormikContext } from "formik";
 import { useState } from "react";
 import { useFetchCountries, useFetchIndustry } from "../../../hooks/useCommon";
+import { useCommonStore } from "../../../store/useCommonStore";
+import { CountryState } from "../../../types/common";
 import Input from "../../form/input/InputField";
 import Label from "../../form/Label";
-import { CountryState } from "../../../types/common";
-import { useCommonStore } from "../../../store/useCommonStore";
-import { ErrorMessage, useFormikContext } from "formik";
 
 export default function Step1() {
   const { data: industries } = useFetchIndustry();
