@@ -68,7 +68,7 @@ export const useVerifyEmail = () => {
       return _AuthApi.verifyEmail(token);
     },
     onSuccess: () => {
-      setTimeout(() => navigate("/login"), 3000);
+      setTimeout(() => navigate("/signin"), 11000);
     },
     onError: (error) => {
       console.error("Email verification failed:", error);
