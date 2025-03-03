@@ -115,10 +115,10 @@ export default function Step1() {
                     className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                   >
                     <option value="">Select a Language</option>
-                    <option key="1" value="1">
+                    <option key="1" value="en">
                       English
                     </option>
-                    <option key="1" value="1">
+                    <option key="2" value="ar">
                       Arabic
                     </option>
                   </select>
