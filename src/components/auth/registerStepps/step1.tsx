@@ -21,6 +21,8 @@ export default function Step1() {
       language: string;
     }>();
 
+  console.log("values 1: ", values);
+
   const handleCountryChange = (event) => {
     const countryId = event.target.value;
     setFieldValue("country_id", countryId);
@@ -34,8 +36,7 @@ export default function Step1() {
     );
     if (selectedCountryData) {
       setCurrency(selectedCountryData.currency);
-      setFieldValue("curreny_id", selectedCountryData.currency);
-
+      setFieldValue("currency_id", selectedCountryData.currency);
     }
   };
 
@@ -49,10 +50,7 @@ export default function Step1() {
       setZipCode(selectedState.zip_code);
       setTimeZone(selectedState.time_zone);
       setFieldValue("postal_code", selectedState.zip_code);
-      setFieldValue(
-        "time_zone_id",
-        `(${selectedState?.time_zone?.offset}) ${selectedState?.time_zone?.name}`
-      );
+      setFieldValue("time_zone_id", selectedState?.time_zone?.id);
     }
   };
   return (

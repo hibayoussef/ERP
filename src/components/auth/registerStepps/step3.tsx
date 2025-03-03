@@ -13,6 +13,8 @@ export default function Step3() {
       password: string;
       mobile: string;
     }>();
+  
+  console.log("values 3: ", values);
 
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">

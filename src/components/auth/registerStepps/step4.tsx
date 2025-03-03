@@ -6,17 +6,18 @@ import { useFormikContext } from "formik";
 
 export default function Step4() {
   const { currency } = useCommonStore();
-  const { data: currencyData } = useFetchCurrencyById(currency); 
-  
+  const { data: currencyData } = useFetchCurrencyById(currency);
+
   const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
     useFormikContext<{
       vat_registered_on: string;
       tax_registration_number: number;
       tax_registration_number_label: number;
-      registeration_for_vat: boolean;
-      curreny_id: number;
+      registered_for_vat: boolean;
+      currency_id: number;
     }>();
 
+  console.log("values 4: ", values);
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col justify-center w-full mx-auto max-w-xl">
@@ -37,16 +38,20 @@ export default function Step4() {
               </Label>
               <Input
                 type="text"
-                name="curreny_id"
+                // name="curreny_id"
                 placeholder="Enter Currency"
-                value={currencyData?.data?.currency_code + " - " + currencyData?.data?.currency_name }
+                value={
+                  currencyData?.data?.currency_code +
+                  " - " +
+                  currencyData?.data?.currency_name
+                }
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className="w-full"
                 readOnly
               />
-              {errors.curreny_id && touched.curreny_id && (
-                <p className="text-red-500 text-sm">{errors.curreny_id}</p>
+              {errors.currency_id && touched.currency_id && (
+                <p className="text-red-500 text-sm">{errors.currency_id}</p>
               )}
             </div>
             <div className="space-y-5 w-full">
@@ -58,9 +63,9 @@ export default function Step4() {
                 <label className="inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={values.registeration_for_vat}
+                    checked={values.registered_for_vat}
                     onChange={(e) =>
-                      setFieldValue("registeration_for_vat", e.target.checked)
+                      setFieldValue("registered_for_vat", e.target.checked)
                     }
                     onBlur={handleBlur}
                     className="sr-only peer"
@@ -90,7 +95,7 @@ export default function Step4() {
                       value={values.tax_registration_number_label}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      disabled={!values.registeration_for_vat}
+                      disabled={!values.registered_for_vat}
                     />
                   </div>
                   <div className="w-full">
@@ -104,7 +109,7 @@ export default function Step4() {
                       value={values.tax_registration_number}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      disabled={!values.registeration_for_vat}
+                      disabled={!values.registered_for_vat}
                     />
                   </div>
                 </div>
@@ -119,7 +124,7 @@ export default function Step4() {
                       value={values.vat_registered_on}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      disabled={!values.registeration_for_vat}
+                      disabled={!values.registered_for_vat}
                     />
                   </div>
                 </div>

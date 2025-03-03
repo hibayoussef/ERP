@@ -21,12 +21,12 @@ export default function SignUpForm() {
     mobile: "",
     email: "",
     organization_name_en: "",
+    currency_id: "", 
     organization_name_ar: "",
     country_state_id: "",
     country_id: "",
     password: "",
     time_zone_id: "",
-    currency_id: "",
     registered_for_vat: "",
     postal_code: "",
     city: "",
@@ -51,11 +51,12 @@ export default function SignUpForm() {
   const { mutate, isPending } = useRegister();
 
   const nextStep = async (validateForm, values) => {
-    console.log('values: ', values)
+    console.log("values: ", values);
     const errors = await validateForm();
     if (Object.keys(errors).length === 0 && step < totalSteps) {
       setFormValues(values);
       setStep(step + 1);
+      console.log("Step updated to: ", step + 1);
     }
   };
 
@@ -65,11 +66,12 @@ export default function SignUpForm() {
   };
 
   const handleSubmit = async (values, actions) => {
+    console.log("Submitting data: ", values);
     if (step < totalSteps) {
       setFormValues(values);
       setStep(step + 1);
     } else {
-     mutate(values);
+      mutate(values);
     }
     actions.setTouched({});
     actions.setSubmitting(false);
@@ -122,7 +124,13 @@ export default function SignUpForm() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => nextStep(validateForm, values)}
+                      onClick={() => {
+                        if (step < totalSteps) {
+                          nextStep(validateForm, values);
+                        } else {
+                          handleSubmit(values, { setSubmitting: () => {} });
+                        }
+                      }}
                       disabled={isSubmitting}
                       className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium disabled:opacity-50 text-white transition rounded-lg bg-[#575db1] shadow-theme-xs hover:bg-brand-600"
                     >
