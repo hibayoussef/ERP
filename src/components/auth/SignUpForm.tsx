@@ -72,7 +72,7 @@ export default function SignUpForm() {
     } else {
       mutate(values, {
         onSuccess: () => {
-          setShowPopup(true); 
+          setShowPopup(true);
         },
       });
     }
@@ -82,6 +82,18 @@ export default function SignUpForm() {
   return (
     <div className="flex flex-col flex-1 w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col justify-center align-center flex-1 w-full max-w-xxl mx-auto">
+        <div className="mb-5 sm:mb-8 text-center mt-6">
+          <div className="flex justify-center items-center space-x-4">
+            {[...Array(totalSteps)].map((_, index) => (
+              <div
+                key={index}
+                className={`h-2 w-13 rounded-full ${
+                  step > index ? "bg-[#575db1]" : "bg-gray-300"
+                }`}
+              ></div>
+            ))}
+          </div>
+        </div>
         <div>
           <Formik
             initialValues={formValues}
