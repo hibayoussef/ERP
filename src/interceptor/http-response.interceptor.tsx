@@ -6,14 +6,6 @@ import { _AuthApi } from "../services/auth.service";
 export const HttpResponseInterceptor = (navigate) => {
   _axios.interceptors.response.use(
     function (response) {
-      const url = response?.config?.url;
-
-      // Skip showing messages for /update-device-token
-      if (url === "/update-device-token") {
-        return response;
-      }
-      console.log("response: ", response);
-
       switch (response?.config?.method) {
         case "post":
           toast.success(response.data.message, {
@@ -68,7 +60,6 @@ export const HttpResponseInterceptor = (navigate) => {
         default:
           break;
       }
-
       return response;
     },
     function (error) {
