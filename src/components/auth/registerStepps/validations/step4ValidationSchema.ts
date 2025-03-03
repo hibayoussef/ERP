@@ -1,36 +1,11 @@
-// import * as Yup from "yup";
+import * as Yup from "yup";
 
-// // مثال للتحقق في Step4 مع شرط عند التسجيل لضريبة القيمة المضافة (VAT)
-// export const step4ValidationSchema = Yup.object({
-//   // تحقق من حقل Tax Registration Number Label بناءً على التسجيل في VAT
-//   tax_registration_number_label: Yup.string()
-//     .when('registeredForVAT', {
-//       is: true,  // إذا كان مسجلًا في VAT
-//       then: Yup.string().required('Tax Registration Number Label is required'),
-//       otherwise: Yup.string().notRequired()
-//     }),
+const step4Validation = Yup.object({
+  vat_registered_on: Yup.string().nullable(),
+  tax_registration_number: Yup.string().nullable(),
+  tax_registration_number_label: Yup.string().nullable(),
+  registeration_for_vat: Yup.string().required("VAT Registration is required"),
+  curreny_id: Yup.string().required("Currency is required"),
+});
 
-//   // تحقق من حقل Tax Registration Number (TRN)
-//   tax_registration_number: Yup.string()
-//     .when('registeredForVAT', {
-//       is: true, // تحقق من التسجيل في VAT
-//       then: Yup.string().required('Tax Registration Number (TRN) is required'),
-//       otherwise: Yup.string().notRequired()
-//     }),
-
-//   // تحقق من حقل VAT Registered On
-//   vat_registered_on: Yup.date()
-//     .when('registeredForVAT', {
-//       is: true,  // إذا كان مسجلاً في VAT
-//       then: Yup.date().required('VAT Registered On is required'),
-//       otherwise: Yup.date().notRequired()
-//     }),
-
-//   // تحقق من حقل العملة
-//   currency: Yup.string()
-//     .when('registeredForVAT', {
-//       is: true,  // إذا كان مسجلًا في VAT
-//       then: Yup.string().required('Currency is required'),
-//       otherwise: Yup.string().notRequired()
-//     }),
-// });
+export default step4Validation;

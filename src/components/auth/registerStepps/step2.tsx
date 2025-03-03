@@ -1,9 +1,20 @@
+import { useFormikContext } from "formik";
 import { useCommonStore } from "../../../store/useCommonStore";
 import Input from "../../form/input/InputField";
 import Label from "../../form/Label";
 
 export default function Step2() {
   const { zipCode, timeZone } = useCommonStore();
+   const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
+     useFormikContext<{
+       city: string;
+       street1: string;
+       street2: string;
+       postal_code: string; 
+       time_zone_id: number;
+     }>();
+  
+  
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col justify-center w-full mx-auto max-w-xl">
@@ -62,19 +73,28 @@ export default function Step2() {
                     readOnly
                     className="w-full"
                   />
+                  {errors.postal_code && touched.postal_code && (
+                    <p className="text-red-500 text-sm">{errors.postal_code}</p>
+                  )}
                 </div>
                 <div className="w-full">
                   <Label>Time Zone</Label>
                   <Input
                     type="text"
-                    id="time_zone"
-                    name="time_zone"
-                    value={
-                      "(" + timeZone?.offset + ")" + " " + timeZone?.name || ""
-                    }
+                    id="time_zone_id"
+                    name="time_zone_id"
+                    value={values.time_zone_id}
+                    // value={
+                    //   "(" + timeZone?.offset + ")" + " " + timeZone?.name || ""
+                    // }
                     readOnly
                     className="w-full"
                   />
+                  {errors.time_zone_id && touched.time_zone_id && (
+                    <p className="text-red-500 text-sm">
+                      {errors.time_zone_id}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>

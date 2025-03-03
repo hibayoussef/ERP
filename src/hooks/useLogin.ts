@@ -1,11 +1,21 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { useAuthStore } from "../store/useAuthStore";
-import { _AuthApi } from "../services/auth.service";
-import type { ILoginRequest } from "../types/auth";
+import axios from "axios";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useSignInValidation } from "../pages/AuthPages/validations/useAuthValidation";
+import { _AuthApi } from "../services/auth.service";
+import { useAuthStore } from "../store/useAuthStore";
+import type { ILoginRequest } from "../types/auth";
+
+export const useRegister = () => {
+  return useMutation({
+    mutationFn: async (data: any) => {
+      return axios.post("/auth/register", data).then((res) => res.data);
+    },
+  });
+};
+
 
 export const useLogin = () => {
   const { signInSchema } = useSignInValidation();

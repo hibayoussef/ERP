@@ -81,7 +81,7 @@ export default function SignInForm() {
                 <div>
                   <Button
                     type="submit"
-                    className="w-full bg-[#49CFB0] hover:bg-[#3bb89a] text-white"
+                    className="w-full bg-[#575db1] shadow-theme-xs hover:bg-[#aa9fea] text-white"
                     size="sm"
                     disabled={isPending}
                   >

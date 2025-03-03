@@ -1,10 +1,16 @@
-import { useState } from "react";
 import Input from "../../form/input/InputField";
 import Label from "../../form/Label";
-import { EyeCloseIcon, EyeIcon } from "../../../icons";
+import { useFormikContext } from "formik";
 
 export default function Step4() {
-  const [registeredForVAT, setRegisteredForVAT] = useState(false);
+  const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
+    useFormikContext<{
+      vat_registered_on: string;
+      tax_registration_number: number;
+      tax_registration_number_label: number;
+      registeration_for_vat: boolean;
+      curreny_id: number;
+    }>();
 
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
@@ -19,16 +25,42 @@ export default function Step4() {
             </p>
           </div>
           <form className="w-full">
+            <div className="w-full mb-4">
+              <Label>
+                Currency
+                <span className="text-error-500">*</span>
+              </Label>
+              <Input
+                type="text"
+                name="curreny_id"
+                placeholder="Enter Currency"
+                value={values.curreny_id}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className="w-full"
+                readOnly
+              />
+              {errors.curreny_id && touched.curreny_id && (
+                <p className="text-red-500 text-sm">{errors.curreny_id}</p>
+              )}
+            </div>
             <div className="space-y-5 w-full">
               <div className="flex items-center justify-between mr-4">
-                <Label>Is This business registered for VAT</Label>
+                <Label>
+                  Is This business registered for VAT
+                  <span className="text-error-500">*</span>
+                </Label>
                 <label className="inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={registeredForVAT}
-                    onChange={() => setRegisteredForVAT(!registeredForVAT)}
-                    className="sr-only peer "
+                    checked={values.registeration_for_vat}
+                    onChange={(e) =>
+                      setFieldValue("registeration_for_vat", e.target.checked)
+                    }
+                    onBlur={handleBlur}
+                    className="sr-only peer"
                   />
+
                   <div
                     className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4
                    peer-focus:ring-blue-300 dark:peer-focus:ring-[#575db1] rounded-full peer
@@ -40,7 +72,6 @@ export default function Step4() {
                 </label>
               </div>
 
-              {/* {!registeredForVAT && ( */}
               <>
                 <div className="w-full flex space-x-2">
                   <div className="w-full">
@@ -51,55 +82,43 @@ export default function Step4() {
                       name="tax_registration_number_label"
                       placeholder="Enter Tax Registration Number Label"
                       className="w-full"
-                      disabled={!registeredForVAT} // Disable if not registered
+                      value={values.tax_registration_number_label}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      disabled={!values.registeration_for_vat}
                     />
                   </div>
                   <div className="w-full">
-                    <Label>
-                      Tax Registration Number (TRN)
-                      <span className="text-error-500">*</span>
-                    </Label>
+                    <Label>Tax Registration Number (TRN)</Label>
                     <Input
                       type="text"
                       id="tax_registration_number"
                       name="tax_registration_number"
                       placeholder="Enter Tax Registration Number"
                       className="w-full"
-                      disabled={!registeredForVAT} // Disable if not registered
+                      value={values.tax_registration_number}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      disabled={!values.registeration_for_vat}
                     />
                   </div>
                 </div>
                 <div className="w-full flex space-x-2">
                   <div className="w-full">
-                    <Label>
-                      VAT Registered On
-                      <span className="text-error-500">*</span>
-                    </Label>
+                    <Label>VAT Registered On</Label>
                     <Input
                       type="date"
                       id="vat_registered_on"
                       name="vat_registered_on"
                       className="w-full"
-                      disabled={!registeredForVAT} // Disable if not registered
-                    />
-                  </div>
-                  <div className="w-full">
-                    <Label>
-                      Currency
-                      <span className="text-error-500">*</span>
-                    </Label>
-                    <Input
-                      type="text"
-                      id="currency"
-                      name="currency"
-                      placeholder="Enter Currency"
-                      className="w-full"
-                      disabled={!registeredForVAT} // Disable if not registered
+                      value={values.vat_registered_on}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      disabled={!values.registeration_for_vat}
                     />
                   </div>
                 </div>
               </>
-              {/* )} */}
             </div>
           </form>
         </div>

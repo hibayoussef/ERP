@@ -4,15 +4,7 @@ import Input from "../../form/input/InputField";
 import Label from "../../form/Label";
 import { CountryState } from "../../../types/common";
 import { useCommonStore } from "../../../store/useCommonStore";
-import { useFormikContext } from "formik";
-
-interface FormValues {
-  organizationName: string;
-  industry: string;
-  location: string;
-  country_states: string;
-  // Add other fields as necessary
-}
+import { ErrorMessage, useFormikContext } from "formik";
 
 export default function Step1() {
   const { data: industries } = useFetchIndustry();
@@ -21,11 +13,21 @@ export default function Step1() {
   const [countryStates, setCountryStates] = useState<CountryState[]>([]);
   const { setZipCode, setTimeZone } = useCommonStore();
   const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
-    useFormikContext<FormValues>();
+    useFormikContext<{
+      organization_name_en: string;
+      industry_id: string;
+      country_id: string;
+      country_state_id: string;
+      language: string;
+    }>();
+
+  console.log("values:::", values);
 
   const handleCountryChange = (event) => {
     const countryId = event.target.value;
+    setFieldValue("country_id", countryId);
     setSelectedCountry(countryId);
+
     const selectedCountryData = countries?.data.find(
       (country) => country.id === parseInt(countryId)
     );
@@ -36,15 +38,20 @@ export default function Step1() {
 
   const handleStateChange = (event) => {
     const stateId = event.target.value;
+    setFieldValue("country_state_id", stateId);
     const selectedState = countryStates.find(
       (state) => state.id === parseInt(stateId)
     );
     if (selectedState) {
       setZipCode(selectedState.zip_code);
       setTimeZone(selectedState.time_zone);
+      setFieldValue("postal_code", selectedState.zip_code);
+      setFieldValue(
+        "time_zone_id",
+        `(${selectedState?.time_zone?.offset}) ${selectedState?.time_zone?.name}`
+      );
     }
   };
-
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col justify-center w-full mx-auto max-w-xl">
@@ -65,27 +72,26 @@ export default function Step1() {
                     Organization Name<span className="text-error-500">*</span>
                   </Label>
                   <Input
-                    name="organizationName"
+                    name="organization_name_en"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values?.organizationName}
-                    error={
-                      !!(touched?.organizationName && errors.organizationName)
-                    } // Convert to boolean
+                    value={values.organization_name_en}
                   />
-                  {touched.organizationName && errors.organizationName && (
-                    <div className="text-error-500 text-sm mt-1">
-                      {errors.organizationName}
-                    </div>
-                  )}
+                  {errors.organization_name_en &&
+                    touched.organization_name_en && (
+                      <p className="text-red-500 text-sm">
+                        {errors.organization_name_en}
+                      </p>
+                    )}
                 </div>
                 <div className="w-full">
                   <Label>
                     Industry<span className="text-error-500">*</span>
                   </Label>
                   <select
-                    id="industry"
-                    name="industry"
+                    name="industry_id"
+                    onChange={handleChange}
+                    value={values.industry_id}
                     className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                   >
                     <option value="">Select an industry</option>
@@ -95,13 +101,27 @@ export default function Step1() {
                       </option>
                     ))}
                   </select>
-                  {touched.industry && errors.industry && (
-                    <div className="text-error-500 text-sm mt-1">
-                      {errors.industry}
-                    </div>
-                  )}
                 </div>
 
+                <div className="w-full">
+                  <Label>
+                    Language<span className="text-error-500">*</span>
+                  </Label>
+                  <select
+                    name="language"
+                    onChange={handleChange}
+                    value={values.language}
+                    className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  >
+                    <option value="">Select a Language</option>
+                    <option key="1" value="1">
+                      English
+                    </option>
+                    <option key="1" value="1">
+                      Arabic
+                    </option>
+                  </select>
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full">
                   <div className="w-full">
                     {" "}
@@ -110,8 +130,8 @@ export default function Step1() {
                       <span className="text-error-500">*</span>
                     </Label>
                     <select
-                      id="location"
-                      name="location"
+                      name="country_id"
+                      value={values.country_id}
                       onChange={handleCountryChange}
                       className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     >
@@ -129,9 +149,9 @@ export default function Step1() {
                       <span className="text-error-500">*</span>
                     </Label>
                     <select
-                      id="country_states"
-                      name="country_states"
+                      name="country_state_id"
                       onChange={handleStateChange}
+                      value={values.country_state_id}
                       className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     >
                       <option value="">
