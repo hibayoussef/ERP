@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { useFetchPlans } from "../../../hooks/useCommon";
+import { useFormikContext } from "formik";
 
 export default function Step5() {
   const { data: plans } = useFetchPlans();
   const [billingCycle, setBillingCycle] = useState("monthly");
-  const [selectedCurrency, setSelectedCurrency] = useState(1); // Default: USD
+  const [selectedCurrency, setSelectedCurrency] = useState(1);
+
+  const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
+    useFormikContext<{
+      plan_id: number;
+      plan_price_id: number;
+      plan_type: number;
+    }>();
 
   return (
     <div className="w-full mx-auto py-12 px-4 sm:px-12 lg:px-12">
@@ -147,12 +155,19 @@ export default function Step5() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="/sign-up"
-                  className="mt-8 block w-full bg-[#575db1] rounded-md py-4 text-sm font-semibold text-white text-center"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFieldValue("plan_id", plan.id);
+                    setFieldValue("plan_price_id", price?.id);
+                    setFieldValue("plan_type", billingCycle);
+                  }}
+                  className={`mt-8 block w-full ${
+                    values.plan_id === plan.id ? "bg-green-600" : "bg-[#575db1]"
+                  } rounded-md py-4 text-sm font-semibold text-white text-center`}
                 >
-                  Choose Plan
-                </a>
+                  {values.plan_id === plan.id ? "Selected" : "Choose Plan"}
+                </button>
               </div>
             </div>
           );
