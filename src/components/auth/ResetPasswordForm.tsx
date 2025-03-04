@@ -96,7 +96,7 @@ export default function ResetPasswordForm() {
                   )}
                 </div>
 
-                <div>
+                {/* <div>
                   <Label>
                     Confirm New Password{" "}
                     <span className="text-error-500">*</span>
@@ -123,7 +123,7 @@ export default function ResetPasswordForm() {
                       {errors.confirmPassword.message}
                     </p>
                   )}
-                </div>
+                </div> */}
 
                 <div>
                   <Button
