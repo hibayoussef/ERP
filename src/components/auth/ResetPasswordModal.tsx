@@ -15,7 +15,7 @@ export default function ResetPasswordModal({
         </p>
         <button
           onClick={onClose}
-          className="mt-4 w-full bg-[#49CFB0] hover:bg-[#3bb89a] text-white py-2 rounded-md"
+          className="mt-4 w-full bg-[#575db1] hover:bg-[#474ca1] text-white py-2 rounded-md"
         >
           OK
         </button>
