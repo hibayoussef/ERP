@@ -33,12 +33,11 @@ export const _AuthApi = {
   },
 
   // RESET PASSWORD
-  resetPassword: async (token: string, newPassword: string) => {
+  resetPassword: async (token: string, Password: string) => {
     return _axios
-      .post("/auth/reset-password", { token, newPassword })
+      .post("/auth/reset-password", { token, Password })
       .then((res) => res.data);
   },
- 
 
   // LOGOUT
   //   logout: async () => {
