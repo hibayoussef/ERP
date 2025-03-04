@@ -33,9 +33,9 @@ export const _AuthApi = {
   },
 
   // RESET PASSWORD
-  resetPassword: async (token: string, Password: string) => {
+  resetPassword: async (token: string, password: string) => {
     return _axios
-      .post("/auth/reset-password", { token, Password })
+      .post("/auth/reset-password", { token, password })
       .then((res) => res.data);
   },
 
