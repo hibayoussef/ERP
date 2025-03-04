@@ -16,7 +16,6 @@ export const useRegister = () => {
   });
 };
 
-
 export const useLogin = () => {
   const { signInSchema } = useSignInValidation();
   const navigate = useNavigate();
@@ -72,6 +71,20 @@ export const useVerifyEmail = () => {
     },
     onError: (error) => {
       console.error("Email verification failed:", error);
+    },
+  });
+};
+
+export const useResendVerificationEmail = () => {
+  return useMutation({
+    mutationFn: async (email: string) => {
+      return _AuthApi.resendVerificationEmail(email);
+    },
+    onSuccess: () => {
+      alert("Verification email resent. Check your inbox!");
+    },
+    onError: (error) => {
+      console.error("Failed to resend verification email:", error);
     },
   });
 };

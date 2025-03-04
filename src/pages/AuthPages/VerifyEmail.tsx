@@ -1,14 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useVerifyEmail } from "../../hooks/useLogin";
+import { useResendVerificationEmail, useVerifyEmail } from "../../hooks/useLogin";
 
 export default function VerifyEmail() {
   const { token } = useParams();
   const { mutate, isPending, isSuccess, isError } = useVerifyEmail();
+  const { mutate: resendEmail, isPending: isResending } =
+    useResendVerificationEmail();
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (token) {
-      mutate(token);
+      mutate(token, {
+        onError: () => {
+          setEmail(localStorage.getItem("userEmail") || ""); 
+        },
+      });
     }
   }, [token, mutate]);
 
@@ -34,6 +41,15 @@ export default function VerifyEmail() {
               Verification Failed
             </h2>
             <p className="text-gray-700">Invalid or expired token.</p>
+            {email && (
+              <button
+                onClick={() => resendEmail(email)}
+                disabled={isResending}
+                className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                {isResending ? "Resending..." : "Resend Verification Email"}
+              </button>
+            )}
           </>
         )}
       </div>

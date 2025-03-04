@@ -18,6 +18,12 @@ export const _AuthApi = {
     return _axios.post("/auth/verfiy-email", { token }).then((res) => res.data);
   },
 
+  // RESEND VERIFICATION EMAIL
+  resendVerificationEmail: async (email: string) => {
+    return _axios
+      .post("/auth/resend-verification-email", { email })
+      .then((res) => res.data);
+  },
   //   // FORGOT PASSWORD
   //   forgetPassword: async (data: ForgetPasswordData) => {
   //     return _axios.post("/auth/forget-password", data);
