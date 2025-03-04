@@ -39,7 +39,7 @@ export const useLogin = () => {
     },
     onSuccess: (data: any) => {
       login(data?.user, data.token);
-      navigate("/");
+      navigate("/home");
     },
     onError: (error) => {
       console.error("Error logging in:", error);
@@ -68,7 +68,7 @@ export const useVerifyEmail = () => {
       return _AuthApi.verifyEmail(token);
     },
     onSuccess: () => {
-      setTimeout(() => navigate("/signin"), 11000);
+      setTimeout(() => navigate("/signin"), 3000);
     },
     onError: (error) => {
       console.error("Email verification failed:", error);
