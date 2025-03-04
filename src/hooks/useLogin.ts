@@ -106,6 +106,8 @@ export const useForgotPassword = () => {
 };
 
 export const useResetPassword = () => {
+  const navigate = useNavigate(); // استخدم useNavigate
+
   return useMutation({
     mutationFn: async ({
       token,
@@ -115,6 +117,13 @@ export const useResetPassword = () => {
       password: string;
     }) => {
       return _AuthApi.resetPassword(token, password);
+    },
+    onSuccess: () => {
+      setTimeout(() => navigate("/signin"), 2000);
+    },
+    onError: (error) => {
+      toast.error("Failed to reset password. Please try again.");
+      console.error("Error resetting password:", error);
     },
   });
 };
