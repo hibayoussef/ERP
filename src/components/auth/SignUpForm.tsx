@@ -13,11 +13,12 @@ import step2Validation from "./registerStepps/validations/step2ValidationSchema"
 import step3Validation from "./registerStepps/validations/step3ValidationSchema";
 import step4Validation from "./registerStepps/validations/step4ValidationSchema";
 import step5Validation from "./registerStepps/validations/step5ValidationSchema";
+import { motion } from "framer-motion";
 
 export default function SignUpForm() {
   const [step, setStep] = useState(1);
   const totalSteps = 5;
-  const [showPopup, setShowPopup] = useState(false); // 🔹 حالة الـ Popup
+  const [showPopup, setShowPopup] = useState(false);
 
   const [formValues, setFormValues] = useState({
     mobile: "",
@@ -104,14 +105,22 @@ export default function SignUpForm() {
             {({ isSubmitting, validateForm, values }) => (
               <Form className="flex flex-col flex-1 w-full overflow-y-auto no-scrollbar">
                 <div className="space-y-5 w-full">
-                  <div className="w-full">
-                    {step === 1 && <Step1 />}
-                    {step === 2 && <Step2 />}
-                    {step === 3 && <Step3 />}
-                    {step === 4 && <Step4 />}
-                    {step === 5 && <Step5 />}
-                  </div>
-
+                  <motion.div
+                    key={step}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.5 }}
+                    className="space-y-5 w-full"
+                  >
+                    <div className="w-full">
+                      {step === 1 && <Step1 />}
+                      {step === 2 && <Step2 />}
+                      {step === 3 && <Step3 />}
+                      {step === 4 && <Step4 />}
+                      {step === 5 && <Step5 />}
+                    </div>
+                  </motion.div>
                   {/* ✅ Navigation Buttons */}
                   <div className="flex space-x-4 max-w-xl mx-auto">
                     <button
