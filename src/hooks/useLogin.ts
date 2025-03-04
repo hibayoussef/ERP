@@ -38,7 +38,7 @@ export const useLogin = () => {
       return res;
     },
     onSuccess: (data: any) => {
-      login(data?.user, data.token);
+      login(data?.data?.data?.user, data?.data?.data?.token);
       navigate("/home");
     },
     onError: (error) => {
@@ -106,7 +106,7 @@ export const useForgotPassword = () => {
 };
 
 export const useResetPassword = () => {
-  const navigate = useNavigate(); // استخدم useNavigate
+  const navigate = useNavigate(); 
 
   return useMutation({
     mutationFn: async ({

@@ -21,8 +21,6 @@ export default function Step1() {
       language: string;
     }>();
 
-  console.log("values 1: ", values);
-
   const handleCountryChange = (event) => {
     const countryId = event.target.value;
     setFieldValue("country_id", countryId);
