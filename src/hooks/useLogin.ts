@@ -109,12 +109,12 @@ export const useResetPassword = () => {
   return useMutation({
     mutationFn: async ({
       token,
-      newPassword,
+      password,
     }: {
       token: string;
-      newPassword: string;
+      password: string;
     }) => {
-      return _AuthApi.resetPassword(token, newPassword);
+      return _AuthApi.resetPassword(token, password);
     },
   });
 };

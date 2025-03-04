@@ -40,7 +40,7 @@ export default function ResetPasswordForm() {
       alert("Invalid or missing token");
       return;
     }
-    mutate({ token, newPassword: data.password });
+    mutate({ token, password: data.password });
   };
 
   return (
