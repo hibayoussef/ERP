@@ -1,17 +1,16 @@
-import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import * as yup from "yup";
+import { useResetPassword } from "../../hooks/useLogin";
 import { EyeCloseIcon, EyeIcon } from "../../icons";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
 import Button from "../ui/button/Button";
-import { useResetPassword } from "../../hooks/useLogin";
 
 interface IResetPassword {
   password: string;
-  confirmPassword: string;
 }
 
 // Validation schema using Yup
@@ -19,11 +18,7 @@ const resetPasswordSchema = yup.object({
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("password"), ""], "Passwords must match")
-    .required("Confirm Password is required"),
+    .required("Password is required")
 });
 
 export default function ResetPasswordForm() {
