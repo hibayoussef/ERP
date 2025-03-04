@@ -1,5 +1,5 @@
 // src/routes/Routes.tsx
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import AppLayout from "../layout/AppLayout";
 import ForgotPassword from "../pages/AuthPages/ForgotPassword";
 import ResetPassword from "../pages/AuthPages/ResetPassword";
@@ -25,8 +25,16 @@ import UserProfiles from "../pages/UserProfiles";
 const RoutesComponent = () => {
   return (
     <Routes>
-      {/* Dashboard Layout */}
+      <Route path="/" element={<Navigate to="/signup" replace />} />
+
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/password/reset/:token" element={<ResetPassword />} />
+      <Route path="/verify-email/:token" element={<VerifyEmail />} />
+
       <Route element={<AppLayout />}>
+        <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<UserProfiles />} />
         <Route path="/calendar" element={<Calendar />} />
@@ -43,15 +51,6 @@ const RoutesComponent = () => {
         <Route path="/bar-chart" element={<BarChart />} />
       </Route>
 
-      {/* Auth Layout */}
-      <Route index path="/signup" element={<SignUp />} />
-
-      <Route path="/signin" element={<SignIn />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/password/reset/:token" element={<ResetPassword />} />
-      <Route path="/verify-email/:token" element={<VerifyEmail />} />
-
-      {/* Fallback Route */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
