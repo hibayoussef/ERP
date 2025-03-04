@@ -24,20 +24,21 @@ export const _AuthApi = {
       .post("/auth/resend-verification-email", { email })
       .then((res) => res.data);
   },
-  //   // FORGOT PASSWORD
-  //   forgetPassword: async (data: ForgetPasswordData) => {
-  //     return _axios.post("/auth/forget-password", data);
-  //   },
 
-  //   // RESET PASSWORD
-  //   resetPass: async (data: ResetPasswordData) => {
-  //     return _axios.post("/auth/reset-password", data);
-  //   },
+  // FORGOT PASSWORD
+  forgotPassword: async (email: string) => {
+    return _axios
+      .post("/auth/forgot-password", { email })
+      .then((res) => res.data);
+  },
 
-  //   // VERIFY CODE
-  //   verifyCode: async (data: VerifyCodeData) => {
-  //     return _axios.post("/auth/verify-account", data);
-  //   },
+  // RESET PASSWORD
+  resetPassword: async (token: string, newPassword: string) => {
+    return _axios
+      .post("/auth/reset-password", { token, newPassword })
+      .then((res) => res.data);
+  },
+ 
 
   // LOGOUT
   //   logout: async () => {

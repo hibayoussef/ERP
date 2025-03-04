@@ -7,6 +7,7 @@ import { useSignInValidation } from "../pages/AuthPages/validations/useAuthValid
 import { _AuthApi } from "../services/auth.service";
 import { useAuthStore } from "../store/useAuthStore";
 import type { ILoginRequest } from "../types/auth";
+import { toast } from "react-toastify";
 
 export const useRegister = () => {
   return useMutation({
@@ -85,6 +86,35 @@ export const useResendVerificationEmail = () => {
     },
     onError: (error) => {
       console.error("Failed to resend verification email:", error);
+    },
+  });
+};
+
+export const useForgotPassword = () => {
+  return useMutation({
+    mutationFn: async (email: string) => {
+      return _AuthApi.forgotPassword(email);
+    },
+    // onSuccess: () => {
+    //   toast.success("A password reset link has been sent to your email.");
+    // },
+    // onError: (error) => {
+    //   toast.error("Failed to send reset email. Please try again.");
+    //   console.error("Error sending reset email:", error);
+    // },
+  });
+};
+
+export const useResetPassword = () => {
+  return useMutation({
+    mutationFn: async ({
+      token,
+      newPassword,
+    }: {
+      token: string;
+      newPassword: string;
+    }) => {
+      return _AuthApi.resetPassword(token, newPassword);
     },
   });
 };
