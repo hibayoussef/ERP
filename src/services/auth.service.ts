@@ -10,13 +10,18 @@ export const _AuthApi = {
   // LOGIN
   login: async (data: ILoginRequest) => {
     const res = await _axios.post<ILoginDTO>("/auth/login", data);
-    console.log('res:::', res)
+    console.log("res:::", res);
     return res.data;
   },
 
   // VERIFY EMAIL
   verifyEmail: async (token: string) => {
     return _axios.post("/auth/verfiy-email", { token }).then((res) => res.data);
+  },
+
+  // CHECK EMAIL
+  checkEmail: async (email: string) => {
+    return _axios.post("/auth/check-email", { email }).then((res) => res.data);
   },
 
   // RESEND VERIFICATION EMAIL

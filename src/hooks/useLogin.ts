@@ -127,3 +127,11 @@ export const useResetPassword = () => {
     },
   });
 };
+
+export const useCheckEmail = () => {
+  return useMutation({
+    mutationFn: async (email: string) => {
+      return _AuthApi.checkEmail(email);
+    }
+  });
+};

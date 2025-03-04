@@ -3,11 +3,35 @@ import Input from "../../form/input/InputField";
 import Label from "../../form/Label";
 import { EyeCloseIcon, EyeIcon } from "../../../icons";
 import { useFormikContext } from "formik";
+import { _AuthApi } from "../../../services/auth.service";
+import { useMutation } from "@tanstack/react-query";
 
 export default function Step3() {
   const [showPassword, setShowPassword] = useState(false);
-  const { errors, touched, handleChange, handleBlur, values } =
+  const [emailMessage, setEmailMessage] = useState<string | null>(null);
+
+  const { values, handleBlur, handleChange, errors, touched } =
     useFormikContext<{ email: string; password: string; mobile: string }>();
+
+  const { mutate: checkEmail, isPending } = useMutation({
+    mutationFn: async (email: string) => {
+      return _AuthApi.checkEmail(email);
+    },
+    onSuccess: (message) => {
+      setEmailMessage(message?.message || "");
+    },
+    onError: (error: any) => {
+      console.error("Email verification failed:", error);
+      setEmailMessage("This email is already in use.");
+    },
+  });
+
+  const handleEmailBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    handleBlur(e);
+    if (values.email) {
+      checkEmail(values.email);
+    }
+  };
 
   const passwordRules = [
     {
@@ -53,12 +77,31 @@ export default function Step3() {
                     name="email"
                     value={values.email}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    onBlur={handleEmailBlur}
                     placeholder="info@gmail.com"
                     className="w-full"
                   />
+
+                  {isPending && (
+                    <div className="mt-2 p-2 text-sm rounded-md bg-blue-100 text-blue-700 border border-blue-400">
+                      Checking...
+                    </div>
+                  )}
+
+                  {emailMessage && (
+                    <div
+                      className={`mt-2 p-2 text-sm rounded-md ${
+                        emailMessage.includes("success")
+                          ? "bg-green-100 text-green-700 border border-green-400"
+                          : "bg-red-100 text-red-700 border border-red-400"
+                      }`}
+                    >
+                      {emailMessage}
+                    </div>
+                  )}
+
                   {errors.email && touched.email && (
-                    <p className="text-red-500 text-sm">{errors.email}</p>
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
                   )}
                 </div>
 
