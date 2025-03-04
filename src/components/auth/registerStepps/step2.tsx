@@ -13,8 +13,6 @@ export default function Step2() {
     time_zone_id: number;
   }>();
 
-  console.log("values 2: ", values);
-
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col justify-center w-full mx-auto max-w-xl">

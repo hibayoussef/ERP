@@ -10,10 +10,10 @@ import Step4 from "./registerStepps/step4";
 import Step5 from "./registerStepps/step5";
 import step1Validation from "./registerStepps/validations/step1ValidationSchema";
 import step2Validation from "./registerStepps/validations/step2ValidationSchema";
-import step3Validation from "./registerStepps/validations/step3ValidationSchema";
 import step4Validation from "./registerStepps/validations/step4ValidationSchema";
 import step5Validation from "./registerStepps/validations/step5ValidationSchema";
 import { motion } from "framer-motion";
+import step3Validation from "./registerStepps/validations/step3ValidationSchema";
 
 export default function SignUpForm() {
   const [step, setStep] = useState(1);

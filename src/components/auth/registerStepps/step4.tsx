@@ -8,7 +8,6 @@ export default function Step4() {
   const { currency } = useCommonStore();
   const { data: currencyData } = useFetchCurrencyById(currency);
 
-  console.log("currencyData: ", currencyData);
   const { errors, touched, handleChange, handleBlur, values, setFieldValue } =
     useFormikContext<{
       vat_registered_on: string;

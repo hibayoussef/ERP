@@ -170,7 +170,6 @@ export default function Step5() {
                     <button
                       type="button"
                       onClick={() => {
-                        console.log("plan: ", plan, price);
                         setFieldValue("plan_id", plan.id);
                         setFieldValue("plan_price_id", price?.id);
                         setFieldValue("plan_type", billingCycle);
