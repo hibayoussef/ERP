@@ -10,6 +10,7 @@ export const _AuthApi = {
   // LOGIN
   login: async (data: ILoginRequest) => {
     const res = await _axios.post<ILoginDTO>("/auth/login", data);
+    console.log('res:::', res)
     return res.data;
   },
 

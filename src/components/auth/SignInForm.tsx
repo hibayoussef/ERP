@@ -8,6 +8,7 @@ import Button from "../ui/button/Button";
 import { useLogin } from "../../hooks/useLogin";
 import { Formik, Form, Field } from "formik";
 import { signinValidationSchema } from "./registerStepps/validations/siginValidation";
+import Loader from "../ui/loader/loader";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -94,14 +95,14 @@ export default function SignInForm() {
                     </Link>
                   </div>
                   <div>
-                    <Button
+                    <button
                       type="submit"
-                      className="w-full bg-[#575db1] !important shadow-theme-xs hover:bg-[#aa9fea] !important text-white"
-                      size="sm"
                       disabled={isSubmitting || isPending}
+                      className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium disabled:opacity-50 text-white transition rounded-lg  shadow-theme-xs bg-[#575db1] hover:bg-[#474ca1]"
                     >
-                      {isPending ? "Signing in..." : "Sign in"}
-                    </Button>
+                      {" "}
+                      {isPending ? <Loader /> : "Sign in"}
+                    </button>
                   </div>
                 </Form>
               )}
