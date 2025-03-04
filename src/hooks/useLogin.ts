@@ -38,7 +38,7 @@ export const useLogin = () => {
       return res;
     },
     onSuccess: (data: any) => {
-      login(data?.data?.data?.user, data?.data?.data?.token);
+      login(data?.data?.user, data?.data?.token);
       navigate("/home");
     },
     onError: (error) => {
@@ -106,7 +106,7 @@ export const useForgotPassword = () => {
 };
 
 export const useResetPassword = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   return useMutation({
     mutationFn: async ({
@@ -132,6 +132,6 @@ export const useCheckEmail = () => {
   return useMutation({
     mutationFn: async (email: string) => {
       return _AuthApi.checkEmail(email);
-    }
+    },
   });
 };
