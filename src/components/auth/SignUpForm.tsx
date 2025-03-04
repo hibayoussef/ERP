@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRegister } from "../../hooks/useLogin";
 import Loader from "../ui/loader/loader";
 import Step1 from "./registerStepps/step1";
@@ -79,6 +79,8 @@ export default function SignUpForm() {
     }
     actions.setSubmitting(false);
   };
+
+  const navigate = useNavigate(); 
 
   return (
     <div className="flex flex-col flex-1 w-full overflow-y-auto no-scrollbar">
@@ -161,7 +163,10 @@ export default function SignUpForm() {
                   to activate your account.
                 </p>
                 <button
-                  onClick={() => setShowPopup(false)}
+                  onClick={() => {
+                    navigate("/signin"), 
+                    setShowPopup(false);
+                  }}
                   className="mt-4 px-4 py-2 bg-[#575db1] hover:bg-[#474ca1] text-white rounded-lg transition"
                 >
                   OK, Got it!
