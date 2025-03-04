@@ -8,6 +8,7 @@ import { EyeCloseIcon, EyeIcon } from "../../icons";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
 import Button from "../ui/button/Button";
+import Loader from "../ui/loader/loader";
 
 interface IResetPassword {
   password: string;
@@ -121,14 +122,14 @@ export default function ResetPasswordForm() {
                 </div> */}
 
                 <div>
-                  <Button
-                    className="w-full bg-[#49CFB0] hover:bg-[#3bb89a] text-white"
-                    size="sm"
+                  <button
                     type="submit"
                     disabled={isPending}
+                    className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium disabled:opacity-50 text-white transition rounded-lg  shadow-theme-xs bg-[#575db1] hover:bg-[#474ca1]"
                   >
-                    {isPending ? "Updating..." : "Update Password"}
-                  </Button>
+                    {" "}
+                    {isPending ? <Loader /> : "Update Password"}
+                  </button>
                 </div>
 
                 {error && (

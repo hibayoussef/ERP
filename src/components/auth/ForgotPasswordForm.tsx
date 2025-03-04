@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
+import { useForgotPassword } from "../../hooks/useLogin";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
-import Button from "../ui/button/Button";
-import { useForgotPassword } from "../../hooks/useLogin";
-import ResetPasswordModal from "./ResetPasswordModal";
 import Loader from "../ui/loader/loader";
+import ResetPasswordModal from "./ResetPasswordModal";
 
 interface IForgotPassword {
   email: string;
@@ -71,14 +70,14 @@ export default function ForgotPasswordForm() {
                 )}
               </div>
               <div>
-                <Button
-                  className="w-full bg-[#575db1] hover:bg-[#3bb89a] text-white"
-                  size="sm"
+                <button
                   type="submit"
                   disabled={isPending}
+                  className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium disabled:opacity-50 text-white transition rounded-lg  shadow-theme-xs bg-[#575db1] hover:bg-[#474ca1]"
                 >
+                  {" "}
                   {isPending ? <Loader /> : "Send Reset Link"}
-                </Button>
+                </button>
               </div>
             </div>
           </form>
