@@ -12,7 +12,7 @@ export default function EcommerceMetricsTry() {
         <div className="flex items-end justify-between mt-2">
           <div>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-              Total Numbers of Partners
+              Total Numbers of Users
             </span>
             <h4 className="mt-2 font-bold text-[#64748B] text-title-sm dark:text-white/90">
               3,782
@@ -31,7 +31,7 @@ export default function EcommerceMetricsTry() {
         <div className="flex items-end justify-between mt-2">
           <div>
             <span className="text-sm text-[#ECF1F0] dark:text-gray-400">
-              Average revenue from partners
+              Average revenue from Users
             </span>
             <h4 className="mt-2 font-bold text-[#ECF1F0] text-title-sm dark:text-white/90">
               5,359
@@ -49,7 +49,7 @@ export default function EcommerceMetricsTry() {
         <div className="flex items-end justify-between mt-2">
           <div>
             <span className="text-sm text-[#ECF1F0] dark:text-gray-400">
-              Recently added partners
+              Recently added Users
             </span>
             <h4 className="mt-2 font-bold text-[#ECF1F0] text-title-sm dark:text-white/90">
               5,359

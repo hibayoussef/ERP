@@ -15,41 +15,46 @@ const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Dashboard",
-    path: "/",
+    path: "/home",
     // subItems: [{ name: "Ecommerce", path: "/", pro: false }],
   },
+  // {
+  //   name: "Admin",
+  //   icon: <TableIcon />,
+  //   subItems: [{ name: "Manage", path: "/basic-tables", pro: false }],
+  // },
   {
-    name: "Admin",
+    name: "Users",
     icon: <TableIcon />,
-    subItems: [{ name: "Manage", path: "/basic-tables", pro: false }],
+    path: "/basic-tables",
   },
-  {
-    name: "Partner Management",
-    icon: <TableIcon />,
-    subItems: [
-      { name: "Hirarchy", path: "/basic-tables", pro: false },
-      { name: "Partner", path: "/basic-tables", pro: false },
-      { name: "Mercants", path: "/basic-tables", pro: false },
-      { name: "Branches", path: "/basic-tables", pro: false },
-      { name: "Terminals", path: "/basic-tables", pro: false },
-      { name: "Users", path: "/basic-tables", pro: false },
-    ],
-  },
-  {
-    name: "Digital Receipts",
-    icon: <TableIcon />,
-    subItems: [
-      { name: "Transactions", path: "/basic-tables", pro: false },
-      { name: "Reconciliations", path: "/basic-tables", pro: false },
-      { name: "Receipts", path: "/basic-tables", pro: false },
-    ],
-  },
+  // {
+  //   name: "Partner Management",
+  //   icon: <TableIcon />,
+  //   subItems: [
+  //     { name: "Hirarchy", path: "/basic-tables", pro: false },
+  //     { name: "Partner", path: "/basic-tables", pro: false },
+  //     { name: "Mercants", path: "/basic-tables", pro: false },
+  //     { name: "Branches", path: "/basic-tables", pro: false },
+  //     { name: "Terminals", path: "/basic-tables", pro: false },
+  //     { name: "Users", path: "/basic-tables", pro: false },
+  //   ],
+  // },
+  // {
+  //   name: "Digital Receipts",
+  //   icon: <TableIcon />,
+  //   subItems: [
+  //     { name: "Transactions", path: "/basic-tables", pro: false },
+  //     { name: "Reconciliations", path: "/basic-tables", pro: false },
+  //     { name: "Receipts", path: "/basic-tables", pro: false },
+  //   ],
+  // },
   {
     icon: <GridIcon />,
-    name: "LogOut",
+    name: "Logout",
     path: "/",
     // subItems: [{ name: "Ecommerce", path: "/", pro: false }],
-  }
+  },
 ];
 
 // const navItems: NavItem[] = [
