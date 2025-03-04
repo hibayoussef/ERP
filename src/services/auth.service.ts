@@ -40,9 +40,12 @@ export const _AuthApi = {
   },
 
   // LOGOUT
-  //   logout: async () => {
-  //     return await _axios.post<any>("/logout");
-  //   },
+  logout: async () => {
+    return _axios.post("/auth/logout").then((res) => {
+      _AuthApi.destroyToken();
+      return res.data;
+    });
+  },
 
   // STORE TOKEN
   storeToken: (token: string) => {
