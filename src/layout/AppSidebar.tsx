@@ -111,9 +111,11 @@ const navItems: NavItem[] = [
 // ];
 
 const AppSidebar: React.FC = () => {
-  const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
+  const { isExpanded, isMobileOpen, isHovered } = useSidebar();
+ const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const [openSubmenu, setOpenSubmenu] = useState<{
     type: "main" | "others";
@@ -200,7 +202,7 @@ const AppSidebar: React.FC = () => {
               onClick={async () => {
                 try {
                   await _AuthApi.logout();
-                  navigate("/signin")
+                  navigate("/signin");
                 } catch (error) {
                   console.error("Logout failed:", error);
                 }
@@ -307,20 +309,26 @@ const AppSidebar: React.FC = () => {
     </ul>
   );
 
+  // <aside
+  //     className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200
+  //       ${
+  //         isExpanded || isMobileOpen
+  //           ? "w-[230px]"
+  //           : isHovered
+  //           ? "w-[230px]"
+  //           : "w-[90px]"
+  //       }
+  //       ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
+  //       lg:translate-x-0`}
+  //     onMouseEnter={() => !isExpanded && setIsHovered(true)}
+  //     onMouseLeave={() => setIsHovered(false)}
+  //   ></aside>
   return (
     <aside
       className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
-        ${
-          isExpanded || isMobileOpen
-            ? "w-[290px]"
-            : isHovered
-            ? "w-[290px]"
-            : "w-[90px]"
-        }
+        ${isExpanded || isMobileOpen ? "w-[230px]" : "w-[90px]"}
         ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0`}
-      onMouseEnter={() => !isExpanded && setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       <div
         className={`py-0 flex ${
@@ -334,7 +342,7 @@ const AppSidebar: React.FC = () => {
                 className="dark:hidden"
                 src="/images/logo/logo-icon.png"
                 alt="Logo"
-                width={130}
+                width={100}
                 height={40}
               />
               <img
