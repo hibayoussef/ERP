@@ -1,18 +1,19 @@
 import { useState } from "react";
-import { useFetchPlans } from "../../../hooks/useCommon";
+import { useFetchPlansByCurrency } from "../../../hooks/useCommon";
 import { useFormikContext } from "formik";
 import Loader from "../../ui/loader/loader";
 import { motion } from "framer-motion";
+import { useCommonStore } from "../../../store/useCommonStore";
 
 export default function Step5() {
-  const { data: plans } = useFetchPlans();
+  const { currency } = useCommonStore(); 
+  const { data: plans } = useFetchPlansByCurrency(currency); 
   const [billingCycle, setBillingCycle] = useState("Monthly");
-  const [selectedCurrency] = useState(1);
 
   const { values, setFieldValue } = useFormikContext<{
     plan_id: number;
     plan_price_id: number;
-    plan_type: number;
+    plan_type: string;
   }>();
 
   return (
@@ -65,9 +66,7 @@ export default function Step5() {
       ) : (
         <div className="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
           {plans.data.map((plan, index) => {
-            const price = plan.prices.find(
-              (p) => p.currency === selectedCurrency
-            );
+            const price = plan.prices.find((p) => p.currency === currency);
 
             return (
               <motion.div

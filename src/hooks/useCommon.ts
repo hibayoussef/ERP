@@ -5,7 +5,7 @@ import type {
   CurrencyResponse,
   IndustryData,
   PlansResponse,
-  TimeZoneResponse
+  TimeZoneResponse,
 } from "../types/common";
 import { QueryKeys } from "../utils/queryKeys";
 
@@ -72,6 +72,19 @@ export const useFetchPlans = () => {
       const data = await _CommonApi.fetchPlans();
       return data;
     },
+    staleTime: 1000 * 60 * 10,
+  });
+};
+
+export const useFetchPlansByCurrency = (currency_id: number | undefined) => {
+  return useQuery({
+    queryKey: [QueryKeys.PLANS, currency_id],
+    queryFn: async (): Promise<PlansResponse> => {
+      if (!currency_id) return Promise.reject("Currency ID is required");
+      const data = await _CommonApi.fetchPlansByCurrency(currency_id);
+      return data;
+    },
+    enabled: !!currency_id,
     staleTime: 1000 * 60 * 10,
   });
 };

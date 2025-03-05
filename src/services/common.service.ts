@@ -66,4 +66,15 @@ export const _CommonApi = {
     });
     return response.data;
   },
+  fetchPlansByCurrency: async (currency_id: number | undefined) => {
+    const response = await _axios.get<PlansResponse>(
+      `/subscription/plans?currency_id=${currency_id}`,
+      {
+        headers: {
+          "x-api-key": "SANN_BOOKS",
+        },
+      }
+    );
+    return response.data;
+  },
 };

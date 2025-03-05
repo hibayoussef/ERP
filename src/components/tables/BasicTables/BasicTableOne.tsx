@@ -3,7 +3,6 @@ import "jspdf-autotable";
 import DataTable from "react-data-table-component";
 import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
-import { FaFilePdf, FaPrint } from "react-icons/fa";
 
 interface Order {
   id: number;
@@ -137,10 +136,6 @@ const exportToPDF = () => {
   doc.save("orders_table.pdf");
 };
 
-const printTable = () => {
-  window.print();
-};
-
 const dataTableData = {
   columns,
   data: tableData,
@@ -149,31 +144,18 @@ const dataTableData = {
 
 export default function OrdersTable() {
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800">
-        Orders Table
-      </h2>
+    <div className="p-4 bg-white rounded-lg shadow-md">
+      {/*<h2 className="text-xl font-semibold mb-4">Orders Table</h2>
 
-      {/* أزرار الطباعة والتصدير */}
-      <div className="mb-6 flex gap-4">
+      <div className="mb-4 flex gap-2">
         <button
           onClick={exportToPDF}
-          className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 transition-all duration-200"
+          className="px-4 py-2 bg-red-500 text-white rounded-md shadow-md"
         >
-          <FaFilePdf className="size-5" />
-          Export as PDF
+          Export PDF
         </button>
+      </div>*/}
 
-        <button
-          onClick={printTable}
-          className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-all duration-200"
-        >
-          <FaPrint className="size-5" />
-          Print Table
-        </button>
-      </div>
-
-      {/* جدول البيانات */}
       <DataTableExtensions {...dataTableData}>
         <DataTable
           columns={columns}
