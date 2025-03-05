@@ -1,12 +1,9 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableRow,
-} from "../../ui/table";
-
-import Badge from "../../ui/badge/Badge";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import DataTable from "react-data-table-component";
+import DataTableExtensions from "react-data-table-component-extensions";
+import "react-data-table-component-extensions/dist/index.css";
+import { FaFilePdf, FaPrint } from "react-icons/fa";
 
 interface Order {
   id: number;
@@ -23,7 +20,6 @@ interface Order {
   budget: string;
 }
 
-// Define the table data using the interface
 const tableData: Order[] = [
   {
     id: 1,
@@ -33,13 +29,7 @@ const tableData: Order[] = [
       role: "Web Designer",
     },
     projectName: "Agency Website",
-    team: {
-      images: [
-        "/images/user/user-22.jpg",
-        "/images/user/user-23.jpg",
-        "/images/user/user-24.jpg",
-      ],
-    },
+    team: { images: ["/images/user/user-22.jpg", "/images/user/user-23.jpg"] },
     budget: "3.9K",
     status: "Active",
   },
@@ -51,174 +41,147 @@ const tableData: Order[] = [
       role: "Project Manager",
     },
     projectName: "Technology",
-    team: {
-      images: ["/images/user/user-25.jpg", "/images/user/user-26.jpg"],
-    },
+    team: { images: ["/images/user/user-25.jpg", "/images/user/user-26.jpg"] },
     budget: "24.9K",
     status: "Pending",
   },
+];
+
+const columns = [
   {
-    id: 3,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Zain Geidt",
-      role: "Content Writing",
-    },
-    projectName: "Blog Writing",
-    team: {
-      images: ["/images/user/user-27.jpg"],
-    },
-    budget: "12.7K",
-    status: "Active",
+    name: "User",
+    selector: (row: Order) => row.user.name,
+    cell: (row: Order) => (
+      <div className="flex items-center gap-2">
+        <img
+          src={row.user.image}
+          alt={row.user.name}
+          className="w-10 h-10 rounded-full"
+        />
+        <div>
+          <p className="font-medium">{row.user.name}</p>
+          <p className="text-sm text-gray-500">{row.user.role}</p>
+        </div>
+      </div>
+    ),
+    sortable: true,
   },
   {
-    id: 4,
-    user: {
-      image: "/images/user/user-20.jpg",
-      name: "Abram Schleifer",
-      role: "Digital Marketer",
-    },
-    projectName: "Social Media",
-    team: {
-      images: [
-        "/images/user/user-28.jpg",
-        "/images/user/user-29.jpg",
-        "/images/user/user-30.jpg",
-      ],
-    },
-    budget: "2.8K",
-    status: "Cancel",
+    name: "Project Name",
+    selector: (row: Order) => row.projectName,
+    sortable: true,
   },
   {
-    id: 5,
-    user: {
-      image: "/images/user/user-21.jpg",
-      name: "Carla George",
-      role: "Front-end Developer",
-    },
-    projectName: "Website",
-    team: {
-      images: [
-        "/images/user/user-31.jpg",
-        "/images/user/user-32.jpg",
-        "/images/user/user-33.jpg",
-      ],
-    },
-    budget: "4.5K",
-    status: "Active",
+    name: "Team",
+    selector: (row: Order) => row.team.images.length.toString(),
+    cell: (row: Order) => (
+      <div className="flex -space-x-2">
+        {row.team.images.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            alt={`Team ${index}`}
+            className="w-6 h-6 rounded-full border-2 border-white"
+          />
+        ))}
+      </div>
+    ),
+  },
+  {
+    name: "Status",
+    selector: (row: Order) => row.status,
+    cell: (row: Order) => (
+      <span
+        className={`px-3 py-1 rounded-full text-xs font-bold ${
+          row.status === "Active"
+            ? "bg-green-200 text-green-800"
+            : row.status === "Pending"
+            ? "bg-yellow-200 text-yellow-800"
+            : "bg-red-200 text-red-800"
+        }`}
+      >
+        {row.status}
+      </span>
+    ),
+    sortable: true,
+  },
+  {
+    name: "Budget",
+    selector: (row: Order) => row.budget,
+    sortable: true,
   },
 ];
 
-export default function BasicTableOne() {
-  return (
-    <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
-      <div className="max-w-full overflow-x-auto">
-        <div className="min-w-[1102px]">
-          <Table>
-            {/* Table Header */}
-            <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
-              <TableRow>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  User
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Project Name
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Team
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Status
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Budget
-                </TableCell>
-              </TableRow>
-            </TableHeader>
+const exportToPDF = () => {
+  const doc = new jsPDF();
+  doc.text("Orders Table", 14, 10);
+  const tableColumn = ["User", "Project Name", "Team Size", "Status", "Budget"];
+  const tableRows: any[] = [];
 
-            {/* Table Body */}
-            <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-              {tableData.map((order) => (
-                <TableRow key={order.id}>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 overflow-hidden rounded-full">
-                        <img
-                          width={40}
-                          height={40}
-                          src={order.user.image}
-                          alt={order.user.name}
-                        />
-                      </div>
-                      <div>
-                        <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                          {order.user.name}
-                        </span>
-                        <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                          {order.user.role}
-                        </span>
-                      </div>
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.projectName}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                      {order.team.images.map((teamImage, index) => (
-                        <div
-                          key={index}
-                          className="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900"
-                        >
-                          <img
-                            width={24}
-                            height={24}
-                            src={teamImage}
-                            alt={`Team member ${index + 1}`}
-                            className="w-full size-6"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    <Badge
-                      size="sm"
-                      color={
-                        order.status === "Active"
-                          ? "success"
-                          : order.status === "Pending"
-                          ? "warning"
-                          : "error"
-                      }
-                    >
-                      {order.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
-                    {order.budget}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
+  tableData.forEach((order) => {
+    const rowData = [
+      order.user.name,
+      order.projectName,
+      order.team.images.length,
+      order.status,
+      order.budget,
+    ];
+    tableRows.push(rowData);
+  });
+
+  doc.autoTable({
+    head: [tableColumn],
+    body: tableRows,
+  });
+
+  doc.save("orders_table.pdf");
+};
+
+const printTable = () => {
+  window.print();
+};
+
+const dataTableData = {
+  columns,
+  data: tableData,
+  exportHeaders: true,
+};
+
+export default function OrdersTable() {
+  return (
+    <div className="p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+        Orders Table
+      </h2>
+
+      {/* أزرار الطباعة والتصدير */}
+      <div className="mb-6 flex gap-4">
+        <button
+          onClick={exportToPDF}
+          className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 transition-all duration-200"
+        >
+          <FaFilePdf className="size-5" />
+          Export as PDF
+        </button>
+
+        <button
+          onClick={printTable}
+          className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-all duration-200"
+        >
+          <FaPrint className="size-5" />
+          Print Table
+        </button>
       </div>
+
+      {/* جدول البيانات */}
+      <DataTableExtensions {...dataTableData}>
+        <DataTable
+          columns={columns}
+          data={tableData}
+          pagination
+          highlightOnHover
+        />
+      </DataTableExtensions>
     </div>
   );
 }

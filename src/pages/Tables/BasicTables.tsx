@@ -24,10 +24,10 @@ export default function BasicTables() {
             Users in Your System
           </h4>
         </div>
-        <ComponentCard title="Basic Table 1">
+        {/* <ComponentCard title="Basic Table 1"> */}
           <BasicTableOne />
           {/* <BasicTables /> */}
-        </ComponentCard>
+        {/* </ComponentCard> */}
       </div>
     </>
   );
