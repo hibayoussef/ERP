@@ -131,11 +131,11 @@ export default function Step3() {
               <p className="text-red-500 text-sm">{errors.password}</p>
             )}
 
-            <div className="grid gap-2 mt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-x-4 gap-y-2 mt-2">
               {passwordRules.map((rule, index) => (
                 <div key={index} className="flex items-center gap-2 text-sm">
                   <span
-                    className={`w-6 h-6 flex items-center justify-center rounded-full border-2 ${
+                    className={`w-5 h-5 flex items-center justify-center rounded-full border-2 text-xs ${
                       rule.check(values.password)
                         ? "border-green-600 bg-green-600 text-white"
                         : "border-gray-400 text-gray-400"
@@ -144,11 +144,11 @@ export default function Step3() {
                     ✓
                   </span>
                   <span
-                    className={
+                    className={`${
                       rule.check(values.password)
                         ? "text-green-600"
                         : "text-gray-500"
-                    }
+                    }`}
                   >
                     {rule.text}
                   </span>
