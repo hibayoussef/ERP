@@ -46,10 +46,14 @@ export const _AuthApi = {
 
   // LOGOUT
   logout: async () => {
-    return _axios.post("/auth/logout").then((res) => {
-      _AuthApi.destroyToken();
+    try {
+      const res = await _axios.post("/auth/logout");
+      _AuthApi.destroyToken(); 
       return res.data;
-    });
+    } catch (error) {
+      console.error("Logout failed:", error);
+      throw error;
+    }
   },
 
   // STORE TOKEN
@@ -101,10 +105,7 @@ export const _AuthApi = {
 
   destroyToken: () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("role");
     localStorage.removeItem("user");
-    localStorage.removeItem("permissions");
-    localStorage.removeItem("userEmail");
-    window.location.reload();
+    // window.location.reload();
   },
 };

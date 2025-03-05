@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 import { useSidebar } from "../context/SidebarContext";
 import { ChevronDownIcon, GridIcon, HorizontaLDots, TableIcon } from "../icons";
+import { _AuthApi } from "../services/auth.service";
 
 type NavItem = {
   name: string;
@@ -52,7 +53,6 @@ const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Logout",
-    path: "/",
     // subItems: [{ name: "Ecommerce", path: "/", pro: false }],
   },
 ];
@@ -113,7 +113,8 @@ const navItems: NavItem[] = [
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const location = useLocation();
-
+  const navigate = useNavigate(); 
+  
   const [openSubmenu, setOpenSubmenu] = useState<{
     type: "main" | "others";
     index: number;
@@ -192,6 +193,35 @@ const AppSidebar: React.FC = () => {
                       : ""
                   }`}
                 />
+              )}
+            </button>
+          ) : nav.name === "Logout" ? (
+            <button
+              onClick={async () => {
+                try {
+                  await _AuthApi.logout();
+                  navigate("/signin")
+                } catch (error) {
+                  console.error("Logout failed:", error);
+                }
+              }}
+              className={`menu-item group ${
+                isActive(nav.path || "")
+                  ? "menu-item-active"
+                  : "menu-item-inactive"
+              }`}
+            >
+              <span
+                className={`menu-item-icon-size ${
+                  isActive(nav.path || "")
+                    ? "menu-item-icon-active"
+                    : "menu-item-icon-inactive"
+                }`}
+              >
+                {nav.icon}
+              </span>
+              {(isExpanded || isHovered || isMobileOpen) && (
+                <span className="menu-item-text">{nav.name}</span>
               )}
             </button>
           ) : (
@@ -282,9 +312,9 @@ const AppSidebar: React.FC = () => {
       className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
         ${
           isExpanded || isMobileOpen
-            ? "w-[290px]"
+            ? "w-[230px]"
             : isHovered
-            ? "w-[290px]"
+            ? "w-[230px]"
             : "w-[90px]"
         }
         ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}

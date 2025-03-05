@@ -8,14 +8,13 @@ export const _axios: AxiosInstance = axios.create({
   baseURL,
 });
 
-const token = _AuthApi.getToken();
-
 _axios.interceptors.request.use(
   (request) => {
     request.headers["x-api-key"] = "SANN_BOOKS";
 
     if (request.headers) {
       request.headers["x-api-key"] = "SANN_BOOKS";
+      const token = _AuthApi.getToken();
 
       if (token) {
         request.headers.Authorization = `Bearer ${token}`;
