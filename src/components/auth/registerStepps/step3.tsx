@@ -16,7 +16,7 @@ export default function Step3() {
   const { mutate: checkEmail, isPending } = useMutation({
     mutationFn: async (email: string) => _AuthApi.checkEmail(email),
     onSuccess: (message) => setEmailMessage(message?.message || ""),
-    onError: () => setEmailMessage("This email is already in use."),
+    onError: () => setEmailMessage("Email Exist"),
   });
 
   const handleEmailBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -40,6 +40,7 @@ export default function Step3() {
     },
   ];
 
+  console.log("emailMessage: ", emailMessage);
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col justify-center w-full mx-auto max-w-xl">
@@ -69,7 +70,7 @@ export default function Step3() {
             {isPending && (
               <p className="mt-2 text-sm text-[#575db1]">Checking...</p>
             )}
-            {emailMessage && (
+            {emailMessage == "Email Exist" && (
               <div
                 className={`mt-2 p-2 text-sm rounded-md ${
                   emailMessage.includes("success")

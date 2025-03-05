@@ -1,9 +1,11 @@
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+import React from "react";
 import DataTable from "react-data-table-component";
 import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
+// بيانات الجدول
 interface Order {
   id: number;
   user: {
@@ -46,6 +48,7 @@ const tableData: Order[] = [
   },
 ];
 
+// أعمدة الجدول
 const columns = [
   {
     name: "User",
@@ -111,6 +114,7 @@ const columns = [
   },
 ];
 
+// وظيفة تصدير الجدول كـ PDF
 const exportToPDF = () => {
   const doc = new jsPDF();
   doc.text("Orders Table", 14, 10);
@@ -136,6 +140,7 @@ const exportToPDF = () => {
   doc.save("orders_table.pdf");
 };
 
+// بيانات التصدير للطباعة و CSV
 const dataTableData = {
   columns,
   data: tableData,
@@ -145,17 +150,19 @@ const dataTableData = {
 export default function OrdersTable() {
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
-      {/*<h2 className="text-xl font-semibold mb-4">Orders Table</h2>
+      {/* <h2 className="text-xl font-semibold mb-4">Orders Table</h2> */}
 
-      <div className="mb-4 flex gap-2">
+      {/* أزرار التصدير والطباعة */}
+      {/* <div className="mb-4 flex gap-2">
         <button
           onClick={exportToPDF}
           className="px-4 py-2 bg-red-500 text-white rounded-md shadow-md"
         >
           Export PDF
         </button>
-      </div>*/}
+      </div> */}
 
+      {/* الجدول مع ميزة التصدير */}
       <DataTableExtensions {...dataTableData}>
         <DataTable
           columns={columns}

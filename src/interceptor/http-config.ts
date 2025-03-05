@@ -35,6 +35,9 @@ _axios.interceptors.request.use(
 
 _axios.interceptors.response.use(
   function (response) {
+    if (response?.config?.url?.includes("/auth/check-email")) {
+      return response;
+    }
     switch (response?.config?.method) {
       case "post":
       case "put":
