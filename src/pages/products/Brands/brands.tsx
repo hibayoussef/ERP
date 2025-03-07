@@ -8,7 +8,6 @@ export default function Brands() {
 //   const [selectedBrand, setSelectedBrand] = useState(null);
   const { data, isLoading } = useFetchBrands();
 
-  console.log("daa: ", data);
   const brands = data || [];
 
   const handleEdit = (brand: any) => {

@@ -40,7 +40,6 @@ export default function Step3() {
     },
   ];
 
-  console.log("emailMessage: ", emailMessage);
   return (
     <div className="flex flex-col w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col justify-center w-full mx-auto max-w-xl">

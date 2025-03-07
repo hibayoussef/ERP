@@ -8,7 +8,6 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   // login: (userData: ILoginRequest, token: string) => {
   login: (userData: ILoginRequest, token: string) => {
-    console.log('token:', token)
     localStorage.setItem("token", token);
 
     set({
