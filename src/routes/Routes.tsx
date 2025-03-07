@@ -21,6 +21,7 @@ import Buttons from "../pages/UiElements/Buttons";
 import Images from "../pages/UiElements/Images";
 import Videos from "../pages/UiElements/Videos";
 import UserProfiles from "../pages/UserProfiles";
+import Brands from "../pages/products/Brands/brands";
 
 const RoutesComponent = () => {
   return (
@@ -36,11 +37,11 @@ const RoutesComponent = () => {
       <Route element={<AppLayout />}>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
+        <Route path="/brands" element={<Brands />} />
         <Route path="/profile" element={<UserProfiles />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/blank" element={<Blank />} />
         <Route path="/form-elements" element={<FormElements />} />
-        <Route path="/basic-tables" element={<BasicTables />} />
         <Route path="/alerts" element={<Alerts />} />
         <Route path="/avatars" element={<Avatars />} />
         <Route path="/badge" element={<Badges />} />

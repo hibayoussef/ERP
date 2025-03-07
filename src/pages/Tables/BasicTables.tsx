@@ -25,7 +25,7 @@ export default function BasicTables() {
           </h4>
         </div>
         {/* <ComponentCard title="Basic Table 1"> */}
-          <BasicTableOne />
+          {/* <BasicTableOne /> */}
           {/* <BasicTables /> */}
         {/* </ComponentCard> */}
       </div>

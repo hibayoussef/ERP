@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
-
 import { useSidebar } from "../context/SidebarContext";
 import { ChevronDownIcon, GridIcon, HorizontaLDots, TableIcon } from "../icons";
 import { _AuthApi } from "../services/auth.service";
@@ -17,39 +16,20 @@ const navItems: NavItem[] = [
     icon: <GridIcon />,
     name: "Dashboard",
     path: "/home",
-    // subItems: [{ name: "Ecommerce", path: "/", pro: false }],
   },
-  // {
-  //   name: "Admin",
-  //   icon: <TableIcon />,
-  //   subItems: [{ name: "Manage", path: "/basic-tables", pro: false }],
-  // },
+
   {
-    name: "Users",
+    name: "Products",
     icon: <TableIcon />,
-    path: "/basic-tables",
+    subItems: [
+      { name: "Branches", path: "/brands", pro: false },
+      { name: "Categories", path: "/basic-tables", pro: false },
+      { name: "SubCategories", path: "/basic-tables", pro: false },
+      { name: "Units", path: "/basic-tables", pro: false },
+      { name: "SubUnits", path: "/basic-tables", pro: false },
+      { name: "Warran", path: "/basic-tables", pro: false },
+    ],
   },
-  // {
-  //   name: "Partner Management",
-  //   icon: <TableIcon />,
-  //   subItems: [
-  //     { name: "Hirarchy", path: "/basic-tables", pro: false },
-  //     { name: "Partner", path: "/basic-tables", pro: false },
-  //     { name: "Mercants", path: "/basic-tables", pro: false },
-  //     { name: "Branches", path: "/basic-tables", pro: false },
-  //     { name: "Terminals", path: "/basic-tables", pro: false },
-  //     { name: "Users", path: "/basic-tables", pro: false },
-  //   ],
-  // },
-  // {
-  //   name: "Digital Receipts",
-  //   icon: <TableIcon />,
-  //   subItems: [
-  //     { name: "Transactions", path: "/basic-tables", pro: false },
-  //     { name: "Reconciliations", path: "/basic-tables", pro: false },
-  //     { name: "Receipts", path: "/basic-tables", pro: false },
-  //   ],
-  // },
   {
     icon: <GridIcon />,
     name: "Logout",
@@ -57,62 +37,8 @@ const navItems: NavItem[] = [
   },
 ];
 
-// const navItems: NavItem[] = [
-//   {
-//     icon: <GridIcon />,
-//     name: "Dashboard",
-//     path: "/",
-//     // subItems: [{ name: "Ecommerce", path: "/", pro: false }],
-//   },
-//   {
-//     name: "Admin",
-//     icon: <TableIcon />,
-//     subItems: [{ name: "Manage", path: "/basic-tables", pro: false }],
-//   },
-//   {
-//     name: "Hirarchy",
-//     icon: <TableIcon />,
-//     path: "/basic-tables",
-//   },
-//   {
-//     name: "Partner",
-//     icon: <TableIcon />,
-//     path: "/basic-tables",
-//   },
-//   {
-//     name: "Mercants",
-//     icon: <TableIcon />,
-//     path: "/basic-tables",
-//   },
-//   {
-//     name: "Branches",
-//     icon: <TableIcon />,
-//     path: "/basic-tables",
-//   },
-//   {
-//     name: "Terminals",
-//     icon: <TableIcon />,
-//     path: "/basic-tables",
-//   },
-//   {
-//     name: "Users",
-//     icon: <TableIcon />,
-//     path: "/basic-tables",
-//   },
-//   {
-//     name: "Digital Receipts",
-//     icon: <TableIcon />,
-//     subItems: [
-//       { name: "Transactions", path: "/basic-tables", pro: false },
-//       { name: "Reconciliations", path: "/basic-tables", pro: false },
-//       { name: "Receipts", path: "/basic-tables", pro: false },
-//     ],
-//   },
-// ];
-
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered } = useSidebar();
- const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -158,7 +84,7 @@ const AppSidebar: React.FC = () => {
   };
 
   const renderMenuItems = (items: NavItem[], menuType: "main" | "others") => (
-    <ul className="flex flex-col gap-4">
+    <ul className="flex flex-col">
       {items.map((nav, index) => (
         <li key={nav.name}>
           {nav.subItems ? (
@@ -262,7 +188,7 @@ const AppSidebar: React.FC = () => {
                     : "0px",
               }}
             >
-              <ul className="mt-2 space-y-1 ml-9">
+              <ul className="mt-2 ml-9">
                 {nav.subItems.map((subItem) => (
                   <li key={subItem.name}>
                     <Link
@@ -309,20 +235,6 @@ const AppSidebar: React.FC = () => {
     </ul>
   );
 
-  // <aside
-  //     className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200
-  //       ${
-  //         isExpanded || isMobileOpen
-  //           ? "w-[230px]"
-  //           : isHovered
-  //           ? "w-[230px]"
-  //           : "w-[90px]"
-  //       }
-  //       ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
-  //       lg:translate-x-0`}
-  //     onMouseEnter={() => !isExpanded && setIsHovered(true)}
-  //     onMouseLeave={() => setIsHovered(false)}
-  //   ></aside>
   return (
     <aside
       className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
@@ -363,7 +275,6 @@ const AppSidebar: React.FC = () => {
           )}
         </Link>
       </div>
-      {/* <div className="border-t border-gray-300 my-4"></div> */}
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
         <nav className="mb-6">
           <div className="flex flex-col gap-4">

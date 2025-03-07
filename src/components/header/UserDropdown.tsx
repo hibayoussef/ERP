@@ -30,14 +30,14 @@ export default function UserDropdown() {
         onClick={toggleDropdown}
         className="flex items-center text-gray-700 dropdown-toggle dark:text-gray-400"
       >
-        <span className="mr-3 overflow-hidden rounded-full h-11 w-11">
+        <span className=" overflow-hidden rounded-full h-9 w-9">
           <img
             src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
             alt="User"
           />
         </span>
 
-        <span className="block mr-1 font-medium text-theme-sm">Test</span>
+        {/* <span className="block mr-1 font-medium text-theme-sm">Test</span>
         <svg
           className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
@@ -55,7 +55,7 @@ export default function UserDropdown() {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-        </svg>
+        </svg> */}
       </button>
 
       <Dropdown
