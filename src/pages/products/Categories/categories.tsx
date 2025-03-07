@@ -1,31 +1,31 @@
-import { useState } from "react";
 import PageBreadcrumb from "../../../components/common/PageBreadCrumb";
 import PageMeta from "../../../components/common/PageMeta";
 import BasicTableOne from "../../../components/tables/BasicTables/BasicTableOne";
 import { useFetchBrands } from "../../../hooks/prouducts/useBrands";
+import { useFetchCategories } from "../../../hooks/prouducts/useCategories";
 
-export default function Brands() {
+export default function Categories() {
 //   const [selectedBrand, setSelectedBrand] = useState(null);
-  const { data, isLoading } = useFetchBrands();
+  const { data, isLoading } = useFetchCategories();
 
-  const brands = data || [];
+  const categories = data || [];
 
   const handleEdit = (brand: any) => {
     // setSelectedBrand(brand);
-    console.log("Editing brand:", brand);
+    console.log("Editing category:", brand);
   };
 
   return (
     <>
       <PageMeta
-        title="Brands Management | Dashboard"
-        description="Manage your product brands in the system."
+        title="Categories Management | Dashboard"
+        description="Manage your product categories in the system."
       />
-      <PageBreadcrumb pageTitle="Brands" />
+      <PageBreadcrumb pageTitle="Categories" />
 
       <div className="space-y-4">
         <BasicTableOne
-          data={brands}
+          data={categories}
           isLoading={isLoading}
           onEdit={handleEdit}
         />

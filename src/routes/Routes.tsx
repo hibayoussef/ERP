@@ -22,6 +22,7 @@ import Images from "../pages/UiElements/Images";
 import Videos from "../pages/UiElements/Videos";
 import UserProfiles from "../pages/UserProfiles";
 import Brands from "../pages/products/Brands/brands";
+import Categories from "../pages/products/Categories/categories";
 
 const RoutesComponent = () => {
   return (
@@ -38,10 +39,14 @@ const RoutesComponent = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/brands" element={<Brands />} />
-        <Route path="/profile" element={<UserProfiles />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/blank" element={<Blank />} />
-        <Route path="/form-elements" element={<FormElements />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/categories/:id" element={<UserProfiles />} />
+        <Route path="/sub-categories" element={<Calendar />} />
+        <Route path="/sub-categories/:id" element={<Calendar />} />
+        <Route path="/units" element={<Blank />} />
+        <Route path="/units/:id" element={<Blank />} />
+        <Route path="/sub-units/:id" element={<FormElements />} />
+
         <Route path="/alerts" element={<Alerts />} />
         <Route path="/avatars" element={<Avatars />} />
         <Route path="/badge" element={<Badges />} />

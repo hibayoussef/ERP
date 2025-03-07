@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { _BrandsApi } from "../services/products/brands.service";
-import { QueryKeys } from "../utils/queryKeys";
+import { _BrandsApi } from "../../services/products/brands.service";
+import { QueryKeys } from "../../utils/queryKeys";
 
 // FETCH BRANDS
 export const useFetchBrands = () => {

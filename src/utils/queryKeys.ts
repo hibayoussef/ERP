@@ -7,4 +7,12 @@ export enum QueryKeys {
   PLANS = "plans",
   BRANDS = "brands",
   BRAND = "brand",
+  CATEGORIES = "categories",
+  CATEGORY = "category",
+  SUB_CATEGORIES = "sub_categories",
+  SUB_CATEGORY = "sub_category",
+  UNITS = "units",
+  UNIT = "unit",
+  SUB_UNITs = "sub_units",
+  SUB_UNIT = "sub_unit",
 }
