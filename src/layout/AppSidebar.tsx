@@ -22,7 +22,7 @@ const navItems: NavItem[] = [
     name: "Products",
     icon: <TableIcon />,
     subItems: [
-      { name: "Branches", path: "/brands", pro: false },
+      { name: "Brands", path: "/brands", pro: false },
       { name: "Categories", path: "/basic-tables", pro: false },
       { name: "SubCategories", path: "/basic-tables", pro: false },
       { name: "Units", path: "/basic-tables", pro: false },
