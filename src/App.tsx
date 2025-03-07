@@ -21,11 +21,11 @@ export default function App() {
   }, [currentLanguage]);
   return (
     <>
-        <CacheProvider value={emotionCache}>
-          <ScrollToTop />
-          <RoutesComponent />
-          <ToastContainer />
-        </CacheProvider>
+      <CacheProvider value={emotionCache}>
+        <ScrollToTop />
+        <RoutesComponent />
+        <ToastContainer />
+      </CacheProvider>
     </>
   );
 }
