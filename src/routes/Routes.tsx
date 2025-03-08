@@ -46,6 +46,7 @@ const RoutesComponent = () => {
         <Route path="/units" element={<Blank />} />
         <Route path="/units/:id" element={<Blank />} />
         <Route path="/sub-units/:id" element={<FormElements />} />
+        <Route path="/profile" element={<UserProfiles />} />
 
         <Route path="/alerts" element={<Alerts />} />
         <Route path="/avatars" element={<Avatars />} />
