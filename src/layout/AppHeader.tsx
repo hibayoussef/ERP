@@ -177,7 +177,7 @@ const AppHeader: React.FC = () => {
         >
           <div className="flex items-end gap-1 2xsm:gap-3">
             {/* <!-- Dark Mode Toggler --> */}
-            <LanguageSwitcher />
+            {/* <LanguageSwitcher /> */}
             <ThemeToggleButton />
             {/* <!-- Dark Mode Toggler --> */}
             <NotificationDropdown />
