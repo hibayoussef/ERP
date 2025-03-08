@@ -41,14 +41,14 @@ const RoutesComponent = () => {
         <Route path="/" element={<Home />} />
         <Route path="/brands" element={<Brands />} />
         <Route path="/brands/create" element={<CreateBrand />} />
-        <Route path="/categories" element={<Blank />} />
+        {/* <Route path="/categories" element={<Blank />} />
         <Route path="/categories/:id" element={<Blank />} />
         <Route path="/sub-categories" element={<Blank />} />
         <Route path="/sub-categories/:id" element={<Blank />} />
         <Route path="/units" element={<Blank />} />
         <Route path="/units/:id" element={<Blank />} />
         <Route path="/sub-units/:id" element={<Blank />} />
-        <Route path="/profile" element={<UserProfiles />} />
+        <Route path="/profile" element={<UserProfiles />} /> */}
 
         <Route path="/alerts" element={<Alerts />} />
         <Route path="/avatars" element={<Avatars />} />
