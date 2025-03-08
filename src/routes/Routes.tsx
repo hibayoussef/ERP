@@ -23,6 +23,7 @@ import Videos from "../pages/UiElements/Videos";
 import UserProfiles from "../pages/UserProfiles";
 import Brands from "../pages/products/Brands/brands";
 import Categories from "../pages/products/Categories/categories";
+import CreateBrand from "../pages/products/Brands/createBrand";
 
 const RoutesComponent = () => {
   return (
@@ -39,6 +40,7 @@ const RoutesComponent = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/brands" element={<Brands />} />
+        <Route path="/brands/create" element={<CreateBrand />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/:id" element={<UserProfiles />} />
         <Route path="/sub-categories" element={<Calendar />} />
