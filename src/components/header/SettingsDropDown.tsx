@@ -78,10 +78,10 @@ const SettingsSidebar = () => {
             </h3>
             <div className="space-y-2 p-4 ">
               <div className="flex items-center gap-2">
-                <span className="text-gray-500">LTR</span>
+                <span className="text-gray-500 text-sm">LTR</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-gray-500">RTL</span>
+                <span className="text-gray-500 text-sm">RTL</span>
               </div>
             </div>
           </div>
@@ -98,7 +98,7 @@ const SettingsSidebar = () => {
                 "Horizontal Hover Menu",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-2">
-                  <span className="text-gray-500">{item}</span>
+                  <span className="text-gray-500 text-sm">{item}</span>
                 </div>
               ))}
             </div>
@@ -119,8 +119,7 @@ const SettingsSidebar = () => {
                   className="flex items-center justify-between"
                 >
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full" />
-                    <span className="text-gray-500 dark:text-gray-300">
+                    <span className="text-gray-500 dark:text-gray-300 text-sm">
                       {themeOption.label}
                     </span>
                   </div>

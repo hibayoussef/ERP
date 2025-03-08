@@ -19,7 +19,7 @@ import {
   ExcelExportModule,
 } from "ag-grid-enterprise";
 import { AgGridReact } from "ag-grid-react";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 
 ModuleRegistry.registerModules([
   NumberFilterModule,
@@ -95,16 +95,32 @@ const BasicTableOne = ({
     gridApi!.exportDataAsExcel();
   }
 
+    const gridRef = useRef<any>(null);
+
+    const exportToCSV = () => {
+      gridRef.current.api.exportDataAsCsv();
+    };
+
+    const exportToExcel = () => {
+      gridRef.current.api.exportDataAsExcel();
+    };
+
   if (isLoading) return <>loading...</>;
 
   return (
     <div style={containerStyle}>
       <div>
         <button
-          onClick={onBtExport}
-          className="margin-bottom: 5px; font-weight: bold"
+          onClick={exportToCSV}
+          className="bg-blue-500 text-white p-2 m-2"
         >
-          Export to Excel
+          Export CSV
+        </button>
+        <button
+          onClick={exportToExcel}
+          className="bg-green-500 text-white p-2 m-2"
+        >
+          Export Excel
         </button>
       </div>
       <div style={gridStyle}>
