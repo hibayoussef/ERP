@@ -3,41 +3,48 @@ import {
   ColDef,
   ModuleRegistry,
   RowSelectionModule,
+  ColumnMenuTab, // أضف هذا الاستيراد
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { useMemo } from "react";
 
 ModuleRegistry.registerModules([RowSelectionModule, ClientSideRowModelModule]);
 
-const BasicTableOne = ({ data, isLoading, onEdit }: { data: any, isLoading: boolean,  onEdit: (brand: any) => void }) => {
+const BasicTableOne = ({
+  data,
+  isLoading,
+  onEdit,
+}: {
+  data: any;
+  isLoading: boolean;
+  onEdit: (brand: any) => void;
+}) => {
   const containerStyle = useMemo(
     () => ({ width: "100%", height: "500px" }),
     []
   );
   const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
 
-  
   const columnDefs: ColDef[] = [
-    { field: "name", headerName: "Brand Name", minWidth: 150 },
-    { field: "category", headerName: "Category", minWidth: 150 },
-    { field: "country", headerName: "Country", minWidth: 120 },
-    { field: "createdAt", headerName: "Created At", minWidth: 130 },
     {
-      field: "actions",
-      headerName: "Actions",
-      cellRenderer: (params) => (
-        <button
-          className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600"
-          onClick={() => onEdit(params.data)}
-        >
-          Edit
-        </button>
-      ),
-      minWidth: 100,
-      maxWidth: 120,
-      sortable: false,
-      filter: false,
+      field: "id",
+      headerName: "ID",
+      minWidth: 150,
+      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[], // تفعيل القائمة
     },
+    {
+      field: "brand_name_en",
+      headerName: "Brand Name",
+      minWidth: 150,
+      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[], // تفعيل القائمة
+    },
+    {
+      field: "description_en",
+      headerName: "Category",
+      minWidth: 150,
+      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
+    },
+   
   ];
 
   const defaultColDef = useMemo(
@@ -47,11 +54,12 @@ const BasicTableOne = ({ data, isLoading, onEdit }: { data: any, isLoading: bool
       sortable: true,
       filter: true,
       resizable: true,
+      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[], 
     }),
     []
   );
-if (isLoading) return <>loading...</>;
 
+  if (isLoading) return <>loading...</>;
 
   return (
     <div style={containerStyle}>
@@ -62,12 +70,11 @@ if (isLoading) return <>loading...</>;
           defaultColDef={defaultColDef}
           domLayout="autoHeight"
           pagination={true}
-          enableRangeSelection={true}
+          enableRangeSelection={true} // تم إزالة suppressHeaderHover هنا
         />
       </div>
     </div>
   );
 };
-
 
 export default BasicTableOne;
