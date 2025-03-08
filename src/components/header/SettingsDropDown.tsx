@@ -57,11 +57,11 @@ const SettingsSidebar = () => {
       </button>
 
       <div
-        className={`fixed right-0 top-0 h-full w-80 bg-white shadow-xl transform transition-transform duration-300 z-50 ${
+        className={`fixed right-0 top-0 h-full w-80 bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 z-50 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="p-4 border-b flex justify-between items-center bg-gray-50">
+        <div className="p-4 border-b dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-900">
           <h2 className="text-lg font-bold"></h2>
           <button
             onClick={() => setIsOpen(false)}
@@ -73,22 +73,22 @@ const SettingsSidebar = () => {
 
         <div className="space-y-6">
           <div>
-            <h3 className="font-semibold mb-2 p-4 text-gray-600 bg-gray-200">
+            <h3 className="font-semibold mb-2 p-4 text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-700">
               LTR AND RTL VERSIONS
             </h3>
             <div className="space-y-2 p-4 ">
               <div className="flex items-center gap-2">
-                <span className="text-gray-500 text-sm">LTR</span>
+                <span className="text-gray-500 dark:text-gray-300">LTR</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-gray-500 text-sm">RTL</span>
+                <span className="text-gray-500 dark:text-gray-300">RTL</span>
               </div>
             </div>
           </div>
 
           {/* قسم NOMRATION STYLE */}
           <div>
-            <h3 className="font-semibold mb-2 p-4 text-gray-600 bg-gray-200">
+            <h3 className="font-semibold mb-2 p-4 text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-700">
               NOMRATION STYLE
             </h3>
             <div className="space-y-2  p-4">
@@ -98,7 +98,9 @@ const SettingsSidebar = () => {
                 "Horizontal Hover Menu",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-2">
-                  <span className="text-gray-500 text-sm">{item}</span>
+                  <span className="text-gray-500 dark:text-gray-300">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -106,7 +108,7 @@ const SettingsSidebar = () => {
 
           {/* قسم THEME STYLE */}
           <div>
-            <h3 className="font-semibold mb-2 p-4 text-gray-600 bg-gray-200">
+            <h3 className="font-semibold mb-2 p-4 text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-700">
               THEME STYLE
             </h3>
             <div className="space-y-2 p-4">
@@ -119,7 +121,7 @@ const SettingsSidebar = () => {
                   className="flex items-center justify-between"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-gray-500 dark:text-gray-300 text-sm">
+                    <span className="text-gray-500 dark:text-gray-300">
                       {themeOption.label}
                     </span>
                   </div>

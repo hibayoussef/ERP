@@ -32,7 +32,7 @@ ModuleRegistry.registerModules([
   TextFilterModule,
   ValidationModule,
   CsvExportModule,
-  ExcelExportModule
+  ExcelExportModule,
 ]);
 
 const BasicTableOne = ({
@@ -81,7 +81,6 @@ const BasicTableOne = ({
     menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
   };
 
-
   const gridOptions: GridOptions = {
     rowSelection: "multiple",
     enableRangeSelection: true,
@@ -95,21 +94,21 @@ const BasicTableOne = ({
     gridApi!.exportDataAsExcel();
   }
 
-    const gridRef = useRef<any>(null);
+  const gridRef = useRef<any>(null);
 
-    const exportToCSV = () => {
-      gridRef.current.api.exportDataAsCsv();
-    };
+  const exportToCSV = () => {
+    gridRef.current.api.exportDataAsCsv();
+  };
 
-    const exportToExcel = () => {
-      gridRef.current.api.exportDataAsExcel();
-    };
+  const exportToExcel = () => {
+    gridRef.current.api.exportDataAsExcel();
+  };
 
   if (isLoading) return <>loading...</>;
 
   return (
     <div style={containerStyle}>
-      <div>
+      {/* <div>
         <button
           onClick={exportToCSV}
           className="bg-blue-500 text-white p-2 m-2"
@@ -122,7 +121,7 @@ const BasicTableOne = ({
         >
           Export Excel
         </button>
-      </div>
+      </div> */}
       <div style={gridStyle}>
         <AgGridReact
           rowData={data}
