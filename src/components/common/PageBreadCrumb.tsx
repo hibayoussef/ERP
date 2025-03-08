@@ -1,26 +1,26 @@
 import { Link } from "react-router";
 
 interface BreadcrumbProps {
+  baseTitle?: string;
   pageTitle: string;
+  baseLink: string;
 }
 
-const PageBreadcrumb: React.FC<BreadcrumbProps> = ({ pageTitle }) => {
+const PageBreadcrumb: React.FC<BreadcrumbProps> = ({
+  baseTitle,
+  baseLink,
+  pageTitle,
+}) => {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
-      {/* <h2
-        className="text-md font-semibold text-gray-800 dark:text-white/90"
-        x-text="pageName"
-      >
-        {pageTitle}
-      </h2> */}
       <nav>
         <ol className="flex items-center gap-1.5">
           <li>
             <Link
               className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400"
-              to="/"
+              to={baseLink ? baseLink : "/"}
             >
-              Home
+              {baseTitle ? baseTitle : "Home"}
               <svg
                 className="stroke-current"
                 width="17"
