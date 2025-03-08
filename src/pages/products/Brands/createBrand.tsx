@@ -1,24 +1,9 @@
 import { useState } from "react";
-import Flatpickr from "react-flatpickr";
-import { CalenderIcon, EyeCloseIcon, EyeIcon, TimeIcon } from "../../../icons";
 import ComponentCard from "../../../components/common/ComponentCard";
-import Label from "../../../components/form/Label";
 import Input from "../../../components/form/input/InputField";
-import Select from "../../../components/form/Select";
+import Label from "../../../components/form/Label";
 
 export default function CreateBrand() {
-  const [showPassword, setShowPassword] = useState(false);
-  const options = [
-    { value: "marketing", label: "Marketing" },
-    { value: "template", label: "Template" },
-    { value: "development", label: "Development" },
-  ];
-  const handleSelectChange = (value: string) => {};
-  const [dateOfBirth, setDateOfBirth] = useState("");
-
-  const handleDateChange = (date: Date[]) => {
-    setDateOfBirth(date[0].toLocaleDateString());
-  };
   return (
     <ComponentCard title="Create Brand">
       <div className="space-y-6">
@@ -34,28 +19,16 @@ export default function CreateBrand() {
             placeholder="please enter brand description"
           />
         </div>
-        <div>
-          <Label>Select Input</Label>
-          <Select
-            options={options}
-            placeholder="Select an option"
-            onChange={handleSelectChange}
-            className="dark:bg-dark-900"
-          />
-        </div>
-        <div>
-          <Label htmlFor="tm">Date Picker Input</Label>
-          <div className="relative">
-            <Input
-              type="time"
-              id="tm"
-              name="tm"
-              onChange={(e) => console.log(e.target.value)}
-            />
-            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
-              <TimeIcon className="size-6" />
-            </span>
-          </div>
+
+        <div className="flex items-start justify-start">
+          <button
+            type="submit"
+            //    disabled={isPending}
+            className="  px-6 py-3 text-sm font-medium disabled:opacity-50 text-white transition rounded-lg  shadow-theme-xs bg-[#575db1] hover:bg-[#474ca1]"
+          >
+            {" "}
+            {"Submit"}
+          </button>
         </div>
       </div>
     </ComponentCard>
