@@ -237,20 +237,28 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
+      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
         ${isExpanded || isMobileOpen ? "w-[230px]" : "w-[90px]"}
         ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0`}
     >
       <div
-        className={`py-0 flex ${
+        className={`py-0 w-full flex ${
           !isExpanded && !isHovered ? "lg:justify-center" : "justify-center"
         }`}
       >
         <Link to="/">
           {isExpanded || isHovered || isMobileOpen ? (
             <>
-              <img
+              <div className="flex flex-col w-full">
+                <div className="flex items-center">
+                  <span className="text-2xl font-bold  p-2 text-[#575db1]">
+                    LOGO
+                  </span>
+                </div>
+              </div>
+
+              {/* <img
                 className="dark:hidden"
                 src="/images/logo/logo-icon.png"
                 alt="Logo"
@@ -263,19 +271,22 @@ const AppSidebar: React.FC = () => {
                 alt="Logo"
                 width={150}
                 height={40}
-              />
+              /> */}
             </>
           ) : (
-            <img
-              src="/images/logo/logo-icon.png"
-              alt="Logo"
-              width={60}
-              height={60}
-            />
+            <div className="flex flex-col w-full">
+              <div className="flex items-center p-2">
+                <span className="text-2xl font-bold text-[#575db1]">LOGO</span>
+              </div>
+            </div>
           )}
         </Link>
       </div>
-      <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
+      <div
+        className="w-full h-px bg-gray-200 dark:bg-gray-600 mb-2"
+        style={{ boxSizing: "border-box" }}
+      ></div>
+      <div className="flex flex-col  px-5  overflow-y-auto duration-300 ease-linear no-scrollbar">
         <nav className="mb-6">
           <div className="flex flex-col gap-4">
             <div>
