@@ -1,16 +1,14 @@
 import {
   ClientSideRowModelModule,
   ColDef,
-  ColGroupDef,
-  GridApi,
   GridOptions,
   ModuleRegistry,
   NumberFilterModule,
-  SideBarDef,
   TextFilterModule,
   ValidationModule,
-  createGrid,
+  CsvExportModule,
   type ColumnMenuTab,
+  type GridApi,
 } from "ag-grid-community";
 import {
   ColumnMenuModule,
@@ -18,6 +16,7 @@ import {
   ContextMenuModule,
   PivotModule,
   SetFilterModule,
+  ExcelExportModule,
 } from "ag-grid-enterprise";
 import { AgGridReact } from "ag-grid-react";
 import { useMemo } from "react";
@@ -32,6 +31,8 @@ ModuleRegistry.registerModules([
   SetFilterModule,
   TextFilterModule,
   ValidationModule,
+  CsvExportModule,
+  ExcelExportModule
 ]);
 
 const BasicTableOne = ({
@@ -54,45 +55,58 @@ const BasicTableOne = ({
       field: "id",
       headerName: "ID",
       minWidth: 150,
-      enableRowGroup: true,
-      enablePivot: true,
       filter: true,
-      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
+      menuTabs: ["generalMenuTab", "filterMenuTab"],
     },
     {
       field: "brand_name_en",
       headerName: "Brand Name",
       minWidth: 150,
-      enableRowGroup: true,
-      enablePivot: true,
-      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
+      menuTabs: ["generalMenuTab", "filterMenuTab"],
     },
     {
       field: "description_en",
       headerName: "Description",
       minWidth: 150,
-      enableRowGroup: true,
-      enablePivot: true,
-      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
+      menuTabs: ["generalMenuTab", "filterMenuTab"],
     },
   ];
 
-  const defaultColDef = useMemo(
-    () => ({
-      flex: 1,
-      minWidth: 100,
-      sortable: true,
-      filter: true,
-      resizable: true,
-      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
-    }),
-    []
-  );
+  const defaultColDef: ColDef = {
+    flex: 1,
+    minWidth: 100,
+    sortable: true,
+    filter: true,
+    resizable: true,
+    menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
+  };
+
+
+  const gridOptions: GridOptions = {
+    rowSelection: "multiple",
+    enableRangeSelection: true,
+    pagination: true,
+    paginationPageSize: 10,
+  };
+
+  let gridApi: GridApi<any>;
+
+  function onBtExport() {
+    gridApi!.exportDataAsExcel();
+  }
 
   if (isLoading) return <>loading...</>;
 
   return (
     <div style={containerStyle}>
+      <div>
+        <button
+          onClick={onBtExport}
+          className="margin-bottom: 5px; font-weight: bold"
+        >
+          Export to Excel
+        </button>
+      </div>
       <div style={gridStyle}>
         <AgGridReact
           rowData={data}
@@ -100,7 +114,9 @@ const BasicTableOne = ({
           defaultColDef={defaultColDef}
           domLayout="autoHeight"
           pagination={true}
-          enableRangeSelection={true} // تم إزالة suppressHeaderHover هنا
+          paginationPageSize={10}
+          enableRangeSelection={true}
+          gridOptions={gridOptions}
         />
       </div>
     </div>

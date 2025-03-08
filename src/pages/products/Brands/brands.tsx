@@ -3,6 +3,7 @@ import PageBreadcrumb from "../../../components/common/PageBreadCrumb";
 import PageMeta from "../../../components/common/PageMeta";
 import BasicTableOne from "../../../components/tables/BasicTables/BasicTableOne";
 import { useFetchBrands } from "../../../hooks/prouducts/useBrands";
+import ComponentCard from "../../../components/common/ComponentCard";
 
 export default function Brands() {
 //   const [selectedBrand, setSelectedBrand] = useState(null);
@@ -24,11 +25,13 @@ export default function Brands() {
       <PageBreadcrumb pageTitle="Brands" />
 
       <div className="space-y-4">
-        <BasicTableOne
-          data={brands}
-          isLoading={isLoading}
-          onEdit={handleEdit}
-        />
+        {/* <ComponentCard title="Basic Table 1"> */}
+          <BasicTableOne
+            data={brands}
+            isLoading={isLoading}
+            onEdit={handleEdit}
+          />{" "}
+        {/* </ComponentCard> */}
       </div>
     </>
   );
