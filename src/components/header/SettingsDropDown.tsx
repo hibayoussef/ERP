@@ -1,16 +1,39 @@
 import { useState } from "react";
+import { useTheme } from "../../context/ThemeContext";
+
+const ToggleSwitcher = ({
+  enabled,
+  onClick,
+}: {
+  enabled: boolean;
+  onClick: () => void;
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+        enabled ? "bg-blue-500" : "bg-gray-300"
+      }`}
+    >
+      <span
+        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+          enabled ? "translate-x-6" : "translate-x-1"
+        }`}
+      />
+    </button>
+  );
+};
 
 const SettingsSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="relative">
-      {/* Settings Icon */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-gray-600 hover:text-gray-900 transition-colors"
+        className="p-2 text-gray-600 hover:text-gray-900"
       >
-        {/* SVG Icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
@@ -33,39 +56,81 @@ const SettingsSidebar = () => {
         </svg>
       </button>
 
-      {/* Sidebar بدون overlay */}
       <div
-        className={`fixed right-0 top-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 z-50 ${
+        className={`fixed right-0 top-0 h-full w-80 bg-white shadow-xl transform transition-transform duration-300 z-50 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="p-4 border-b flex justify-between items-center">
-          <h2 className="text-lg font-semibold">الإعدادات</h2>
+        <div className="p-4 border-b flex justify-between items-center bg-gray-50">
+          <h2 className="text-lg font-bold"></h2>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-1 hover:bg-gray-100 rounded"
+            className="text-gray-500 hover:text-gray-700"
           >
             ✕
           </button>
         </div>
 
-        {/* محتوى الإعدادات */}
-        <div className="p-4">
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">
-              إعدادات المظهر
-            </label>
-            <select className="w-full p-2 border rounded">
-              <option>وضع النهار</option>
-              <option>وضع الليل</option>
-            </select>
+        <div className="space-y-6">
+          <div>
+            <h3 className="font-semibold mb-2 p-4 text-gray-600 bg-gray-200">
+              LTR AND RTL VERSIONS
+            </h3>
+            <div className="space-y-2 p-4 ">
+              <div className="flex items-center gap-2">
+                <span className="text-gray-500">LTR</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-gray-500">RTL</span>
+              </div>
+            </div>
           </div>
 
-          <div className="mb-4">
-            <label className="flex items-center space-x-2">
-              <input type="checkbox" className="form-checkbox" />
-              <span>الإشعارات</span>
-            </label>
+          {/* قسم NOMRATION STYLE */}
+          <div>
+            <h3 className="font-semibold mb-2 p-4 text-gray-600 bg-gray-200">
+              NOMRATION STYLE
+            </h3>
+            <div className="space-y-2  p-4">
+              {[
+                "Vertical Menu",
+                "Horizontal Click Menu",
+                "Horizontal Hover Menu",
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-2">
+                  <span className="text-gray-500">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* قسم THEME STYLE */}
+          <div>
+            <h3 className="font-semibold mb-2 p-4 text-gray-600 bg-gray-200">
+              THEME STYLE
+            </h3>
+            <div className="space-y-2 p-4">
+              {[
+                { label: "Light Theme", value: "light" },
+                { label: "Dark Theme", value: "dark" },
+              ].map((themeOption) => (
+                <div
+                  key={themeOption.value}
+                  className="flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full" />
+                    <span className="text-gray-500 dark:text-gray-300">
+                      {themeOption.label}
+                    </span>
+                  </div>
+                  <ToggleSwitcher
+                    enabled={theme === themeOption.value}
+                    onClick={toggleTheme}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
