@@ -1,14 +1,38 @@
 import {
   ClientSideRowModelModule,
   ColDef,
+  ColGroupDef,
+  GridApi,
+  GridOptions,
   ModuleRegistry,
-  RowSelectionModule,
-  ColumnMenuTab, // أضف هذا الاستيراد
+  NumberFilterModule,
+  SideBarDef,
+  TextFilterModule,
+  ValidationModule,
+  createGrid,
+  type ColumnMenuTab,
 } from "ag-grid-community";
+import {
+  ColumnMenuModule,
+  ColumnsToolPanelModule,
+  ContextMenuModule,
+  PivotModule,
+  SetFilterModule,
+} from "ag-grid-enterprise";
 import { AgGridReact } from "ag-grid-react";
 import { useMemo } from "react";
 
-ModuleRegistry.registerModules([RowSelectionModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+  NumberFilterModule,
+  ClientSideRowModelModule,
+  ColumnsToolPanelModule,
+  ColumnMenuModule,
+  ContextMenuModule,
+  PivotModule,
+  SetFilterModule,
+  TextFilterModule,
+  ValidationModule,
+]);
 
 const BasicTableOne = ({
   data,
@@ -30,21 +54,27 @@ const BasicTableOne = ({
       field: "id",
       headerName: "ID",
       minWidth: 150,
-      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[], // تفعيل القائمة
+      enableRowGroup: true,
+      enablePivot: true,
+      filter: true,
+      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
     },
     {
       field: "brand_name_en",
       headerName: "Brand Name",
       minWidth: 150,
-      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[], // تفعيل القائمة
+      enableRowGroup: true,
+      enablePivot: true,
+      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
     },
     {
       field: "description_en",
-      headerName: "Category",
+      headerName: "Description",
       minWidth: 150,
+      enableRowGroup: true,
+      enablePivot: true,
       menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
     },
-   
   ];
 
   const defaultColDef = useMemo(
@@ -54,7 +84,7 @@ const BasicTableOne = ({
       sortable: true,
       filter: true,
       resizable: true,
-      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[], 
+      menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
     }),
     []
   );
