@@ -15,4 +15,5 @@ export enum QueryKeys {
   UNIT = "unit",
   SUB_UNITs = "sub_units",
   SUB_UNIT = "sub_unit",
+  ME = "me",
 }
