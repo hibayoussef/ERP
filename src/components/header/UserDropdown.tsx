@@ -3,11 +3,14 @@ import { FaUserCircle } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { _AuthApi } from "../../services/auth.service";
 import { useNavigate } from "react-router";
+import { useFetchMe } from "../../hooks/useMe";
 
 const UserDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
+  const { data: userData } = useFetchMe();
 
+  console.log("userData: ", userData);
   return (
     <div>
       {/* Profile Image Button */}
@@ -27,10 +30,10 @@ const UserDropdown = () => {
               <div className="flex justify-between items-start">
                 <div>
                   <div className="font-semibold text-gray-800 text-lg">
-                    drghamdakhol
+                    {userData?.user.name}
                   </div>
                   <div className="text-sm text-gray-600 mt-1">
-                    drghamdakhol@sanritech.net
+                    {userData?.user?.email}
                   </div>
                 </div>
 
@@ -44,14 +47,16 @@ const UserDropdown = () => {
               <div className="flex gap-4 text-sm">
                 <div className="flex items-center gap-1">
                   <span className="font-medium text-gray-700">User ID:</span>
-                  <span className="text-gray-600">876694518</span>
+                  <span className="text-gray-600">{userData?.user?.id}</span>
                 </div>
                 <div className="h-4 w-px bg-gray-300"></div>
                 <div className="flex items-center gap-1">
                   <span className="font-medium text-gray-700">
                     Organization ID:
                   </span>
-                  <span className="text-gray-600">876692891</span>
+                  <span className="text-gray-600">
+                    {userData?.organization?.id}
+                  </span>
                 </div>
               </div>
             </div>
