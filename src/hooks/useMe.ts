@@ -3,7 +3,7 @@ import { _MeApi } from "../services/me.service";
 import { useMeStore } from "../store/useMeStore";
 import { QueryKeys } from "../utils/queryKeys";
 
-// FETCH BRANDS
+// FETCH Me
 export const useFetchMe = () => {
   const setMe = useMeStore((state) => state.setMe);
   return useQuery({
