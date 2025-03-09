@@ -7,13 +7,17 @@ import { useFetchBrands } from "../../../hooks/prouducts/useBrands";
 
 export default function Brands() {
   //   const [selectedBrand, setSelectedBrand] = useState(null);
-  const { data, isLoading } = useFetchBrands();
+  const { data, isLoading, refetch } = useFetchBrands();
   const naviagate = useNavigate();
   const brands = data || [];
 
   const handleEdit = (brand: any) => {
     // setSelectedBrand(brand);
     console.log("Editing brand:", brand);
+  };
+
+  const handleCreate = async () => {
+    await refetch();
   };
 
   return (

@@ -8,8 +8,6 @@ import App from "./App.tsx";
 import { AppWrapper } from "./components/common/PageMeta.tsx";
 import { ThemeProvider } from "./context/ThemeContext.tsx";
 import "./index.css";
-import { I18nextProvider } from "react-i18next"; 
-import i18n from "./i18n";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,13 +22,13 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Router>
       <QueryClientProvider client={queryClient}>
-        <I18nextProvider i18n={i18n}>
-          <ThemeProvider>
-            <AppWrapper>
-              <App />
-            </AppWrapper>
-          </ThemeProvider>
-        </I18nextProvider>
+        {/* <I18nextProvider i18n={i18n}> */}
+        <ThemeProvider>
+          <AppWrapper>
+            <App />
+          </AppWrapper>
+        </ThemeProvider>
+        {/* </I18nextProvider> */}
       </QueryClientProvider>
     </Router>
   </StrictMode>
