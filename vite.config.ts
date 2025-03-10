@@ -16,6 +16,12 @@ export default defineConfig({
       },
     }),
   ],
+  css: {
+    transformer: "lightningcss",
+  },
+  build: {
+    cssMinify: "lightningcss",
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
