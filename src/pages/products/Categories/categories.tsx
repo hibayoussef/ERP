@@ -1,14 +1,13 @@
 import PageBreadcrumb from "../../../components/common/PageBreadCrumb";
 import PageMeta from "../../../components/common/PageMeta";
 import BasicTableOne from "../../../components/tables/BasicTables/BasicTableOne";
-import { useFetchBrands } from "../../../hooks/prouducts/useBrands";
 import { useFetchCategories } from "../../../hooks/prouducts/useCategories";
 
 export default function Categories() {
-//   const [selectedBrand, setSelectedBrand] = useState(null);
+  //   const [selectedBrand, setSelectedBrand] = useState(null);
   const { data, isLoading } = useFetchCategories();
 
-  const categories = data || [];
+  const categories: any = data || [];
 
   const handleEdit = (brand: any) => {
     // setSelectedBrand(brand);
@@ -25,9 +24,10 @@ export default function Categories() {
 
       <div className="space-y-4">
         <BasicTableOne
-          data={categories}
-          isLoading={isLoading}
-          onEdit={handleEdit}
+          rowData={categories}
+          columnDefs={[]}
+          // isLoading={isLoading}
+          // onEdit={handleEdit}
         />
       </div>
     </>
