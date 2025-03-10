@@ -26,7 +26,7 @@ export const useAddBrand = () => {
   return useMutation({
     mutationFn: _BrandsApi.addBrand,
     onSuccess: () => {
-      navigate("/dashboard/brands");
+      navigate("/brands");
     },
   });
 };

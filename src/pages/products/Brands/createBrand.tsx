@@ -5,16 +5,19 @@ import Input from "../../../components/form/input/InputField";
 import TextArea from "../../../components/form/input/TextArea";
 import Label from "../../../components/form/Label";
 import { useAddBrand } from "../../../hooks/prouducts/useBrands";
+import { useMeStore } from "../../../store/useMeStore";
 
 export default function CreateBrand() {
   const [messageTwo, setMessageTwo] = useState("");
   const [brandNameEn, setBrandNameEn] = useState("");
   const [brandNameAr, setBrandNameAr] = useState("");
   const addBrand = useAddBrand();
+  const organizationId = useMeStore((state) => state.organizationId);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await addBrand.mutateAsync({
+      organization_id: organizationId,
       brand_name_en: brandNameEn,
       brand_name_ar: brandNameAr,
       description_en: messageTwo,

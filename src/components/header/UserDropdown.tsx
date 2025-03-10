@@ -1,16 +1,14 @@
 import { useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import { _AuthApi } from "../../services/auth.service";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useFetchMe } from "../../hooks/useMe";
+import { _AuthApi } from "../../services/auth.service";
 
 const UserDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const { data: userData } = useFetchMe();
 
-  console.log("userData: ", userData);
   return (
     <div>
       {/* Profile Image Button */}
@@ -22,7 +20,6 @@ const UserDropdown = () => {
       </button>
 
       {/* Sidebar Dropdown */}
-
       {isDropdownOpen && (
         <div className="fixed right-0 top-13 h-full w-96 bg-white shadow-xl border-l border-gray-200 z-50 flex flex-col">
           <div className="mt-4 p-4 space-y-4">

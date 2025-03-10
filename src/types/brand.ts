@@ -7,6 +7,7 @@ export interface IBrand {
 }
 
 export interface BrandForm {
+  organization_id: number | null;
   brand_name_en: string;
   brand_name_ar?: string | null;
   description_en?: string | null;
