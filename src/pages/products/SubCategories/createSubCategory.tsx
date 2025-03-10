@@ -1,10 +1,10 @@
-import { useAddSubCategory } from "@/hooks/prouducts/useSubCategories";
 import { useState } from "react";
 import ComponentCard from "../../../components/common/ComponentCard";
 import PageBreadcrumb from "../../../components/common/PageBreadCrumb";
 import Input from "../../../components/form/input/InputField";
 import TextArea from "../../../components/form/input/TextArea";
 import Label from "../../../components/form/Label";
+import { useAddSubCategory } from "../../../hooks/prouducts/useSubCategories";
 
 export default function CreateSubCategory() {
   const [sub_category_name_ar, setSub_category_name_ar] = useState("");

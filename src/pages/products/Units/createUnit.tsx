@@ -4,7 +4,7 @@ import PageBreadcrumb from "../../../components/common/PageBreadCrumb";
 import Input from "../../../components/form/input/InputField";
 import Label from "../../../components/form/Label";
 import { useMeStore } from "../../../store/useMeStore";
-import { useAddUnit } from "@/hooks/prouducts/useUnits";
+import { useAddUnit } from "../../../hooks/prouducts/useUnits";
 
 export default function CreateUnit() {
   const addUnit = useAddUnit();
@@ -27,7 +27,7 @@ export default function CreateUnit() {
     },
   ]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     await addUnit.mutateAsync({
       organization_id: organizationId,
