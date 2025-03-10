@@ -38,7 +38,7 @@ export const useUpdateBrand = () => {
     mutationFn: ({ id, data }: { id: string; data: any }) =>
       _BrandsApi.updateBrand(id, data),
     onSuccess: () => {
-      navigate("/dashboard/brands");
+      navigate("/brands");
     },
   });
 };

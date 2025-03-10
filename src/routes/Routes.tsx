@@ -24,6 +24,7 @@ import UserProfiles from "../pages/UserProfiles";
 import Brands from "../pages/products/Brands/brands";
 import Categories from "../pages/products/Categories/categories";
 import CreateBrand from "../pages/products/Brands/createBrand";
+import CreateCategory from "../pages/products/Categories/createCategory";
 
 const RoutesComponent = () => {
   return (
@@ -39,8 +40,12 @@ const RoutesComponent = () => {
       <Route element={<AppLayout />}>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
+
         <Route path="/brands" element={<Brands />} />
         <Route path="/brands/create" element={<CreateBrand />} />
+
+        <Route path="/categories" element={<Brands />} />
+        <Route path="/categories/create" element={<CreateCategory />} />
         {/* <Route path="/categories" element={<Blank />} />
         <Route path="/categories/:id" element={<Blank />} />
         <Route path="/sub-categories" element={<Blank />} />

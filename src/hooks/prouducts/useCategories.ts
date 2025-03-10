@@ -26,7 +26,7 @@ export const useAddCategory = () => {
   return useMutation({
     mutationFn: _CategoriesApi.addCategory,
     onSuccess: () => {
-      navigate("/dashboard/brands");
+      navigate("/categories");
     },
   });
 };
@@ -38,7 +38,7 @@ export const useUpdateCategory = () => {
     mutationFn: ({ id, data }: { id: string; data: any }) =>
       _CategoriesApi.updateCategory(id, data),
     onSuccess: () => {
-      navigate("/dashboard/brands");
+      navigate("/categories");
     },
   });
 };

@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { _axios } from "../../interceptor/http-config";
-import type { BrandForm, IBrand } from "../../types/brand";
+import type { BrandForm, IBrand } from "../../types/products/brand";
 
 export const _UnitsApi = {
   // GET UNITS
