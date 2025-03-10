@@ -1,141 +1,145 @@
-import {
-  ClientSideRowModelModule,
-  ColDef,
-  GridOptions,
-  ModuleRegistry,
-  NumberFilterModule,
-  TextFilterModule,
-  ValidationModule,
-  CsvExportModule,
-  type ColumnMenuTab,
-  type GridApi,
-} from "ag-grid-community";
-import {
-  ColumnMenuModule,
-  ColumnsToolPanelModule,
-  ContextMenuModule,
-  PivotModule,
-  SetFilterModule,
-  ExcelExportModule,
-} from "ag-grid-enterprise";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
-import { useMemo, useRef } from "react";
+import * as XLSX from "xlsx";
+import { AllCommunityModule, ColDef, ModuleRegistry } from "ag-grid-community";
 
-ModuleRegistry.registerModules([
-  NumberFilterModule,
-  ClientSideRowModelModule,
-  ColumnsToolPanelModule,
-  ColumnMenuModule,
-  ContextMenuModule,
-  PivotModule,
-  SetFilterModule,
-  TextFilterModule,
-  ValidationModule,
-  CsvExportModule,
-  ExcelExportModule,
-]);
+ModuleRegistry.registerModules([AllCommunityModule]);
 
-const BasicTableOne = ({
-  data,
-  isLoading,
-  onEdit,
-}: {
-  data: any;
-  isLoading: boolean;
-  onEdit: (brand: any) => void;
-}) => {
-  const containerStyle = useMemo(
-    () => ({ width: "100%", height: "500px" }),
-    []
+interface TableProps<T> {
+  rowData: T[];
+  columnDefs: ColDef<T>[];
+}
+
+const Table = <T,>({ rowData, columnDefs }: TableProps<T>) => {
+  const gridRef = useRef<AgGridReact<T>>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [visibleColumns, setVisibleColumns] = useState(
+    columnDefs.map((col) => col.field as string)
   );
-  const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
-
-  const columnDefs: ColDef[] = [
-    {
-      field: "id",
-      headerName: "ID",
-      minWidth: 150,
-      filter: true,
-      menuTabs: ["generalMenuTab", "filterMenuTab"],
-    },
-    {
-      field: "brand_name_en",
-      headerName: "Brand Name",
-      minWidth: 150,
-      menuTabs: ["generalMenuTab", "filterMenuTab"],
-    },
-    {
-      field: "description_en",
-      headerName: "Description",
-      minWidth: 150,
-      menuTabs: ["generalMenuTab", "filterMenuTab"],
-    },
-  ];
 
   const defaultColDef: ColDef = {
     flex: 1,
     minWidth: 100,
+    resizable: true,
     sortable: true,
     filter: true,
-    resizable: true,
-    menuTabs: ["generalMenuTab", "filterMenuTab"] as ColumnMenuTab[],
-  };
-
-  const gridOptions: GridOptions = {
-    rowSelection: "multiple",
-    enableRangeSelection: true,
-    pagination: true,
-    paginationPageSize: 10,
-  };
-
-  let gridApi: GridApi<any>;
-
-  function onBtExport() {
-    gridApi!.exportDataAsExcel();
-  }
-
-  const gridRef = useRef<any>(null);
-
-  const exportToCSV = () => {
-    gridRef.current.api.exportDataAsCsv();
   };
 
   const exportToExcel = () => {
-    gridRef.current.api.exportDataAsExcel();
+    const rowData: any[] = [];
+    gridRef.current?.api.forEachNode((node) => {
+      const filteredData = Object.fromEntries(
+        Object.entries(node?.data || {}).filter(([key]) =>
+          visibleColumns.includes(key)
+        )
+      );
+      rowData.push(filteredData);
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(rowData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    XLSX.writeFile(workbook, "table_data.xlsx");
   };
 
-  if (isLoading) return <>loading...</>;
+  const printTable = () => {
+    gridRef.current?.api.exportDataAsCsv({
+      fileName: "print",
+      columnKeys: visibleColumns,
+    });
+    setTimeout(() => window.print(), 1000);
+  };
+
+  const toggleColumnVisibility = (field: string) => {
+    setVisibleColumns((prev) =>
+      prev.includes(field)
+        ? prev.filter((col) => col !== field)
+        : [...prev, field]
+    );
+  };
+
+  const filteredColumnDefs = useMemo(
+    () =>
+      columnDefs.filter((col) => visibleColumns.includes(col.field as string)),
+    [columnDefs, visibleColumns]
+  );
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
 
   return (
-    <div style={containerStyle}>
-      {/* <div>
-        <button
-          onClick={exportToCSV}
-          className="bg-blue-500 text-white p-2 m-2"
-        >
-          Export CSV
-        </button>
+    <div className="w-full p-4">
+      <div className="flex gap-2 mb-2 relative">
         <button
           onClick={exportToExcel}
-          className="bg-green-500 text-white p-2 m-2"
+          className="px-4 py-2 bg-blue-500 text-white rounded"
         >
-          Export Excel
+          Export to Excel
         </button>
-      </div> */}
-      <div style={gridStyle}>
-        <AgGridReact
-          rowData={data}
-          columnDefs={columnDefs}
+        <button
+          onClick={printTable}
+          className="px-4 py-2 bg-green-500 text-white rounded"
+        >
+          Print
+        </button>
+
+        {/* Column Visibility Dropdown */}
+        <div className="relative" ref={menuRef}>
+          <button
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className="px-4 py-2 bg-gray-500 text-white rounded"
+          >
+            Manage Columns
+          </button>
+
+          {menuOpen && (
+            <div className="absolute left-0 mt-2 bg-white border rounded shadow-md p-2 w-48 z-10">
+              {columnDefs.map((col) => (
+                <label
+                  key={col.field}
+                  className="flex items-center gap-2 px-2 py-1 cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    checked={visibleColumns.includes(col.field as string)}
+                    onChange={() => toggleColumnVisibility(col.field as string)}
+                  />
+                  {col.headerName}
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="ag-theme-alpine w-full h-[500px]">
+        <AgGridReact<T>
+          ref={gridRef}
+          rowData={rowData}
+          columnDefs={filteredColumnDefs}
           defaultColDef={defaultColDef}
-          domLayout="autoHeight"
           pagination={true}
           paginationPageSize={10}
-          enableRangeSelection={true}
-          gridOptions={gridOptions}
+          domLayout="autoHeight"
         />
       </div>
     </div>
   );
 };
 
-export default BasicTableOne;
+export default Table;
