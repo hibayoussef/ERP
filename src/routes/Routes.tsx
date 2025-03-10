@@ -1,4 +1,6 @@
 // src/routes/Routes.tsx
+import CreateSubCategory from "@/pages/products/SubCategories/createSubCategory";
+import CreateUnit from "@/pages/products/Units/createUnit";
 import { Navigate, Route, Routes } from "react-router";
 import AppLayout from "../layout/AppLayout";
 import ForgotPassword from "../pages/AuthPages/ForgotPassword";
@@ -6,26 +8,19 @@ import ResetPassword from "../pages/AuthPages/ResetPassword";
 import SignIn from "../pages/AuthPages/SignIn";
 import SignUp from "../pages/AuthPages/SignUp";
 import VerifyEmail from "../pages/AuthPages/VerifyEmail";
-import Blank from "../pages/Blank";
-import Calendar from "../pages/Calendar";
 import BarChart from "../pages/Charts/BarChart";
 import LineChart from "../pages/Charts/LineChart";
 import Home from "../pages/Dashboard/Home";
-import FormElements from "../pages/Forms/FormElements";
 import NotFound from "../pages/OtherPage/NotFound";
-import BasicTables from "../pages/Tables/BasicTables";
 import Alerts from "../pages/UiElements/Alerts";
 import Avatars from "../pages/UiElements/Avatars";
 import Badges from "../pages/UiElements/Badges";
 import Buttons from "../pages/UiElements/Buttons";
 import Images from "../pages/UiElements/Images";
 import Videos from "../pages/UiElements/Videos";
-import UserProfiles from "../pages/UserProfiles";
 import Brands from "../pages/products/Brands/brands";
-import Categories from "../pages/products/Categories/categories";
 import CreateBrand from "../pages/products/Brands/createBrand";
 import CreateCategory from "../pages/products/Categories/createCategory";
-import CreateSubCategory from "@/pages/products/SubCategories/createSubCategory";
 
 const RoutesComponent = () => {
   return (
@@ -50,6 +45,9 @@ const RoutesComponent = () => {
 
         <Route path="/categories/sub" element={<Brands />} />
         <Route path="/categories/sub/create" element={<CreateSubCategory />} />
+
+        <Route path="/units" element={<Brands />} />
+        <Route path="/units/create" element={<CreateUnit />} />
         {/* <Route path="/categories" element={<Blank />} />
         <Route path="/categories/:id" element={<Blank />} />
         <Route path="/sub-categories" element={<Blank />} />

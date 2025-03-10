@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { _axios } from "../../interceptor/http-config";
 import type { BrandForm, IBrand } from "../../types/products/brand";
+import { UnitForm } from "@/types/products/unit";
 
 export const _UnitsApi = {
   // GET UNITS
@@ -18,7 +19,7 @@ export const _UnitsApi = {
     return response.data.data;
   },
   // ADD UNIT
-  addUnit: async (data: BrandForm) => {
+  addUnit: async (data: UnitForm) => {
     const response = await _axios.post("/products/units", data);
     return response.data;
   },
