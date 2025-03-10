@@ -8,7 +8,8 @@ import { useAddBrand } from "../../../hooks/prouducts/useBrands";
 import { useMeStore } from "../../../store/useMeStore";
 
 export default function CreateBrand() {
-  const [messageTwo, setMessageTwo] = useState("");
+  const [descriptionAr, setDescriptionAr] = useState("");
+  const [descriptionEn, setDescriptionEn] = useState("");
   const [brandNameEn, setBrandNameEn] = useState("");
   const [brandNameAr, setBrandNameAr] = useState("");
   const addBrand = useAddBrand();
@@ -20,8 +21,8 @@ export default function CreateBrand() {
       organization_id: organizationId,
       brand_name_en: brandNameEn,
       brand_name_ar: brandNameAr,
-      description_en: messageTwo,
-      description_ar: messageTwo,
+      description_en: descriptionEn,
+      description_ar: descriptionAr,
     });
   };
 
@@ -50,9 +51,9 @@ export default function CreateBrand() {
               <Label>Description(En)</Label>
               <TextArea
                 rows={6}
-                value={messageTwo}
+                value={descriptionEn}
                 error
-                onChange={(value) => setMessageTwo(value)}
+                onChange={(value) => setDescriptionEn(value)}
               />
             </div>
 
@@ -74,9 +75,9 @@ export default function CreateBrand() {
               <Label>Description(Ar)</Label>
               <TextArea
                 rows={6}
-                value={messageTwo}
+                value={descriptionAr}
                 error
-                onChange={(value) => setMessageTwo(value)}
+                onChange={(value) => setDescriptionAr(value)}
               />
             </div>
             <div className="flex justify-end">
