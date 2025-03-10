@@ -16,4 +16,6 @@ export enum QueryKeys {
   SUB_UNITs = "sub_units",
   SUB_UNIT = "sub_unit",
   ME = "me",
+  WARRANTIES = "warranties",
+  WARRANTY = "warranty",
 }

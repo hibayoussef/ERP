@@ -11,6 +11,6 @@ export interface IWarranty {
     organization_id: number | null;
     warranty_name_ar?: string | null;
     warranty_name_en: string;
-    duration: number;
-    duration_type: "days" | "months" | "years";
+    duration?: string;
+    duration_type?: "days" | "months" | "years"| string;
   }
