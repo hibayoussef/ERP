@@ -1,7 +1,6 @@
 import { ColDef } from "ag-grid-community";
-import { IBrand } from "../../types/products/brand";
 
-export const columnBrandDefs: ColDef<IBrand>[] = [
+export const columnBrandDefs: ColDef<any>[] = [
   { headerName: "ID", field: "id", sortable: true, filter: true },
   {
     headerName: "brand_name_en",
@@ -14,5 +13,10 @@ export const columnBrandDefs: ColDef<IBrand>[] = [
     field: "description_en",
     sortable: true,
     filter: true,
+  },
+  {
+    headerName: "Actions",
+    field: "actions",
+    cellRenderer: "actionCellRenderer", 
   },
 ];

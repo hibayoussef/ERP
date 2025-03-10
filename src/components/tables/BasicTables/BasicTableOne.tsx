@@ -3,6 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import * as XLSX from "xlsx";
 import { AllCommunityModule, ColDef, ModuleRegistry } from "ag-grid-community";
 import { ExportIcon } from "../../../icons";
+import { FaPlus } from "react-icons/fa";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -10,6 +11,31 @@ interface TableProps<T> {
   rowData: T[];
   columnDefs: ColDef<T>[];
 }
+
+const ActionCellRenderer = (props: any) => {
+  const handleUpdate = () => {
+    console.log("Update row with ID:", props.data.id);
+    // تنفيذ منطق التحديث هنا
+  };
+
+  const handleDelete = () => {
+    console.log("Delete row with ID:", props.data.id);
+    // تنفيذ منطق الحذف هنا
+  };
+
+  const handleDetails = () => {
+    console.log("Details for row with ID:", props.data.id);
+    // تنفيذ منطق التفاصيل هنا
+  };
+
+  return (
+    <div>
+      <button onClick={handleUpdate}>Update</button>
+      <button onClick={handleDelete}>Delete</button>
+      <button onClick={handleDetails}>Details</button>
+    </div>
+  );
+};
 
 const Table = <T,>({ rowData, columnDefs }: TableProps<T>) => {
   const gridRef = useRef<AgGridReact<T>>(null);
@@ -222,6 +248,14 @@ const Table = <T,>({ rowData, columnDefs }: TableProps<T>) => {
         </button>
       </div>
 
+      <div className="flex gap-2 justify-start mb-2 relative">
+        <button
+          // onClick={onCreate}
+          className="px-4 py-2  text-white text-sm font-medium rounded-lg hover:bg-[#575db1] flex items-center gap-2"
+        >
+          <FaPlus className="text-white" /> Create
+        </button>
+      </div>
       {/* Table */}
       <div className="ag-theme-alpine w-full h-[500px]">
         <AgGridReact<T>
@@ -229,6 +263,7 @@ const Table = <T,>({ rowData, columnDefs }: TableProps<T>) => {
           rowData={rowData}
           columnDefs={filteredColumnDefs}
           defaultColDef={defaultColDef}
+          // frameworkComponents={{ actionCellRenderer: ActionCellRenderer }}
           pagination={true}
           paginationPageSize={10}
           domLayout="autoHeight"
