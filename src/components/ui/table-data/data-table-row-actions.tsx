@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { Row } from "@tanstack/react-table";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,20 +9,14 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Copy, Eye, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
-import { label_options } from "./filters";
-// import EditDialog from "@/components/modals/edit-modal";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { brandSchema } from "@/components/lib/validations/brand";
-// import DeleteDialog from "@/components/modals/delete-modal";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { useNavigate } from "react-router";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -40,6 +34,8 @@ export function DataTableRowActions<TData>({
   const handleEditClick = () => {
     // setDialogContent(<EditDialog task={task} />);
   };
+
+  const navigate = useNavigate(); 
 
   return (
     //   <></>
@@ -74,19 +70,19 @@ export function DataTableRowActions<TData>({
             </DropdownMenuItem>
           </DialogTrigger>
           <DialogTrigger asChild onClick={handleEditClick}>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate("/brands/update/:id")}>
               <Pencil className="mr-2 h-4 w-4" />
               Edit Details
             </DropdownMenuItem>
           </DialogTrigger>
-          <DropdownMenuItem
+          {/* <DropdownMenuItem
             onSelect={() => setShowDeleteDialog(true)}
             className="text-red-600"
           >
             <Trash2 className="mr-2 h-4 w-4" />
             Delete Details
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
+          </DropdownMenuItem> */}
+          {/* <DropdownMenuSeparator /> */}
           <DropdownMenuSub>
             {/* <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger> */}
             {/* <DropdownMenuSubContent>

@@ -35,7 +35,7 @@ export const useAddBrand = () => {
 export const useUpdateBrand = () => {
   const navigate = useNavigate();
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: any }) =>
+    mutationFn: ({ id, data }: { id: number | undefined; data: any }) =>
       _BrandsApi.updateBrand(id, data),
     onSuccess: () => {
       navigate("/brands");

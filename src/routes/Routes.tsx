@@ -40,6 +40,7 @@ const RoutesComponent = () => {
 
         <Route path="/brands" element={<Brands />} />
         <Route path="/brands/create" element={<CreateBrand />} />
+        <Route path="/brands/update/:id" element={<CreateBrand />} />
 
         <Route path="/categories" element={<Brands />} />
         <Route path="/categories/create" element={<CreateCategory />} />
