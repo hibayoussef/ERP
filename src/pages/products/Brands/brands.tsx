@@ -1,14 +1,13 @@
+import { DataTable } from "@/components/ui/table-data/table-data";
 import { useNavigate } from "react-router";
-import { columnBrandDefs } from "../../../columns/products/brand";
 import ComponentCard from "../../../components/common/ComponentCard";
 import PageBreadcrumb from "../../../components/common/PageBreadCrumb";
 import PageMeta from "../../../components/common/PageMeta";
-import Table from "../../../components/tables/BasicTables/BasicTableOne";
 import { useFetchBrands } from "../../../hooks/prouducts/useBrands";
+import { brandColumns } from "@/columns/products/brand";
 
 export default function Brands() {
-  //   const [selectedBrand, setSelectedBrand] = useState(null);
-  const { data, isLoading, refetch } = useFetchBrands();
+  const { data } = useFetchBrands();
   const naviagate = useNavigate();
   const brands: any = data || [];
 
@@ -21,11 +20,8 @@ export default function Brands() {
       <PageBreadcrumb pageTitle="Brands" />
 
       <div className="space-y-4">
-        <ComponentCard
-          title="Brand"
-          onCreate={() => naviagate("/brands/create")}
-        >
-          <Table rowData={brands} columnDefs={columnBrandDefs} />
+        <ComponentCard title="Brand">
+          <DataTable columns={brandColumns} data={brands} />
         </ComponentCard>
       </div>
     </>
