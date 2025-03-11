@@ -8,18 +8,25 @@ import Input from "../../../components/form/input/InputField";
 import TextArea from "../../../components/form/input/TextArea";
 import Label from "../../../components/form/Label";
 import { useMeStore } from "../../../store/useMeStore";
-import { useAddCategory, useFetchCategory, useUpdateCategory } from "@/hooks/prouducts/useCategories";
-import { categorySchema, type CategoryType } from "@/components/lib/validations/category";
+import {
+  useAddCategory,
+  useFetchCategory,
+  useUpdateCategory,
+} from "@/hooks/prouducts/useCategories";
+import {
+  categorySchema,
+  type CategoryType,
+} from "@/components/lib/validations/category";
 
 export default function BrandForm() {
   const { id } = useParams();
   const isUpdate = Boolean(id);
-  const addCategory  = useAddCategory();
+  const addCategory = useAddCategory();
   const updateCategory = useUpdateCategory();
   const organizationId = useMeStore((state) => state.organizationId);
 
   const { data: categoryData, isLoading } = useFetchCategory(Number(id), {
-    enabled: isUpdate
+    enabled: isUpdate,
   });
 
   const {
@@ -35,8 +42,8 @@ export default function BrandForm() {
       category_name_ar: categoryData?.category_name_ar ?? "",
       description_en: categoryData?.description_en ?? "",
       description_ar: categoryData?.description_ar ?? "",
-      code: categoryData?.code ?? ""
-    }
+      code: categoryData?.code ?? "",
+    },
   });
 
   useEffect(() => {

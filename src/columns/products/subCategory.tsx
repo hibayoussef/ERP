@@ -1,4 +1,4 @@
-import { categorySchema } from "@/components/lib/validations/category";
+import { subCategorySchema } from "@/components/lib/validations/subCategory";
 import { DataTableColumnHeader } from "@/components/ui/table-data/data-table-column-header";
 import { DataTableRowActions } from "@/components/ui/table-data/data-table-row-actions";
 import { ColumnDef } from "@tanstack/react-table";
@@ -36,7 +36,7 @@ export const subCategoryColumns: ColumnDef<any>[] = [
   {
     id: "actions",
     cell: ({ row }) => (
-      <DataTableRowActions row={row} schema={categorySchema} />
+      <DataTableRowActions row={row} schema={subCategorySchema} />
     ),
   },
 ];

@@ -14,7 +14,7 @@ export const subCategorySchema = z.object({
   description_ar: z
     .string()
     .min(5, "Description (AR) must be at least 5 characters"),
-  code: z.string().min(5, "Description (AR) must be at least 5 characters"),
+  code: z.string().min(5, "Code must be at least 5 characters"),
 });
 
 export type SubCategoryType = z.infer<typeof subCategorySchema>;

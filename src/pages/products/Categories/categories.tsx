@@ -18,7 +18,7 @@ export default function Categories() {
       <PageBreadcrumb pageTitle="Categories" />
 
       <div className="space-y-4">
-        <ComponentCard title="Brand">
+        <ComponentCard title="Categories">
           <DataTable columns={categoryColumns} data={categories} />
         </ComponentCard>
       </div>

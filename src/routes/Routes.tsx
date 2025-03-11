@@ -21,9 +21,9 @@ import Videos from "../pages/UiElements/Videos";
 import Brands from "../pages/products/Brands/brands";
 import CreateBrand from "../pages/products/Brands/createBrand";
 import CreateCategory from "../pages/products/Categories/createCategory";
-import CreateSubCategory from "../pages/products/SubCategories/createSubCategory";
 import CreateUnit from "../pages/products/Units/createUnit";
 import CategoryDetails from "@/pages/products/Categories/categoryDetails";
+import SubCategories from "@/pages/products/SubCategories/subCategories";
 
 const RoutesComponent = () => {
   return (
@@ -49,8 +49,13 @@ const RoutesComponent = () => {
         <Route path="/categories/create" element={<CreateCategory />} />
         <Route path="/categories/update/:id" element={<CreateCategory />} />
 
+        <Route path="/sub-categories" element={<SubCategories />} />
+        <Route path="/sub-categories/:id" element={<CategoryDetails />} />
+        <Route path="/sub-categories/create" element={<CreateCategory />} />
+        <Route path="/sub-categories/update/:id" element={<CreateCategory />} />
+
         <Route path="/categories/sub" element={<Brands />} />
-        <Route path="/categories/sub/create" element={<CreateSubCategory />} />
+        {/* <Route path="/categories/sub/create" element={<CreateSubCategory />} /> */}
 
         <Route path="/units" element={<Brands />} />
         <Route path="/units/create" element={<CreateUnit />} />

@@ -28,7 +28,8 @@ export function DataTableRowActions<TData>({
   const navigate = useNavigate();
 
   try {
-    const data = schema.parse(row.original);
+    // const data = schema.parse(row.original);
+    const data = schema.safeParse(row.original);
     return (
       <Dialog>
         <DropdownMenu>
@@ -59,7 +60,7 @@ export function DataTableRowActions<TData>({
             </DialogTrigger>
             <DialogTrigger
               asChild
-              onClick={() => navigate(`/update/${data.id}`)}
+              // onClick={() => navigate(`/update/${data?.id}`)}
             >
               <DropdownMenuItem>
                 <Pencil className="mr-2 h-4 w-4" />
