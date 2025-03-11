@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ComponentCard from "../../../components/common/ComponentCard";
 import PageBreadcrumb from "../../../components/common/PageBreadCrumb";
@@ -11,6 +11,12 @@ import {
   useFetchBrand,
   useUpdateBrand,
 } from "@/hooks/prouducts/useBrands";
+import {
+  brandSchema,
+  type BrandType,
+} from "@/components/lib/validations/brand";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function BrandForm() {
   const { id } = useParams();
@@ -23,28 +29,35 @@ export default function BrandForm() {
     enabled: isUpdate,
   });
 
-  const [descriptionAr, setDescriptionAr] = useState("");
-  const [descriptionEn, setDescriptionEn] = useState("");
-  const [brandNameEn, setBrandNameEn] = useState("");
-  const [brandNameAr, setBrandNameAr] = useState("");
+ const {
+   register,
+   handleSubmit,
+   setValue,
+   formState: { errors },
+   control,
+ } = useForm<BrandType>({
+   resolver: zodResolver(brandSchema),
+   defaultValues: {
+     brand_name_en: brandData?.brand_name_en ?? "",
+     brand_name_ar: brandData?.brand_name_ar ?? "",
+     description_en: brandData?.description_en ?? "",
+     description_ar: brandData?.description_ar ?? "",
+   },
+ });
 
   useEffect(() => {
     if (brandData) {
-      setDescriptionAr(brandData?.description_ar || "");
-      setDescriptionEn(brandData?.description_en || "");
-      setBrandNameEn(brandData?.brand_name_en || "");
-      setBrandNameAr(brandData?.brand_name_ar || "");
+      setValue("brand_name_en", brandData.brand_name_en ?? "");
+      setValue("brand_name_ar", brandData.brand_name_ar ?? "");
+      setValue("description_en", brandData.description_en ?? "");
+      setValue("description_ar", brandData.description_ar ?? "");
     }
-  }, [brandData]);
+  }, [brandData, setValue]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (formData: BrandType) => {
     const payload = {
       organization_id: organizationId,
-      brand_name_en: brandNameEn,
-      brand_name_ar: brandNameAr,
-      description_en: descriptionEn,
-      description_ar: descriptionAr,
+      ...formData,
     };
 
     if (isUpdate && id) {
@@ -69,7 +82,7 @@ export default function BrandForm() {
         {isUpdate && isLoading ? (
           <p>Loading brand data...</p>
         ) : (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-6">
               <div>
                 <Label htmlFor="input">Name (En)</Label>
@@ -77,16 +90,18 @@ export default function BrandForm() {
                   type="text"
                   id="input"
                   placeholder="Please enter brand name"
-                  value={brandNameEn}
-                  onChange={(e) => setBrandNameEn(e.target.value)}
+                  {...register("brand_name_en")}
+                  error={!!errors.brand_name_en}
+                  hint={errors.brand_name_en?.message}
                 />
               </div>
               <div>
                 <Label>Description (En)</Label>
                 <TextArea
                   rows={6}
-                  value={descriptionEn}
-                  onChange={(value) => setDescriptionEn(value)}
+                  {...register("description_en")}
+                  error={!!errors.description_en}
+                  hint={errors.description_en?.message}
                 />
               </div>
 
@@ -98,16 +113,18 @@ export default function BrandForm() {
                   type="text"
                   id="input"
                   placeholder="Please enter brand name"
-                  value={brandNameAr}
-                  onChange={(e) => setBrandNameAr(e.target.value)}
+                  {...register("brand_name_ar")}
+                  error={!!errors.brand_name_ar}
+                  hint={errors.brand_name_ar?.message}
                 />
               </div>
               <div>
                 <Label>Description (Ar)</Label>
                 <TextArea
                   rows={6}
-                  value={descriptionAr}
-                  onChange={(value) => setDescriptionAr(value)}
+                  {...register("description_ar")}
+                  error={!!errors.description_ar}
+                  hint={errors.description_ar?.message}
                 />
               </div>
               <div className="flex justify-end">

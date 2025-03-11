@@ -39,7 +39,7 @@ const Input: FC<InputProps & React.RefAttributes<HTMLInputElement>> =
         success = false,
         error = false,
         hint,
-        readOnly = false,
+      readOnly = false,
       },
       ref
     ) => {
