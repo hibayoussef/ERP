@@ -1,6 +1,10 @@
 import { AxiosResponse } from "axios";
 import { _axios } from "../../interceptor/http-config";
-import type { BrandForm, BrandUpdateForm, IBrand } from "../../types/products/brand";
+import type {
+  BrandForm,
+  BrandUpdateForm,
+  IBrand,
+} from "../../types/products/brand";
 
 export const _BrandsApi = {
   // GET BRANDS
@@ -12,7 +16,7 @@ export const _BrandsApi = {
   },
   // GET BRAND
   getBrand: async (id: number) => {
-    const response = await _axios.get<AxiosResponse<{ brand: IBrand }>>(
+    const response = await _axios.get<AxiosResponse<IBrand>>(
       `/products/brands/${id}`
     );
     return response.data.data;
@@ -23,7 +27,7 @@ export const _BrandsApi = {
     return response.data;
   },
   // UPDATE BRAND
-  updateBrand: async (id:  number | undefined, data: BrandUpdateForm) => {
+  updateBrand: async (id: number | undefined, data: BrandUpdateForm) => {
     const response = await _axios.put(`/products/brands/${id}`, data);
     return response.data;
   },

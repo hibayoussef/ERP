@@ -12,11 +12,12 @@ export const useFetchBrands = () => {
 };
 
 // FETCH BRAND
-export const useFetchBrand = (id: number) => {
+export const useFetchBrand = (id: number, options = {}) => {
   return useQuery({
     queryKey: [QueryKeys.BRAND, id],
     queryFn: () => _BrandsApi.getBrand(id),
     enabled: !!id,
+    ...options,
   });
 };
 
