@@ -11,7 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuSub,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Copy, Eye, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { brandSchema } from "@/components/lib/validations/brand";
@@ -29,13 +29,9 @@ export function DataTableRowActions<TData>({
     React.useState<React.ReactNode | null>(null);
   const [showDeleteDialog, setShowDeleteDialog] =
     React.useState<boolean>(false);
-  const task = brandSchema.parse(row.original);
+  const brand = brandSchema.parse(row.original);
 
-  const handleEditClick = () => {
-    // setDialogContent(<EditDialog task={task} />);
-  };
-
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   return (
     //   <></>
@@ -69,8 +65,11 @@ export function DataTableRowActions<TData>({
               View Details
             </DropdownMenuItem>
           </DialogTrigger>
-          <DialogTrigger asChild onClick={handleEditClick}>
-            <DropdownMenuItem onClick={() => navigate("/brands/update/:id")}>
+          <DialogTrigger
+            asChild
+            onClick={() => navigate(`/brands/update/${brand?.id}`)}
+          >
+            <DropdownMenuItem>
               <Pencil className="mr-2 h-4 w-4" />
               Edit Details
             </DropdownMenuItem>
