@@ -5,16 +5,15 @@ import type {
   CategoryUpdateForm,
   ICategory,
 } from "../../types/products/categories";
-import type { IBrand } from "../../types/products/brand";
 
 export const _CategoriesApi = {
   // GET CATEGORIES
   getCategories: async () => {
-    const response = await _axios.get<
-      AxiosResponse<{ categories: ICategory[] }>
-    >("/products/categories");
+    const response = await _axios.get<AxiosResponse<{ categories: ICategory[] }>>(
+      "/products/categories");
     return response?.data?.data;
   },
+  
   // GET CATEGORY
   getCategory: async (id: number) => {
     const response = await _axios.get<AxiosResponse<CategoryForm>>(

@@ -30,6 +30,7 @@ export function DataTableRowActions<TData>({
   try {
     // const data = schema.parse(row.original);
     const data = schema.safeParse(row.original);
+    console.log('datad: ', data)
     return (
       <Dialog>
         <DropdownMenu>

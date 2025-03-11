@@ -2,8 +2,9 @@ import { DataTableColumnHeader } from "@/components/ui/table-data/data-table-col
 import { DataTableRowActions } from "@/components/ui/table-data/data-table-row-actions";
 import { ColumnDef } from "@tanstack/react-table";
 import { brandSchema } from "@/components/lib/validations/brand";
+import type { IBrand } from "@/types/products/brand";
 
-export const brandColumns: ColumnDef<any>[] = [
+export const brandColumns: ColumnDef<IBrand>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => (

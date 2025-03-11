@@ -18,7 +18,7 @@ import {
   type CategoryType,
 } from "@/components/lib/validations/category";
 
-export default function BrandForm() {
+export default function CategoryForm() {
   const { id } = useParams();
   const isUpdate = Boolean(id);
   const addCategory = useAddCategory();
@@ -75,14 +75,14 @@ export default function BrandForm() {
   return (
     <>
       <PageBreadcrumb
-        baseLink="/brands"
-        baseTitle="Brand"
-        pageTitle={isUpdate ? "Update Brand" : "Create Brand"}
+        baseLink="/categories"
+        baseTitle="Category"
+        pageTitle={isUpdate ? "Update Category" : "Create Category"}
       />
 
-      <ComponentCard title={isUpdate ? "Update Brand" : "Create Brand"}>
+      <ComponentCard title={isUpdate ? "Update Category" : "Create Category"}>
         {isUpdate && isLoading ? (
-          <p>Loading brand data...</p>
+          <p>Loading Category data...</p>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-6">
@@ -91,7 +91,7 @@ export default function BrandForm() {
                 <Input
                   type="text"
                   id="input"
-                  placeholder="Please enter brand name"
+                  placeholder="Please enter category name"
                   {...register("category_name_en")}
                   error={!!errors.category_name_en}
                   hint={errors.category_name_en?.message}
@@ -114,7 +114,7 @@ export default function BrandForm() {
                 <Input
                   type="text"
                   id="input"
-                  placeholder="Please enter brand name"
+                  placeholder="Please enter category name"
                   {...register("category_name_ar")}
                   error={!!errors.category_name_ar}
                   hint={errors.category_name_ar?.message}

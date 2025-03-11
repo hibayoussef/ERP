@@ -11,7 +11,7 @@ import { useMeStore } from "../../../store/useMeStore";
 import { useAddCategory, useFetchCategory, useUpdateCategory } from "@/hooks/prouducts/useCategories";
 import { categorySchema, type CategoryType } from "@/components/lib/validations/category";
 
-export default function BrandForm() {
+export default function SubCategoryForm() {
   const { id } = useParams();
   const isUpdate = Boolean(id);
   const addCategory  = useAddCategory();

@@ -1,9 +1,10 @@
 import { subCategorySchema } from "@/components/lib/validations/subCategory";
 import { DataTableColumnHeader } from "@/components/ui/table-data/data-table-column-header";
 import { DataTableRowActions } from "@/components/ui/table-data/data-table-row-actions";
+import type { ISubCategory } from "@/types/products/subCategory";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const subCategoryColumns: ColumnDef<any>[] = [
+export const subCategoryColumns: ColumnDef<ISubCategory>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => (

@@ -1,6 +1,5 @@
 export interface ICategory {
   id: number;
-  organization_id: number | null;
   category_name_en: string;
   category_name_ar?: string | null;
   description_en?: string | null;
