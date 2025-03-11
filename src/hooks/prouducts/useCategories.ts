@@ -12,11 +12,12 @@ export const useFetchCategories = () => {
 };
 
 // FETCH CATEGORY
-export const useFetchCategory = (id: number) => {
+export const useFetchCategory = (id: number, options = {}) => {
   return useQuery({
     queryKey: [QueryKeys.CATEGORY, id],
     queryFn: () => _CategoriesApi.getCategory(id),
     enabled: !!id,
+    ...options,
   });
 };
 
@@ -35,7 +36,7 @@ export const useAddCategory = () => {
 export const useUpdateCategory = () => {
   const navigate = useNavigate();
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: any }) =>
+    mutationFn: ({ id, data }: { id: number | undefined; data: any }) =>
       _CategoriesApi.updateCategory(id, data),
     onSuccess: () => {
       navigate("/categories");

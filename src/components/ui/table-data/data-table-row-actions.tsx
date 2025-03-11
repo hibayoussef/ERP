@@ -1,8 +1,5 @@
-"use client";
-
 import { Row } from "@tanstack/react-table";
 import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,103 +7,76 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuSub,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Copy, Eye, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
-import { brandSchema } from "@/components/lib/validations/brand";
+import { Copy, Eye, MoreHorizontal, Pencil } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useNavigate } from "react-router";
+import { ZodSchema } from "zod"; 
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
+  schema: ZodSchema; 
 }
 
 export function DataTableRowActions<TData>({
   row,
+  schema,
 }: DataTableRowActionsProps<TData>) {
   const [dialogContent, setDialogContent] =
     React.useState<React.ReactNode | null>(null);
-  const [showDeleteDialog, setShowDeleteDialog] =
-    React.useState<boolean>(false);
-  const brand = brandSchema.parse(row.original);
-
   const navigate = useNavigate();
 
-  return (
-    //   <></>
-    <Dialog>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant="ghost"
-            className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+  try {
+    const data = schema.parse(row.original);
+    return (
+      <Dialog>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+            >
+              <MoreHorizontal className="h-4 w-4" />
+              <span className="sr-only">Open menu</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className="w-[200px] bg-white shadow-md border border-gray-200 z-[9999]"
           >
-            <MoreHorizontal className="h-4 w-4" />
-            <span className="sr-only">Open menu</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent
-          align="end"
-          className="w-[200px] bg-white shadow-md border border-gray-200 z-[9999]"
-        >
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem
-          // onClick={() => navigator.clipboard.writeText(task.id)}
-          >
-            <Copy className="mr-2 h-4 w-4" />
-            Copy Task ID
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DialogTrigger asChild onClick={() => {}}>
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem>
-              {" "}
-              <Eye className="mr-2 h-4 w-4" />
-              View Details
+              <Copy className="mr-2 h-4 w-4" />
+              Copy ID
             </DropdownMenuItem>
-          </DialogTrigger>
-          <DialogTrigger
-            asChild
-            onClick={() => navigate(`/brands/update/${brand?.id}`)}
-          >
-            <DropdownMenuItem>
-              <Pencil className="mr-2 h-4 w-4" />
-              Edit Details
-            </DropdownMenuItem>
-          </DialogTrigger>
-          {/* <DropdownMenuItem
-            onSelect={() => setShowDeleteDialog(true)}
-            className="text-red-600"
-          >
-            <Trash2 className="mr-2 h-4 w-4" />
-            Delete Details
-          </DropdownMenuItem> */}
-          {/* <DropdownMenuSeparator /> */}
-          <DropdownMenuSub>
-            {/* <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger> */}
-            {/* <DropdownMenuSubContent>
-              <DropdownMenuRadioGroup value={task.label}>
-                {label_options.map((label) => (
-                  <DropdownMenuRadioItem key={label.value} value={label.value}>
-                    <label.icon className="w-4 h-4 mr-2" />
-                    {label.label}
-                  </DropdownMenuRadioItem>
-                ))}
-              </DropdownMenuRadioGroup>
-            </DropdownMenuSubContent> */}
-          </DropdownMenuSub>
-        </DropdownMenuContent>
-      </DropdownMenu>
-      {dialogContent && (
-        <DialogContent className="bg-white p-6 rounded-lg shadow-lg z-[9999]">
-          {dialogContent}
-        </DialogContent>
-      )}
-      {/* <DeleteDialog
-        task={task}
-        isOpen={showDeleteDialog}
-        showActionToggle={setShowDeleteDialog}
-      /> */}
-    </Dialog>
-  );
+            <DropdownMenuSeparator />
+            <DialogTrigger asChild>
+              <DropdownMenuItem>
+                <Eye className="mr-2 h-4 w-4" />
+                View Details
+              </DropdownMenuItem>
+            </DialogTrigger>
+            <DialogTrigger
+              asChild
+              onClick={() => navigate(`/update/${data.id}`)}
+            >
+              <DropdownMenuItem>
+                <Pencil className="mr-2 h-4 w-4" />
+                Edit Details
+              </DropdownMenuItem>
+            </DialogTrigger>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        {dialogContent && (
+          <DialogContent className="bg-white p-6 rounded-lg shadow-lg z-[9999]">
+            {dialogContent}
+          </DialogContent>
+        )}
+      </Dialog>
+    );
+  } catch (error) {
+    console.error("Schema validation failed:", error);
+    return null;
+  }
 }

@@ -1,5 +1,6 @@
 // src/routes/Routes.tsx
 
+import Categories from "@/pages/products/Categories/categories";
 import { Navigate, Route, Routes } from "react-router";
 import AppLayout from "../layout/AppLayout";
 import ForgotPassword from "../pages/AuthPages/ForgotPassword";
@@ -22,6 +23,7 @@ import CreateBrand from "../pages/products/Brands/createBrand";
 import CreateCategory from "../pages/products/Categories/createCategory";
 import CreateSubCategory from "../pages/products/SubCategories/createSubCategory";
 import CreateUnit from "../pages/products/Units/createUnit";
+import CategoryDetails from "@/pages/products/Categories/categoryDetails";
 
 const RoutesComponent = () => {
   return (
@@ -42,8 +44,10 @@ const RoutesComponent = () => {
         <Route path="/brands/create" element={<CreateBrand />} />
         <Route path="/brands/update/:id" element={<CreateBrand />} />
 
-        <Route path="/categories" element={<Brands />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/categories/:id" element={<CategoryDetails />} />
         <Route path="/categories/create" element={<CreateCategory />} />
+        <Route path="/categories/update/:id" element={<CreateCategory />} />
 
         <Route path="/categories/sub" element={<Brands />} />
         <Route path="/categories/sub/create" element={<CreateSubCategory />} />

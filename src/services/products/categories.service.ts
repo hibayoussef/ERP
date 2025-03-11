@@ -1,21 +1,25 @@
 import { AxiosResponse } from "axios";
 import { _axios } from "../../interceptor/http-config";
-import type { CategoryForm } from "../../types/products/categories";
+import type {
+  CategoryForm,
+  CategoryUpdateForm,
+  ICategory,
+} from "../../types/products/categories";
 import type { IBrand } from "../../types/products/brand";
 
 export const _CategoriesApi = {
   // GET CATEGORIES
   getCategories: async () => {
-    const response = await _axios.get<AxiosResponse<{ categories: IBrand[] }>>(
-      "/products/categories"
-    );
+    const response = await _axios.get<
+      AxiosResponse<{ categories: ICategory[] }>
+    >("/products/categories");
     return response?.data?.data;
   },
   // GET CATEGORY
   getCategory: async (id: number) => {
-    const response = await _axios.get<
-      AxiosResponse<{ category: CategoryForm }>
-    >(`/products/categories/${id}`);
+    const response = await _axios.get<AxiosResponse<CategoryForm>>(
+      `/products/categories/${id}`
+    );
     return response.data.data;
   },
   // ADD CATEGORY
@@ -24,7 +28,7 @@ export const _CategoriesApi = {
     return response.data;
   },
   // UPDATE CATEGORY
-  updateCategory: async (id: string, data: CategoryForm) => {
+  updateCategory: async (id: number | undefined, data: CategoryUpdateForm) => {
     const response = await _axios.put(`/products/categories/${id}`, data);
     return response.data;
   },

@@ -1,23 +1,25 @@
+import { categorySchema } from "@/components/lib/validations/category";
 import { DataTableColumnHeader } from "@/components/ui/table-data/data-table-column-header";
 import { DataTableRowActions } from "@/components/ui/table-data/data-table-row-actions";
 import { ColumnDef } from "@tanstack/react-table";
-import { brandSchema } from "@/components/lib/validations/brand";
 
-export const brandColumns: ColumnDef<any>[] = [
+export const subCategoryColumns: ColumnDef<any>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="ID" />
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
+    enableSorting: true,
+    enableHiding: false,
   },
   {
-    accessorKey: "brand_name_en",
+    accessorKey: "sub_category_name_en",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Brand Name" />
+      <DataTableColumnHeader column={column} title="Name" />
     ),
     cell: ({ row }) => (
-      <div className="font-medium">{row.getValue("brand_name_en")}</div>
+      <div className="font-medium">{row.getValue("sub_category_name_en")}</div>
     ),
   },
   {
@@ -33,6 +35,8 @@ export const brandColumns: ColumnDef<any>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <DataTableRowActions row={row} schema={brandSchema} />,
+    cell: ({ row }) => (
+      <DataTableRowActions row={row} schema={categorySchema} />
+    ),
   },
 ];

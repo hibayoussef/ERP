@@ -1,18 +1,13 @@
+import { categoryColumns } from "@/columns/products/category";
+import { DataTable } from "@/components/ui/table-data/table-data";
+import { useFetchCategories } from "@/hooks/prouducts/useCategories";
+import ComponentCard from "../../../components/common/ComponentCard";
 import PageBreadcrumb from "../../../components/common/PageBreadCrumb";
 import PageMeta from "../../../components/common/PageMeta";
-import BasicTableOne from "../../../components/tables/BasicTables/BasicTableOne";
-import { useFetchCategories } from "../../../hooks/prouducts/useCategories";
 
 export default function Categories() {
-  //   const [selectedBrand, setSelectedBrand] = useState(null);
-  const { data, isLoading } = useFetchCategories();
-
+  const { data } = useFetchCategories();
   const categories: any = data || [];
-
-  const handleEdit = (brand: any) => {
-    // setSelectedBrand(brand);
-    console.log("Editing category:", brand);
-  };
 
   return (
     <>
@@ -23,12 +18,9 @@ export default function Categories() {
       <PageBreadcrumb pageTitle="Categories" />
 
       <div className="space-y-4">
-        <BasicTableOne
-          rowData={categories}
-          columnDefs={[]}
-          // isLoading={isLoading}
-          // onEdit={handleEdit}
-        />
+        <ComponentCard title="Brand">
+          <DataTable columns={categoryColumns} data={categories} />
+        </ComponentCard>
       </div>
     </>
   );
