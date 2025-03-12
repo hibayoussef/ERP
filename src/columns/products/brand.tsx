@@ -34,6 +34,6 @@ export const brandColumns: ColumnDef<IBrand>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <DataTableRowActions row={row} schema={brandSchema} />,
+    cell: ({ row }) => <DataTableRowActions row={row} schema={brandSchema} editItem={`/brands/update/${row.original.id}`} />,
   },
 ];

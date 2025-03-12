@@ -24,6 +24,7 @@ import CreateCategory from "../pages/products/Categories/createCategory";
 import CreateUnit from "../pages/products/Units/createUnit";
 import CategoryDetails from "@/pages/products/Categories/categoryDetails";
 import SubCategories from "@/pages/products/SubCategories/subCategories";
+import Units from "@/pages/products/Units/units";
 
 const RoutesComponent = () => {
   return (
@@ -57,7 +58,7 @@ const RoutesComponent = () => {
         <Route path="/categories/sub" element={<Brands />} />
         {/* <Route path="/categories/sub/create" element={<CreateSubCategory />} /> */}
 
-        <Route path="/units" element={<Brands />} />
+        <Route path="/units" element={<Units />} />
         <Route path="/units/create" element={<CreateUnit />} />
         {/* <Route path="/categories" element={<Blank />} />
         <Route path="/categories/:id" element={<Blank />} />

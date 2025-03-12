@@ -12,11 +12,12 @@ export const useFetchUnits = () => {
 };
 
 // FETCH UNIT
-export const useFetchUnit = (id: number) => {
+export const useFetchUnit = (id: number, options = {}) => {
   return useQuery({
     queryKey: [QueryKeys.UNIT, id],
     queryFn: () => _UnitsApi.getUnit(id),
     enabled: !!id,
+    ...options,
   });
 };
 
@@ -26,7 +27,7 @@ export const useAddUnit = () => {
   return useMutation({
     mutationFn: _UnitsApi.addUnit,
     onSuccess: () => {
-      navigate("/dashboard/brands");
+      navigate("/units");
     },
   });
 };
@@ -35,10 +36,10 @@ export const useAddUnit = () => {
 export const useUpdateUnit = () => {
   const navigate = useNavigate();
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: any }) =>
+    mutationFn: ({ id, data }: { id: number | undefined, data: any }) =>
       _UnitsApi.updateUnit(id, data),
     onSuccess: () => {
-      navigate("/dashboard/brands");
+      navigate("/units");
     },
   });
 };

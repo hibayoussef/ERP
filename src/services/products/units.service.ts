@@ -1,19 +1,24 @@
 import { AxiosResponse } from "axios";
 import { _axios } from "../../interceptor/http-config";
 import type { BrandForm, IBrand } from "../../types/products/brand";
-import { UnitForm } from "@/types/products/unit";
+import {
+  UnitForm,
+  type IUnit,
+  type UnitUpdateForm,
+} from "@/types/products/unit";
+import type { CategoryUpdateForm } from "@/types/products/categories";
 
 export const _UnitsApi = {
   // GET UNITS
   getUnits: async () => {
-    const response = await _axios.get<AxiosResponse<{ categories: IBrand[] }>>(
+    const response = await _axios.get<AxiosResponse<{ units: IUnit[] }>>(
       "/products/units"
     );
     return response?.data?.data;
   },
   // GET UNIT
   getUnit: async (id: number) => {
-    const response = await _axios.get<AxiosResponse<{ category: IBrand }>>(
+    const response = await _axios.get<AxiosResponse<IUnit>>(
       `/products/units/${id}`
     );
     return response.data.data;
@@ -24,7 +29,7 @@ export const _UnitsApi = {
     return response.data;
   },
   // UPDATE CATEGORY
-  updateUnit: async (id: string, data: BrandForm) => {
+  updateUnit: async (id: number | undefined, data: UnitUpdateForm) => {
     const response = await _axios.put(`/products/units/${id}`, data);
     return response.data;
   },

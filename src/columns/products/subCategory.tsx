@@ -37,7 +37,11 @@ export const subCategoryColumns: ColumnDef<ISubCategory>[] = [
   {
     id: "actions",
     cell: ({ row }) => (
-      <DataTableRowActions row={row} schema={subCategorySchema} />
+      <DataTableRowActions
+        row={row}
+        schema={subCategorySchema}
+        editItem={`/sub-categories/update/${row.original.id}`}
+      />
     ),
   },
 ];

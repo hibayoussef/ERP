@@ -24,7 +24,7 @@ const navItems: NavItem[] = [
     subItems: [
       { name: "Brands", path: "/brands", pro: false },
       { name: "Categories", path: "/categories", pro: false },
-      { name: "SubCategories", path: "/sub-categories", pro: false },
+      { name: "sub-categories", path: "/sub-categories", pro: false },
       { name: "Units", path: "/units", pro: false },
       { name: "SubUnits", path: "/sub-units", pro: false },
       { name: "Warran", path: "/basic-tables", pro: false },

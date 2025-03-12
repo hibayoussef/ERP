@@ -18,12 +18,14 @@ interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
   schema: ZodSchema;
   viewDetails?: string | undefined | null;
+  editItem?: string | undefined;
 }
 
 export function DataTableRowActions<TData>({
   row,
   schema,
   viewDetails,
+  editItem,
 }: DataTableRowActionsProps<TData>) {
   const [dialogContent, setDialogContent] =
     React.useState<React.ReactNode | null>(null);
@@ -63,15 +65,14 @@ export function DataTableRowActions<TData>({
                 </DropdownMenuItem>
               </DialogTrigger>
             )}
-            <DialogTrigger
-              asChild
-              // onClick={() => navigate(`/update/${data?.id}`)}
-            >
-              <DropdownMenuItem>
-                <Pencil className="mr-2 h-4 w-4" />
-                Edit Details
-              </DropdownMenuItem>
-            </DialogTrigger>
+            {editItem && (
+              <DialogTrigger asChild onClick={() => navigate(editItem)}>
+                <DropdownMenuItem>
+                  <Pencil className="mr-2 h-4 w-4" />
+                  Edit Details
+                </DropdownMenuItem>
+              </DialogTrigger>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
         {dialogContent && (

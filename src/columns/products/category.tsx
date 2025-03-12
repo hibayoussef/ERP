@@ -41,6 +41,7 @@ export const categoryColumns: ColumnDef<ICategory>[] = [
         row={row}
         schema={categorySchema}
         viewDetails={`/categories/${row?.original?.id}`}
+        editItem={`/categories/update/${row.original.id}`}
       />
     ),
   },

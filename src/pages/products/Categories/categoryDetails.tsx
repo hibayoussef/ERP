@@ -1,11 +1,7 @@
 import { subCategoryColumns } from "@/columns/products/subCategory";
 import { DataTable } from "@/components/ui/table-data/table-data";
-import {
-    useFetchCategory
-} from "@/hooks/prouducts/useCategories";
-import {
-    useFetchSubCategories
-} from "@/hooks/prouducts/useSubCategories";
+import { useFetchCategory } from "@/hooks/prouducts/useCategories";
+import { useFetchSubCategories } from "@/hooks/prouducts/useSubCategories";
 import { useParams } from "react-router";
 import ComponentCard from "../../../components/common/ComponentCard";
 import PageBreadcrumb from "../../../components/common/PageBreadCrumb";
@@ -40,7 +36,7 @@ export default function CategoryDetails() {
           <h4 className="mb-2 text-sm font-semibold text-center text-gray-800 dark:text-white/90 xl:text-left">
             Sub Categories
           </h4>
-          <DataTable columns={subCategoryColumns} data={subCategories} />
+          <DataTable columns={subCategoryColumns} data={subCategories} createPath="/sub-categories/create" />
         </ComponentCard>
       </div>
     </>

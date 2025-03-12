@@ -40,7 +40,11 @@ export default function CategoryDetails() {
           <h4 className="mb-2 text-sm font-semibold text-center text-gray-800 dark:text-white/90 xl:text-left">
             Sub Categories
           </h4>
-          <DataTable columns={subCategoryColumns} data={subCategories} />
+          <DataTable
+            columns={subCategoryColumns}
+            data={subCategories}
+            createPath="/sub-categories/create"
+          />
         </ComponentCard>
       </div>
     </>

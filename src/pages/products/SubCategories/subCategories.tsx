@@ -22,7 +22,7 @@ export default function SubCategories() {
           <DataTable
             columns={subCategoryColumns}
             data={subCategories}
-            createPath="/subcategories/create"
+            createPath="/sub-categories/create"
           />
         </ComponentCard>
       </div>
