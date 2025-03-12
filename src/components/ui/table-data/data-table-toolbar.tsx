@@ -10,15 +10,17 @@ import { DataTableViewOptions } from "./data-table-view-options";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
+  createPath: string;
 }
 
 export function DataTableToolbar<TData>({
   table,
+  createPath,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
-    const navigate = useNavigate(); 
-    
+  const navigate = useNavigate();
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
@@ -61,12 +63,11 @@ export function DataTableToolbar<TData>({
         <Button
           variant="outline"
           className="h-8 px-2 mr-4 lg:px-3"
-          onClick={() => navigate("/brands/create")}
+          onClick={() => navigate(createPath)}
         >
           <Plus /> Create
         </Button>
       </div>
-
       <DataTableViewOptions table={table} />
     </div>
   );

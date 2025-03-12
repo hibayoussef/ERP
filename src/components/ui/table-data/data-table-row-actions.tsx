@@ -12,16 +12,18 @@ import {
 import { Copy, Eye, MoreHorizontal, Pencil } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useNavigate } from "react-router";
-import { ZodSchema } from "zod"; 
+import { ZodSchema } from "zod";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
-  schema: ZodSchema; 
+  schema: ZodSchema;
+  viewDetails?: string | undefined | null;
 }
 
 export function DataTableRowActions<TData>({
   row,
   schema,
+  viewDetails,
 }: DataTableRowActionsProps<TData>) {
   const [dialogContent, setDialogContent] =
     React.useState<React.ReactNode | null>(null);
@@ -30,7 +32,7 @@ export function DataTableRowActions<TData>({
   try {
     // const data = schema.parse(row.original);
     const data = schema.safeParse(row.original);
-    console.log('datad: ', data)
+    console.log("datad: ", data);
     return (
       <Dialog>
         <DropdownMenu>
@@ -53,12 +55,14 @@ export function DataTableRowActions<TData>({
               Copy ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DialogTrigger asChild>
-              <DropdownMenuItem>
-                <Eye className="mr-2 h-4 w-4" />
-                View Details
-              </DropdownMenuItem>
-            </DialogTrigger>
+            {viewDetails && (
+              <DialogTrigger asChild onClick={() => navigate(viewDetails)}>
+                <DropdownMenuItem>
+                  <Eye className="mr-2 h-4 w-4" />
+                  View Details
+                </DropdownMenuItem>
+              </DialogTrigger>
+            )}
             <DialogTrigger
               asChild
               // onClick={() => navigate(`/update/${data?.id}`)}

@@ -19,7 +19,11 @@ export default function Units() {
 
       <div className="space-y-4">
         <ComponentCard title="Brand">
-          <DataTable columns={brandColumns} data={brands} />
+          <DataTable
+            columns={brandColumns}
+            data={brands}
+            createPath="/units/create"
+          />
         </ComponentCard>
       </div>
     </>

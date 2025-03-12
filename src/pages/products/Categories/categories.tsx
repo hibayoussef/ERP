@@ -19,7 +19,11 @@ export default function Categories() {
 
       <div className="space-y-4">
         <ComponentCard title="Categories">
-          <DataTable columns={categoryColumns} data={categories} />
+          <DataTable
+            columns={categoryColumns}
+            data={categories}
+            createPath="/categories/create"
+          />
         </ComponentCard>
       </div>
     </>

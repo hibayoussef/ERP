@@ -37,7 +37,11 @@ export const categoryColumns: ColumnDef<ICategory>[] = [
   {
     id: "actions",
     cell: ({ row }) => (
-      <DataTableRowActions row={row} schema={categorySchema} />
+      <DataTableRowActions
+        row={row}
+        schema={categorySchema}
+        viewDetails={`/categories/${row?.original?.id}`}
+      />
     ),
   },
 ];

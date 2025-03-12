@@ -19,7 +19,11 @@ export default function SubCategories() {
 
       <div className="space-y-4">
         <ComponentCard title="Sub Categories">
-          <DataTable columns={subCategoryColumns} data={subCategories} />
+          <DataTable
+            columns={subCategoryColumns}
+            data={subCategories}
+            createPath="/subcategories/create"
+          />
         </ComponentCard>
       </div>
     </>
